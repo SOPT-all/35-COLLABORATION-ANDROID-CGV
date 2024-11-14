@@ -43,4 +43,4 @@
 ┃ ┣ 📂 extensions
 ```
 
-## [➿ *****Convention*****]
+## [➿ *****Convention*****] ( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Git-Convention )
