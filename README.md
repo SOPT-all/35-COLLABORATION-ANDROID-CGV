@@ -27,6 +27,24 @@
 <br>
 
 
+_**단순한 기능 구현을 넘어, 그동안 학습한 기술들을 실전에서 깊이 있게 활용하는 것을 목표로 합니다.**_
+
+> 과제에서 학습한 기술들을 활용
+
+> 각 기술의 장단점을 경험
+
+> 코드 품질과 구조적 설계에 중점
+
+> 컴포넌트 설계 패턴의 실전 적용
+
+> 상태 관리 로직의 체계적 구현
+
+> 재사용 가능한 모듈화된 코드 작성
+
+> 코드 리뷰를 통한 상호 학습
+
+> 팀원 간 기술 공유 및 지식 전파
+
 
 ## 📁 *****Foldering*****
 ```
@@ -43,4 +61,7 @@
 ┃ ┣ 📂 extensions
 ```
 
-## [➿ *****Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Git-Convention )
+## [➿ *****Collaboration-Rule*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Collaboration-%08Rule )
+## [➿ *****Git-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Git-Convention )
+## [➿ *****Android-Coding-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Android-Coding-Convention )
+
