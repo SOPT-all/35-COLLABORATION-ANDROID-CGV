@@ -71,7 +71,7 @@ _**단순한 기능 구현을 넘어, 그동안 학습한 기술들을 실전에
 ┃ ┣ 📂 theme
 ```
 
-## [➿ *****Collaboration-Rule*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Collaboration-%08Rule )
-## [➿ *****Git-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Git-Convention )
-## [➿ *****Android-Coding-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Android-Coding-Convention )
+## [➿ *****Collaboration-Rule*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Collaboration%E2%80%90Rule )
+## [➿ *****Git-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/%08Git-Convention )
+## [➿ *****Android-Coding-Convention*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Android%E2%80%90Coding%E2%80%90Convention )
 
