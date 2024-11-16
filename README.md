@@ -5,10 +5,9 @@
 
 ## 👋 역할 분담 및 주요 기능!!
 
-
 | [공세영](https://github.com/0se0) | [김재민](https://github.com/kamja0510) | [양지원](https://github.com/tunaunnie) |
 | :--------: | :--------: | :--------: | 
-| <img src="https://github.com/user-attachments/assets/bd7bd5cb-96b1-4126-a8cd-a0941f26e2c7" width="200px"  height="300dp">  | <img src="https://github.com/user-attachments/assets/d37ec0fe-b462-46b0-8c2b-caa670a5069c" width="180px"  height="200dp"> | <img src="https://github.com/user-attachments/assets/8816c950-01d3-4d95-a75b-cdb630c316f5" width="300px"  height="200dp">
+| <img src="https://github.com/user-attachments/assets/d2d12d33-23f7-4842-b59b-c8b52c0ca0ec" width="200px"  height="300dp">  | <img src="https://github.com/user-attachments/assets/8df98ab4-2190-425a-bd7b-072b51318186" width="180px"  height="200dp"> | <img src="https://github.com/user-attachments/assets/d4bb7635-5b0a-42a0-98ae-cab038f2c685" width="300px"  height="200dp">
 | 담당기능 | 담당기능 | 담당기능 | 
 
 ## 📷 *****ScreenShot*****
@@ -51,16 +50,25 @@ _**단순한 기능 구현을 넘어, 그동안 학습한 기술들을 실전에
 ## 📁 *****Foldering*****
 ```
 📂 cgv
+┣ 📂 core
+┃ ┣ 📂 common
+┃ ┣ 📂 designsystem
 ┣ 📂 data
 ┃ ┣ 📂 repository
 ┃ ┣ 📂 models
 ┃ ┣ 📂 datasources
-┣ 📂 ui
+┣ 📂 feature
 ┃ ┣ 📂 main
-┃ ┣ 📂 signup
-┃ ┣ 📂 login
-┣ 📂 util
-┃ ┣ 📂 extensions
+┃ ┣ 📂 home
+┃ ┣ 📂 time
+┃ ┣ 📂 seats
+┣ 📂 network
+┃ ┣ 📂 request
+┃ ┣ 📂 reponse
+┃ ┣ 📂 ApiFactory
+┃ ┣ 📂 CgvService
+┣ 📂 ui
+┃ ┣ 📂 theme
 ```
 
 ## [➿ *****Collaboration-Rule*****]( https://github.com/SOPT-all/35-COLLABORATION-ANDROID-CGV/wiki/Collaboration-%08Rule )
