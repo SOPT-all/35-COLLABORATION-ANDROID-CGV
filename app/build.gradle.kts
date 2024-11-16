@@ -12,7 +12,7 @@ val properties = Properties().apply {
 
 android {
     namespace = "org.sopt.cgv"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "org.sopt.cgv"
