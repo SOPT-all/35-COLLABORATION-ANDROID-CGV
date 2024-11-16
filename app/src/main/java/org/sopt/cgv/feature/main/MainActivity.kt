@@ -1,4 +1,4 @@
-package org.sopt.cgv.main
+package org.sopt.cgv.feature.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
