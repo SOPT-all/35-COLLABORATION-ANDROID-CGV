@@ -1,12 +1,3 @@
----
-name: Feature Template
-about: Create Request
-title: ''
-labels: ''
-assignees: ''
-
----
-
 ## *📌 Issue*
 - closed #
 
