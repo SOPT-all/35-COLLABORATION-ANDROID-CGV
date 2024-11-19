@@ -22,168 +22,168 @@ val malgunGothicFontFamily = FontFamily(
 )
 // Set of Material typography styles to start with
 internal val Typography = CGVTypography(
-    kopub_dotum_head8_b_20 = TextStyle(
+    head8_b_20 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head7_b_18 = TextStyle(
+    head7_b_18 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head6_b_17 = TextStyle(
+    head6_b_17 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 17.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head5_b_16 = TextStyle(
+    head5_b_16 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head4_b_15 = TextStyle(
+    head4_b_15 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 15.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head3_b_14 = TextStyle(
+    head3_b_14 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head2_b_13 = TextStyle(
+    head2_b_13 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 13.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head1_b_12 = TextStyle(
+    head1_b_12 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_head0_b_10 = TextStyle(
+    head0_b_10 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 10.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_body4_m_15 = TextStyle(
+    body4_m_15 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 15.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_body3_m_14 = TextStyle(
+    body3_m_14 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_body2_m_13 = TextStyle(
+    body2_m_13 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 13.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_body1_m_12 = TextStyle(
+    body1_m_12 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_body0_m_11 = TextStyle(
+    body0_m_11 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 11.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_small1_l_10 = TextStyle(
+    small1_l_10 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Light,
         fontSize = 10.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    kopub_dotum_small0_l_8 = TextStyle(
+    small0_l_8 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Light,
         fontSize = 8.sp,
         lineHeight = 10.sp,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_head3_b_20 = TextStyle(
+    head3_b_20 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_head2_b_18 = TextStyle(
+    head2_b_18 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_head1_b_16 = TextStyle(
+    head1_b_16 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_head0_b_11 = TextStyle(
+    head0_b_11 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 11.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_body3_r_18 = TextStyle(
+    body3_r_18 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_body2_r_12 = TextStyle(
+    body2_r_12 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 17.sp,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_body1_r_10 = TextStyle(
+    body1_r_10 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 10.sp,
         lineHeight = 17.sp,
         letterSpacing = 0.sp
     ),
-    malgun_gothic_body0_r_8 = TextStyle(
+    body0_r_8 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 8.sp,
@@ -194,57 +194,57 @@ internal val Typography = CGVTypography(
 
 @Immutable
 data class CGVTypography(
-    val kopub_dotum_head8_b_20: TextStyle,
-    val kopub_dotum_head7_b_18: TextStyle,
-    val kopub_dotum_head6_b_17: TextStyle,
-    val kopub_dotum_head5_b_16: TextStyle,
-    val kopub_dotum_head4_b_15: TextStyle,
-    val kopub_dotum_head3_b_14: TextStyle,
-    val kopub_dotum_head2_b_13: TextStyle,
-    val kopub_dotum_head1_b_12: TextStyle,
-    val kopub_dotum_head0_b_10: TextStyle,
-    val kopub_dotum_body4_m_15: TextStyle,
-    val kopub_dotum_body3_m_14: TextStyle,
-    val kopub_dotum_body2_m_13: TextStyle,
-    val kopub_dotum_body1_m_12: TextStyle,
-    val kopub_dotum_body0_m_11: TextStyle,
-    val kopub_dotum_small1_l_10: TextStyle,
-    val kopub_dotum_small0_l_8: TextStyle,
-    val malgun_gothic_head3_b_20: TextStyle,
-    val malgun_gothic_head2_b_18: TextStyle,
-    val malgun_gothic_head1_b_16: TextStyle,
-    val malgun_gothic_head0_b_11: TextStyle,
-    val malgun_gothic_body3_r_18: TextStyle,
-    val malgun_gothic_body2_r_12: TextStyle,
-    val malgun_gothic_body1_r_10: TextStyle,
-    val malgun_gothic_body0_r_8: TextStyle,
+    val head8_b_20: TextStyle,
+    val head7_b_18: TextStyle,
+    val head6_b_17: TextStyle,
+    val head5_b_16: TextStyle,
+    val head4_b_15: TextStyle,
+    val head3_b_14: TextStyle,
+    val head2_b_13: TextStyle,
+    val head1_b_12: TextStyle,
+    val head0_b_10: TextStyle,
+    val body4_m_15: TextStyle,
+    val body3_m_14: TextStyle,
+    val body2_m_13: TextStyle,
+    val body1_m_12: TextStyle,
+    val body0_m_11: TextStyle,
+    val small1_l_10: TextStyle,
+    val small0_l_8: TextStyle,
+    val head3_b_20: TextStyle,
+    val head2_b_18: TextStyle,
+    val head1_b_16: TextStyle,
+    val head0_b_11: TextStyle,
+    val body3_r_18: TextStyle,
+    val body2_r_12: TextStyle,
+    val body1_r_10: TextStyle,
+    val body0_r_8: TextStyle,
 )
 
 val LocalCGVTypography = staticCompositionLocalOf {
     CGVTypography(
-        kopub_dotum_head8_b_20 = TextStyle.Default,
-        kopub_dotum_head7_b_18 = TextStyle.Default,
-        kopub_dotum_head6_b_17 = TextStyle.Default,
-        kopub_dotum_head5_b_16 = TextStyle.Default,
-        kopub_dotum_head4_b_15 = TextStyle.Default,
-        kopub_dotum_head3_b_14 = TextStyle.Default,
-        kopub_dotum_head2_b_13 = TextStyle.Default,
-        kopub_dotum_head1_b_12 = TextStyle.Default,
-        kopub_dotum_head0_b_10 = TextStyle.Default,
-        kopub_dotum_body4_m_15 = TextStyle.Default,
-        kopub_dotum_body3_m_14 = TextStyle.Default,
-        kopub_dotum_body2_m_13 = TextStyle.Default,
-        kopub_dotum_body1_m_12 = TextStyle.Default,
-        kopub_dotum_body0_m_11 = TextStyle.Default,
-        kopub_dotum_small1_l_10 = TextStyle.Default,
-        kopub_dotum_small0_l_8 = TextStyle.Default,
-        malgun_gothic_head3_b_20 = TextStyle.Default,
-        malgun_gothic_head2_b_18 = TextStyle.Default,
-        malgun_gothic_head1_b_16 = TextStyle.Default,
-        malgun_gothic_head0_b_11 = TextStyle.Default,
-        malgun_gothic_body3_r_18 = TextStyle.Default,
-        malgun_gothic_body2_r_12 = TextStyle.Default,
-        malgun_gothic_body1_r_10 = TextStyle.Default,
-        malgun_gothic_body0_r_8 = TextStyle.Default
+        head8_b_20 = TextStyle.Default,
+        head7_b_18 = TextStyle.Default,
+        head6_b_17 = TextStyle.Default,
+        head5_b_16 = TextStyle.Default,
+        head4_b_15 = TextStyle.Default,
+        head3_b_14 = TextStyle.Default,
+        head2_b_13 = TextStyle.Default,
+        head1_b_12 = TextStyle.Default,
+        head0_b_10 = TextStyle.Default,
+        body4_m_15 = TextStyle.Default,
+        body3_m_14 = TextStyle.Default,
+        body2_m_13 = TextStyle.Default,
+        body1_m_12 = TextStyle.Default,
+        body0_m_11 = TextStyle.Default,
+        small1_l_10 = TextStyle.Default,
+        small0_l_8 = TextStyle.Default,
+        head3_b_20 = TextStyle.Default,
+        head2_b_18 = TextStyle.Default,
+        head1_b_16 = TextStyle.Default,
+        head0_b_11 = TextStyle.Default,
+        body3_r_18 = TextStyle.Default,
+        body2_r_12 = TextStyle.Default,
+        body1_r_10 = TextStyle.Default,
+        body0_r_8 = TextStyle.Default
     )
 }
