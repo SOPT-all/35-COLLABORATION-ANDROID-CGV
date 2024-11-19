@@ -9,14 +9,14 @@ import androidx.compose.ui.unit.sp
 import org.sopt.cgv.R
 
 val koPubDotumFontFamily = FontFamily(
-    Font(R.font.kopub_world_dotum_bold),
-    Font(R.font.kopub_world_dotum_medium),
-    Font(R.font.kopub_world_dotum_light)
+    Font(resId = R.font.kopub_world_dotum_bold, weight = FontWeight.Bold),
+    Font(resId = R.font.kopub_world_dotum_medium, weight = FontWeight.Medium),
+    Font(resId = R.font.kopub_world_dotum_light, weight = FontWeight.Light)
 )
 
 val malgunGothicFontFamily = FontFamily(
-    Font(R.font.malgun_gothic_bold),
-    Font(R.font.malgun_gothic_regular)
+    Font(resId = R.font.malgun_gothic_bold, weight = FontWeight.Bold),
+    Font(resId = R.font.malgun_gothic_regular, weight = FontWeight.Normal)
 )
 // Set of Material typography styles to start with
 val Typography = Typography(
