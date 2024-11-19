@@ -1,4 +1,4 @@
-package org.sopt.cgv.ui.theme
+package org.sopt.cgv.core.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Black,
-    secondary = Purple,
-    tertiary = Pink
+    primary = Yellow,
+    secondary = Pink,
+    tertiary = Purple
 )
 
 private val LightColorScheme = lightColorScheme(
