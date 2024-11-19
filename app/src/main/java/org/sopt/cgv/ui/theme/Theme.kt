@@ -1,6 +1,5 @@
 package org.sopt.cgv.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -9,6 +8,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -50,9 +50,19 @@ fun CGVTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalCGVTypography provides Typography) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = androidx.compose.material3.Typography(),
+            content = content
+        )
+    }
 }
+
+object CGVTheme {
+    val typography: CGVTypography
+    @Composable
+    get() = LocalCGVTypography.current
+}
+
+// 사용법 : ex) CGVTheme.typography.koPubDotumHead8
