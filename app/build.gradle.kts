@@ -73,6 +73,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     //Network
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
