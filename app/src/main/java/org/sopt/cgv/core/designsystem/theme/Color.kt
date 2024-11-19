@@ -1,4 +1,4 @@
-package org.sopt.cgv.ui.theme
+package org.sopt.cgv.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

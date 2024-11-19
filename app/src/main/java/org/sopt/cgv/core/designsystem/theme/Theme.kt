@@ -1,4 +1,4 @@
-package org.sopt.cgv.ui.theme
+package org.sopt.cgv.core.designsystem.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
