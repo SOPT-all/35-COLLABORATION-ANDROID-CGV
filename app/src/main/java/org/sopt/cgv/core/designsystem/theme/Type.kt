@@ -22,168 +22,168 @@ val malgunGothicFontFamily = FontFamily(
 )
 // Set of Material typography styles to start with
 internal val Typography = CGVTypography(
-    koPubDotumHead8 = TextStyle(
+    kopub_dotum_head8_b_20 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead7 = TextStyle(
+    kopub_dotum_head7_b_18 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead6 = TextStyle(
+    kopub_dotum_head6_b_17 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 17.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead5 = TextStyle(
+    kopub_dotum_head5_b_16 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead4 = TextStyle(
+    kopub_dotum_head4_b_15 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 15.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead3 = TextStyle(
+    kopub_dotum_head3_b_14 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead2 = TextStyle(
+    kopub_dotum_head2_b_13 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 13.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead1 = TextStyle(
+    kopub_dotum_head1_b_12 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumHead0 = TextStyle(
+    kopub_dotum_head0_b_10 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 10.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumBody4 = TextStyle(
+    kopub_dotum_body4_m_15 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 15.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumBody3 = TextStyle(
+    kopub_dotum_body3_m_14 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumBody2 = TextStyle(
+    kopub_dotum_body2_m_13 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 13.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumBody1 = TextStyle(
+    kopub_dotum_body1_m_12 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    koPubDotumBody0 = TextStyle(
+    kopub_dotum_body0_m_11 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 11.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumSmall1 = TextStyle(
+    kopub_dotum_small1_l_10 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Light,
         fontSize = 10.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    koPubDotumSmall0 = TextStyle(
+    kopub_dotum_small0_l_8 = TextStyle(
         fontFamily = koPubDotumFontFamily,
         fontWeight = FontWeight.Light,
         fontSize = 8.sp,
         lineHeight = 10.sp,
         letterSpacing = 0.sp
     ),
-    malgunGothicHead3 = TextStyle(
+    malgun_gothic_head3_b_20 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgunGothicHead2 = TextStyle(
+    malgun_gothic_head2_b_18 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgunGothicHead1 = TextStyle(
+    malgun_gothic_head1_b_16 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
-    malgunGothicHead0 = TextStyle(
+    malgun_gothic_head0_b_11 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 11.sp,
         lineHeight = TextUnit.Unspecified,
         letterSpacing = 0.sp
     ),
-    malgunGothicBody3 = TextStyle(
+    malgun_gothic_body3_r_18 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp
     ),
-    malgunGothicBody2 = TextStyle(
+    malgun_gothic_body2_r_12 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 17.sp,
         letterSpacing = 0.sp
     ),
-    malgunGothicBody1 = TextStyle(
+    malgun_gothic_body1_r_10 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 10.sp,
         lineHeight = 17.sp,
         letterSpacing = 0.sp
     ),
-    malgunGothicBody0 = TextStyle(
+    malgun_gothic_body0_r_8 = TextStyle(
         fontFamily = malgunGothicFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 8.sp,
@@ -194,57 +194,57 @@ internal val Typography = CGVTypography(
 
 @Immutable
 data class CGVTypography(
-    val koPubDotumHead8: TextStyle,
-    val koPubDotumHead7: TextStyle,
-    val koPubDotumHead6: TextStyle,
-    val koPubDotumHead5: TextStyle,
-    val koPubDotumHead4: TextStyle,
-    val koPubDotumHead3: TextStyle,
-    val koPubDotumHead2: TextStyle,
-    val koPubDotumHead1: TextStyle,
-    val koPubDotumHead0: TextStyle,
-    val koPubDotumBody4: TextStyle,
-    val koPubDotumBody3: TextStyle,
-    val koPubDotumBody2: TextStyle,
-    val koPubDotumBody1: TextStyle,
-    val koPubDotumBody0: TextStyle,
-    val koPubDotumSmall1: TextStyle,
-    val koPubDotumSmall0: TextStyle,
-    val malgunGothicHead3: TextStyle,
-    val malgunGothicHead2: TextStyle,
-    val malgunGothicHead1: TextStyle,
-    val malgunGothicHead0: TextStyle,
-    val malgunGothicBody3: TextStyle,
-    val malgunGothicBody2: TextStyle,
-    val malgunGothicBody1: TextStyle,
-    val malgunGothicBody0: TextStyle,
+    val kopub_dotum_head8_b_20: TextStyle,
+    val kopub_dotum_head7_b_18: TextStyle,
+    val kopub_dotum_head6_b_17: TextStyle,
+    val kopub_dotum_head5_b_16: TextStyle,
+    val kopub_dotum_head4_b_15: TextStyle,
+    val kopub_dotum_head3_b_14: TextStyle,
+    val kopub_dotum_head2_b_13: TextStyle,
+    val kopub_dotum_head1_b_12: TextStyle,
+    val kopub_dotum_head0_b_10: TextStyle,
+    val kopub_dotum_body4_m_15: TextStyle,
+    val kopub_dotum_body3_m_14: TextStyle,
+    val kopub_dotum_body2_m_13: TextStyle,
+    val kopub_dotum_body1_m_12: TextStyle,
+    val kopub_dotum_body0_m_11: TextStyle,
+    val kopub_dotum_small1_l_10: TextStyle,
+    val kopub_dotum_small0_l_8: TextStyle,
+    val malgun_gothic_head3_b_20: TextStyle,
+    val malgun_gothic_head2_b_18: TextStyle,
+    val malgun_gothic_head1_b_16: TextStyle,
+    val malgun_gothic_head0_b_11: TextStyle,
+    val malgun_gothic_body3_r_18: TextStyle,
+    val malgun_gothic_body2_r_12: TextStyle,
+    val malgun_gothic_body1_r_10: TextStyle,
+    val malgun_gothic_body0_r_8: TextStyle,
 )
 
 val LocalCGVTypography = staticCompositionLocalOf {
     CGVTypography(
-        koPubDotumHead8 = TextStyle.Default,
-        koPubDotumHead7 = TextStyle.Default,
-        koPubDotumHead6 = TextStyle.Default,
-        koPubDotumHead5 = TextStyle.Default,
-        koPubDotumHead4 = TextStyle.Default,
-        koPubDotumHead3 = TextStyle.Default,
-        koPubDotumHead2 = TextStyle.Default,
-        koPubDotumHead1 = TextStyle.Default,
-        koPubDotumHead0 = TextStyle.Default,
-        koPubDotumBody4 = TextStyle.Default,
-        koPubDotumBody3 = TextStyle.Default,
-        koPubDotumBody2 = TextStyle.Default,
-        koPubDotumBody1 = TextStyle.Default,
-        koPubDotumBody0 = TextStyle.Default,
-        koPubDotumSmall1 = TextStyle.Default,
-        koPubDotumSmall0 = TextStyle.Default,
-        malgunGothicHead3 = TextStyle.Default,
-        malgunGothicHead2 = TextStyle.Default,
-        malgunGothicHead1 = TextStyle.Default,
-        malgunGothicHead0 = TextStyle.Default,
-        malgunGothicBody3 = TextStyle.Default,
-        malgunGothicBody2 = TextStyle.Default,
-        malgunGothicBody1 = TextStyle.Default,
-        malgunGothicBody0 = TextStyle.Default
+        kopub_dotum_head8_b_20 = TextStyle.Default,
+        kopub_dotum_head7_b_18 = TextStyle.Default,
+        kopub_dotum_head6_b_17 = TextStyle.Default,
+        kopub_dotum_head5_b_16 = TextStyle.Default,
+        kopub_dotum_head4_b_15 = TextStyle.Default,
+        kopub_dotum_head3_b_14 = TextStyle.Default,
+        kopub_dotum_head2_b_13 = TextStyle.Default,
+        kopub_dotum_head1_b_12 = TextStyle.Default,
+        kopub_dotum_head0_b_10 = TextStyle.Default,
+        kopub_dotum_body4_m_15 = TextStyle.Default,
+        kopub_dotum_body3_m_14 = TextStyle.Default,
+        kopub_dotum_body2_m_13 = TextStyle.Default,
+        kopub_dotum_body1_m_12 = TextStyle.Default,
+        kopub_dotum_body0_m_11 = TextStyle.Default,
+        kopub_dotum_small1_l_10 = TextStyle.Default,
+        kopub_dotum_small0_l_8 = TextStyle.Default,
+        malgun_gothic_head3_b_20 = TextStyle.Default,
+        malgun_gothic_head2_b_18 = TextStyle.Default,
+        malgun_gothic_head1_b_16 = TextStyle.Default,
+        malgun_gothic_head0_b_11 = TextStyle.Default,
+        malgun_gothic_body3_r_18 = TextStyle.Default,
+        malgun_gothic_body2_r_12 = TextStyle.Default,
+        malgun_gothic_body1_r_10 = TextStyle.Default,
+        malgun_gothic_body0_r_8 = TextStyle.Default
     )
 }
