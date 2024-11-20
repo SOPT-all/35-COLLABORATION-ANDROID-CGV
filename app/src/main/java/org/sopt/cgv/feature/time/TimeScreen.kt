@@ -68,13 +68,6 @@ fun TimeScreen(
     )
 }
 
-
-data class MovieTheatersByDetailRegion(
-    val detailRegionName: String,
-    val theaterNames: List<String>
-)
-
-
 @Composable
 fun TheaterClassificationTab(
     selectedIndex: MutableState<Int>,

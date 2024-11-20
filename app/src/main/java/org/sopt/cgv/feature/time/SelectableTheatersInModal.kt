@@ -29,6 +29,12 @@ import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 
+
+data class MovieTheatersByDetailRegion(
+    val detailRegionName: String,
+    val theaterNames: List<String>
+)
+
 @Composable
 fun SelectableTheatersInModal(
     modifier: Modifier,
