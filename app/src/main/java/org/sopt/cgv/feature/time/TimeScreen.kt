@@ -144,7 +144,7 @@ fun ClickableVerticalList(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TheaterSelectionModalBottom(
+fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit
 ) {

@@ -83,7 +83,7 @@ fun TheaterSelectionModalBottomSheet(
                         movieTheatersByDetailRegion = MovieTheatersByDetailRegion
                     )
                 }
-                TheaterSelectionModalBottom(
+                TheaterSelectionModalFooter(
                     sheetState = sheetState,
                     onDismissRequest = onDismissRequest
                 )
