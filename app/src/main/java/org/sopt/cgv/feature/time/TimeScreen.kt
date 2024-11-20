@@ -168,7 +168,7 @@ fun TheaterSelectionModalBottom(
                 .background(color = Color.White)
                 .padding(horizontal = 18.dp)
         ) {
-            SelectedChips()
+            ShowSelectedChipsBox()
 
             Button(
                 onClick = {
@@ -188,7 +188,7 @@ fun TheaterSelectionModalBottom(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SelectedChips() {
+fun ShowSelectedChipsBox() {
     val chips = listOf("Chip 1", "Chip 2", "Chip 3", "Long Chip 4", "Chip 5", "Another Chip 6")
 
     FlowRow(
