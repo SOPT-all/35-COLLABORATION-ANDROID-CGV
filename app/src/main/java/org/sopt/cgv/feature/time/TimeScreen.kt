@@ -69,7 +69,7 @@ fun TimeScreen(
 }
 
 @Composable
-fun TheaterClassificationTab(
+fun TheaterClassificationTabInModal(
     selectedIndex: MutableState<Int>,
     tabs: List<String>
 ) {

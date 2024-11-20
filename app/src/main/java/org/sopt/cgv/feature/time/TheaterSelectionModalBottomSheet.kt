@@ -65,7 +65,7 @@ fun TheaterSelectionModalBottomSheet(
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
 
-                TheaterClassificationTab(selectedIndex, tabs)
+                TheaterClassificationTabInModal(selectedIndex, tabs)
 
                 Spacer(modifier = Modifier.height(10.dp))
 
