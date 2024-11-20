@@ -77,87 +77,10 @@ fun TimeScreen(
     )
 }
 
-private const val s = "CGV를 선택해주세요./n최대 5개까지 선택 가능합니다"
-
-@ExperimentalMaterial3Api
 @Composable
-fun TheaterSelectionModalBottomSheet(
-    isSheetOpen: Boolean,
-    onDismissRequest: () -> Unit
-) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    if (isSheetOpen) {
-        ModalBottomSheet(
-            onDismissRequest = onDismissRequest,
-            sheetState = sheetState,
-            modifier = Modifier
-                .height(650.dp),
-            dragHandle = null
-        ) {
-            val selectedIndex = remember { mutableStateOf(0) }
-            val tabs = listOf("지역별", "특별관")
-            val regions = listOf(
-                "추천 CGV",
-                "서울(31)",
-                "경기",
-                "인천",
-                "강원",
-                "대전/충청",
-                "대구",
-                "울산/부산",
-                "경상",
-                "광주/전라/제주"
-            )
-            val MovieTheatersByDetailRegion = listOf(
-                MovieTheatersByDetailRegion(
-                    theaterNames = listOf("구리", "압구정"),
-                    detailRegionName = "최근 이용한 CGV"
-                ),
-                MovieTheatersByDetailRegion(
-                    theaterNames = listOf("용산아이파크몰"),
-                    detailRegionName = "현재 주변에 있는 CGV"
-                )
-            )
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White)
-            ) {
-                Spacer(modifier = Modifier.height(10.dp))
-
-                TheaterClassificationTab(selectedIndex, tabs)
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Row(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    ClickableVerticalList(
-                        list = regions
-                    )
-
-                    Spacer(modifier = Modifier.width(33.dp))
-
-                    SelectableTheaters(
-                        modifier = Modifier.weight(1f),
-                        MovieTheatersByDetailRegion = MovieTheatersByDetailRegion
-                    )
-                }
-                TheaterSelectionModalBottom(
-                    sheetState = sheetState,
-                    onDismissRequest = onDismissRequest
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun SelectableTheaters(
+fun SelectableTheaters(
     modifier: Modifier,
-    MovieTheatersByDetailRegion: List<MovieTheatersByDetailRegion>
+    movieTheatersByDetailRegion: List<MovieTheatersByDetailRegion>
 ) {
     LazyColumn(
         modifier = modifier
@@ -174,7 +97,7 @@ private fun SelectableTheaters(
 
         item { Spacer(modifier = Modifier.height(25.dp)) }
 
-        items(MovieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
+        items(movieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
             DetailRegionTheaters(
                 theaterNames = movieTheatersByDetailRegion.theaterNames,
                 detailRegionName = movieTheatersByDetailRegion.detailRegionName
@@ -189,7 +112,7 @@ data class MovieTheatersByDetailRegion(
 )
 
 @Composable
-private fun DetailRegionTheaters(
+fun DetailRegionTheaters(
     theaterNames: List<String>,
     detailRegionName: String
 ) {
@@ -210,7 +133,7 @@ private fun DetailRegionTheaters(
 }
 
 @Composable
-private fun TheaterListItem(
+fun TheaterListItem(
     theaterName: String
 ) {
     var isSelected by remember { mutableStateOf(false) }
@@ -256,7 +179,7 @@ private fun TheaterListItem(
 
 
 @Composable
-private fun TheaterClassificationTab(
+fun TheaterClassificationTab(
     selectedIndex: MutableState<Int>,
     tabs: List<String>
 ) {
@@ -331,7 +254,7 @@ fun ClickableVerticalList(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TheaterSelectionModalBottom(
+fun TheaterSelectionModalBottom(
     sheetState: SheetState,
     onDismissRequest: () -> Unit
 ) {
