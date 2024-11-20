@@ -29,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import org.sopt.cgv.core.common.norippleclick
 
 
 @Composable
@@ -53,7 +54,7 @@ fun CompTimeCard(
             .clip(RoundedCornerShape(8.dp))
             .background(backgroundColor)
             .border(width = 2.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
-            .clickable {
+            .norippleclick() {
                 isClicked = !isClicked
             }
     ){
