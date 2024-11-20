@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.cgv.BuildConfig
+import org.sopt.cgv.BuildConfig.BASE_URL
 import retrofit2.Retrofit
 
 object ApiFactory {
