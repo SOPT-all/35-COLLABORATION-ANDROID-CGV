@@ -93,7 +93,7 @@ fun TheaterClassificationTabInModal(
 }
 
 @Composable
-fun ClickableVerticalList(
+fun ClickableVerticalRegionListInModal(
     list: List<String>,
     modifier: Modifier = Modifier
 ) {
