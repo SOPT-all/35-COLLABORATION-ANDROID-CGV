@@ -78,7 +78,7 @@ fun TimeScreen(
 }
 
 @Composable
-fun SelectableTheaters(
+fun SelectableTheatersInModal(
     modifier: Modifier,
     movieTheatersByDetailRegion: List<MovieTheatersByDetailRegion>
 ) {

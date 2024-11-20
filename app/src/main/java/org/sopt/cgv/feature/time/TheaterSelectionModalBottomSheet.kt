@@ -78,7 +78,7 @@ fun TheaterSelectionModalBottomSheet(
 
                     Spacer(modifier = Modifier.width(33.dp))
 
-                    SelectableTheaters(
+                    SelectableTheatersInModal(
                         modifier = Modifier.weight(1f),
                         movieTheatersByDetailRegion = MovieTheatersByDetailRegion
                     )
