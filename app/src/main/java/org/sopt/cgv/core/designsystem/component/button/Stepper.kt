@@ -112,6 +112,7 @@ fun Stepper(
 @Composable
 fun StepperPreview() {
     Stepper(
+        modifier = Modifier,
         initialValue = 0,
         onValueChange = { newValue ->
             println("Stepper value changed: $newValue")

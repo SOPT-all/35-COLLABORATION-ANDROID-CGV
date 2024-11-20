@@ -16,6 +16,7 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 
 @Composable
 fun SeatChoiceModalChip(
+    modifier: Modifier = Modifier,
     type: String,   //Date, Location, Time 으로 구분
     content: String
 ){
@@ -38,6 +39,7 @@ fun SeatChoiceModalChip(
 @Composable
 fun SeatChoiceModalChipPreview(){
     SeatChoiceModalChip(
+        modifier = Modifier,
         type = "Date",
         content = "2024.11.9 (토)"
     )

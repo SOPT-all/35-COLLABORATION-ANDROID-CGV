@@ -34,6 +34,7 @@ import org.sopt.cgv.core.common.norippleclick
 
 @Composable
 fun CompTimeCard(
+    modifier: Modifier = Modifier,
     startTime: String,
     endTime: String,
     currentSeats: Int,
@@ -131,6 +132,7 @@ fun CompTimeCard(
 @Composable
 fun CompTimeCardPreview() {
     CompTimeCard(
+        modifier = Modifier,
         startTime = "07:50",
         endTime = "09:41",
         currentSeats = 183,

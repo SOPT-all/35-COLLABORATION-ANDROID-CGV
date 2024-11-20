@@ -60,8 +60,9 @@ fun getButtonStyle(buttonType: String): ButtonStyle {
 
 @Composable
 fun ModalButton(
-    buttonType: String,   //선택 버튼인 경우 Choice, 뒤로가기인 경우 Back
-    initialActivation: Boolean, // 처음부터 활성화 상태면 true, 활성화 조건 필요하면 false
+    modifier: Modifier = Modifier,
+    buttonType: String,
+    initialActivation: Boolean,
     content: String,
     length: String,     //long, half로 사용
 ){
@@ -119,18 +120,21 @@ fun ButtonPreview(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ModalButton(
+            modifier = Modifier,
             buttonType = "Choice",
             initialActivation = true,
             content = "좌석선택",
             length = "long"
         )
         ModalButton(
+            modifier = Modifier,
             buttonType = "Back",
             initialActivation = false,
             content = "뒤로가기",
             length = "half"
         )
         ModalButton(
+            modifier = Modifier,
             buttonType = "Choice",
             initialActivation = true,
             content = "확인",
