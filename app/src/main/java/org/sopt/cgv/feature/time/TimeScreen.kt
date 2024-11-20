@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Tab
@@ -34,8 +36,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
@@ -43,10 +47,13 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,6 +76,8 @@ fun TimeScreen(
         onDismissRequest = { isSheetOpen = false }
     )
 }
+
+private const val s = "CGV를 선택해주세요./n최대 5개까지 선택 가능합니다"
 
 @ExperimentalMaterial3Api
 @Composable
@@ -100,6 +109,16 @@ fun TheaterSelectionModalBottomSheet(
                 "경상",
                 "광주/전라/제주"
             )
+            val MovieTheatersByDetailRegion = listOf(
+                MovieTheatersByDetailRegion(
+                    theaterNames = listOf("구리", "압구정"),
+                    detailRegionName = "최근 이용한 CGV"
+                ),
+                MovieTheatersByDetailRegion(
+                    theaterNames = listOf("용산아이파크몰"),
+                    detailRegionName = "현재 주변에 있는 CGV"
+                )
+            )
 
             Column(
                 modifier = Modifier
@@ -112,11 +131,20 @@ fun TheaterSelectionModalBottomSheet(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                ClickableVerticalList(
-                    list = regions,
-                    Modifier.weight(1f)
-                )
+                Row(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    ClickableVerticalList(
+                        list = regions
+                    )
 
+                    Spacer(modifier = Modifier.width(33.dp))
+
+                    SelectableTheaters(
+                        modifier = Modifier.weight(1f),
+                        MovieTheatersByDetailRegion = MovieTheatersByDetailRegion
+                    )
+                }
                 TheaterSelectionModalBottom(
                     sheetState = sheetState,
                     onDismissRequest = onDismissRequest
@@ -125,6 +153,107 @@ fun TheaterSelectionModalBottomSheet(
         }
     }
 }
+
+@Composable
+private fun SelectableTheaters(
+    modifier: Modifier,
+    MovieTheatersByDetailRegion: List<MovieTheatersByDetailRegion>
+) {
+    LazyColumn(
+        modifier = modifier
+            .padding(end = 18.dp)
+    ) {
+        item { Spacer(modifier = Modifier.height(16.dp)) }
+
+        item {
+            Text(
+                text = stringResource(R.string.cgv_theater_selection_guide),
+                style = CGVTheme.typography.small1_l_10
+            )
+        }
+
+        item { Spacer(modifier = Modifier.height(25.dp)) }
+
+        items(MovieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
+            DetailRegionTheaters(
+                theaterNames = movieTheatersByDetailRegion.theaterNames,
+                detailRegionName = movieTheatersByDetailRegion.detailRegionName
+            )
+        }
+    }
+}
+
+data class MovieTheatersByDetailRegion(
+    val detailRegionName: String,
+    val theaterNames: List<String>
+)
+
+@Composable
+private fun DetailRegionTheaters(
+    theaterNames: List<String>,
+    detailRegionName: String
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = detailRegionName,
+            style = CGVTheme.typography.head0_b_10,
+            color = Color.Red
+        )
+        Spacer(modifier = Modifier.height(25.dp))
+        theaterNames.forEach {
+            TheaterListItem(it)
+        }
+        Spacer(modifier = Modifier.height(36.dp))
+    }
+}
+
+@Composable
+private fun TheaterListItem(
+    theaterName: String
+) {
+    var isSelected by remember { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { isSelected = !isSelected }
+            .background(color = if (isSelected) Color.Gray else Color.White)
+            .drawBehind {
+                val strokeWidth = 1.dp.toPx()
+                val y = size.height - strokeWidth / 2
+                drawLine(
+                    color = Color(0xFFEDEDED),
+                    start = Offset(0f, y),
+                    end = Offset(size.width, y),
+                    strokeWidth = strokeWidth
+                )
+            }
+            .padding(horizontal = 8.dp, vertical = 11.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = theaterName,
+                style = CGVTheme.typography.body3_m_14
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            if (isSelected) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_time_modal_check),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp, vertical = 7.dp)
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun TheaterClassificationTab(
@@ -209,17 +338,20 @@ private fun TheaterSelectionModalBottom(
     val coroutineScope = rememberCoroutineScope()
 
     Box(
-        modifier = Modifier.dropShadow(
-            shape = RectangleShape,
-            color = Color(0x1A000000),
-            blur = 10.dp,
-            offsetY = (-4).dp,
-            offsetX = 0.dp,
-            spread = 0.dp
-        )
+        modifier = Modifier
+            .dropShadow(
+                shape = RectangleShape,
+                color = Color(0x1A000000),
+                blur = 10.dp,
+                offsetY = (-4).dp,
+                offsetX = 0.dp,
+                spread = 0.dp
+            )
+            .fillMaxWidth()
     ) {
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .background(color = Color.White)
                 .padding(horizontal = 18.dp)
         ) {
