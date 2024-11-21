@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.component.button.ModalButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.Typography
-import org.sopt.cgv.core.designsystem.component.chip.Chip
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
