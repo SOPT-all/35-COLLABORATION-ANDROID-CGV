@@ -30,13 +30,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import org.sopt.cgv.core.common.norippleclick
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Composable
 fun CompTimeCard(
     modifier: Modifier = Modifier,
-    startTime: String,
-    endTime: String,
+    startTime: LocalDateTime,
+    endTime: LocalDateTime,
     currentSeats: Int,
     totalSeats: Int,
     isMorning: Boolean
@@ -48,6 +50,10 @@ fun CompTimeCard(
     val backgroundColor = if (isClicked) Gray700 else White
     val backgroundColor2 = if (isClicked) Gray700 else Gray200
     val leftSeatsColor = if (isClickedCard) PrimaryRed400 else Green
+
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+    val formattedStartTime = startTime.format(timeFormatter)
+    val formattedEndTime = endTime.format(timeFormatter)
 
     Box(
         modifier = Modifier
@@ -72,13 +78,13 @@ fun CompTimeCard(
                 horizontalArrangement = Arrangement.Center,
             ){
                 Text(
-                    text = startTime,
+                    text = formattedStartTime,
                     color = Black,
                     style = Typography.head1_b_16
                 )
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
-                    text = "~$endTime",
+                    text = "~$formattedEndTime",
                     color = Gray600,
                     style = Typography.body0_r_8
                 )
@@ -133,8 +139,8 @@ fun CompTimeCard(
 fun CompTimeCardPreview() {
     CompTimeCard(
         modifier = Modifier,
-        startTime = "07:50",
-        endTime = "09:41",
+        startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
+        endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
         currentSeats = 183,
         totalSeats = 185,
         isMorning = true
