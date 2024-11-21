@@ -22,12 +22,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gray200
+import org.sopt.cgv.core.designsystem.theme.Gray700
+import org.sopt.cgv.core.designsystem.theme.Gray850
+import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.White
 
 
 data class MovieTheatersByDetailRegion(
@@ -49,7 +53,8 @@ fun SelectableTheatersInModal(
         item {
             Text(
                 text = stringResource(R.string.cgv_theater_selection_guide),
-                style = CGVTheme.typography.small1_l_10
+                style = CGVTheme.typography.small1_l_10,
+                color = Gray700
             )
         }
 
@@ -75,12 +80,15 @@ fun DetailRegionTheaters(
         Text(
             text = detailRegionName,
             style = CGVTheme.typography.head0_b_10,
-            color = Color.Red
+            color = PrimaryRed400
         )
+
         Spacer(modifier = Modifier.height(25.dp))
+
         theaterNames.forEach {
             TheaterListItem(it)
         }
+
         Spacer(modifier = Modifier.height(36.dp))
     }
 }
@@ -94,13 +102,14 @@ fun TheaterListItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(44.dp)
             .clickable { isSelected = !isSelected }
-            .background(color = if (isSelected) Color.Gray else Color.White)
+            .background(color = if (isSelected) Gray200 else White)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 val y = size.height - strokeWidth / 2
                 drawLine(
-                    color = Color(0xFFEDEDED),
+                    color = Gray200,
                     start = Offset(0f, y),
                     end = Offset(size.width, y),
                     strokeWidth = strokeWidth
@@ -113,7 +122,8 @@ fun TheaterListItem(
         ) {
             Text(
                 text = theaterName,
-                style = CGVTheme.typography.body3_m_14
+                style = if (isSelected) CGVTheme.typography.head4_b_15 else CGVTheme.typography.body3_m_14,
+                color = Gray850
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -123,7 +133,8 @@ fun TheaterListItem(
                     painter = painterResource(R.drawable.ic_time_modal_check),
                     contentDescription = "",
                     modifier = Modifier
-                        .padding(horizontal = 5.dp, vertical = 7.dp)
+                        .padding(horizontal = 5.dp, vertical = 7.dp),
+                    tint = PrimaryRed400
                 )
             }
         }

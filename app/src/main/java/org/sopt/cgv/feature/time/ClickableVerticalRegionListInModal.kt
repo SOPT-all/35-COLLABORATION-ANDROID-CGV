@@ -14,9 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gray700
 
 @Composable
 fun ClickableVerticalRegionListInModal(
@@ -41,8 +42,8 @@ fun ClickableVerticalRegionListInModal(
             ) {
                 Text(
                     text = item,
-                    style = CGVTheme.typography.body3_m_14,
-                    color = if (selectedItem == item) Color.Black else Color.DarkGray
+                    style = if (selectedItem == item) CGVTheme.typography.head3_b_14 else CGVTheme.typography.body3_m_14,
+                    color = if (selectedItem == item) Black else Gray700
                 )
             }
         }

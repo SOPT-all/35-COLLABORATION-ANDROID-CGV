@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gray850
+import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TheaterClassificationTabInModal(
@@ -27,14 +29,14 @@ fun TheaterClassificationTabInModal(
     ) {
         TabRow(
             selectedTabIndex = selectedIndex.value,
-            modifier = Modifier,
-            containerColor = Color.White,
-            contentColor = Color.White,
+            containerColor = White,
+            contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedIndex.value]),
                     width = 175.dp,
-                    color = Color.Red
+                    height = 2.dp,
+                    color = PrimaryRed400
                 )
             },
             divider = {}
@@ -44,8 +46,8 @@ fun TheaterClassificationTabInModal(
                     selected = selectedIndex.value == index,
                     onClick = { selectedIndex.value = index },
                     modifier = Modifier.padding(vertical = 10.dp),
-                    selectedContentColor = Color.Red,
-                    unselectedContentColor = Color.Black
+                    selectedContentColor = PrimaryRed400,
+                    unselectedContentColor = Gray850
                 ) {
                     Text(
                         text = category,
