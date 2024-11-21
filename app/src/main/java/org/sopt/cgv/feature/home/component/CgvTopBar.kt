@@ -31,8 +31,7 @@ fun CgvTopBar(
         modifier = modifier
             .fillMaxWidth()
             .background(White)
-            .padding(top = 10.dp)
-            .height(48.dp)
+            .height(50.dp)
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_ticket),
