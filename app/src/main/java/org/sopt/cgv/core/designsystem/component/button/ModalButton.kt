@@ -86,7 +86,7 @@ fun ModalButton(
             .background(buttonStyle.backgroundColor)
             .then(
                 if (buttonStyle.border != null)
-                    Modifier.border(buttonStyle.border, RoundedCornerShape(8.dp))
+                    Modifier.border(buttonStyle.border, RoundedCornerShape(12.dp))
                 else
                     Modifier
             )
