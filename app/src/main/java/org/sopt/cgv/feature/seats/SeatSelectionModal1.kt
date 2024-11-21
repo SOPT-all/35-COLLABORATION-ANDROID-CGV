@@ -1,7 +1,7 @@
-package org.sopt.cgv.core.designsystem.component.bottomsheet
+package org.sopt.cgv.feature.seats
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -10,16 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import org.sopt.cgv.core.designsystem.component.button.ModalButton
-import org.sopt.cgv.core.designsystem.component.button.Stepper
-import org.sopt.cgv.core.designsystem.component.chip.SeatChoiceModalChip
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.Typography
+import org.sopt.cgv.core.designsystem.component.chip.Chip
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SeatScreenModal1(
+fun SeatSelectionModal1(
+    seatSelectionMovieTitle: String,
+    chipContents: List<String>,
     onBackClick: () -> Unit,
     onSeatSelectionClick: () -> Unit
 ) {
@@ -37,21 +37,14 @@ fun SeatScreenModal1(
                 .fillMaxWidth()
         ) {
             Text(
-                text = "글래디에이터 2",
+                text = seatSelectionMovieTitle,
                 style = Typography.head6_b_17,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                SeatChoiceModalChip(type = "Date", content = "2024.11.05 (월)")
-                SeatChoiceModalChip(type = "Location", content = "구리")
-                SeatChoiceModalChip(type = "Time", content = "10:40 ~ 12:39")
-            }
+            SeatSelectionChipRow(contents = chipContents)
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -77,7 +70,7 @@ fun SeatScreenModal1(
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.Center
             ) {
                 ModalButton(
                     modifier = Modifier,
@@ -86,6 +79,9 @@ fun SeatScreenModal1(
                     content = "뒤로가기",
                     length = "half"
                 )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
                 ModalButton(
                     modifier = Modifier,
                     buttonType = "Choice",
@@ -99,33 +95,19 @@ fun SeatScreenModal1(
 }
 
 
-@Composable
-fun StepperRow(label: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = label,
-            style = Typography.body4_m_15,
-            color = Color.Black
-        )
-        Stepper(
-            modifier = Modifier,
-            initialValue = 0,
-            onValueChange = { newValue ->
-                println("$label 인원: $newValue")
-            }
-        )
-    }
-}
-
-
 @Preview(showBackground = true)
 @Composable
-fun ReservationBottomSheetPreview() {
-    SeatScreenModal1(
+fun SeatSelectionModal1Preview() {
+    
+    val ChipContents = listOf(
+        "2024.11.05 (월)",
+        "구리",
+        "10:40 ~ 12:39"
+    )
+
+    SeatSelectionModal1(
+        seatSelectionMovieTitle = "글래디에이터 2",
+        chipContents = ChipContents,
         onBackClick = {  },
         onSeatSelectionClick = {  }
     )

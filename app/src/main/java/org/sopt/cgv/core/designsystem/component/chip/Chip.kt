@@ -10,15 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Typography
 
 @Composable
-fun SeatChoiceModalChip(
+fun Chip(
     modifier: Modifier = Modifier,
-    type: String,   //Date, Location, Time 으로 구분
     content: String
 ){
 
@@ -39,9 +37,8 @@ fun SeatChoiceModalChip(
 @Preview
 @Composable
 fun SeatChoiceModalChipPreview(){
-    SeatChoiceModalChip(
+    Chip(
         modifier = Modifier,
-        type = "Date",
         content = "2024.11.9 (토)"
     )
 }

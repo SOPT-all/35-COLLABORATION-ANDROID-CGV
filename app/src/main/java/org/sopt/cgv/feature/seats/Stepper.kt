@@ -1,7 +1,6 @@
-package org.sopt.cgv.core.designsystem.component.button
+package org.sopt.cgv.feature.seats
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -23,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.norippleclick
 import org.sopt.cgv.core.designsystem.theme.Gray100

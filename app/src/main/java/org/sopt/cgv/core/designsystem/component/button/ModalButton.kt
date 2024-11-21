@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.sopt.cgv.core.common.norippleclick
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.Typography
 import org.sopt.cgv.core.designsystem.theme.White
@@ -65,7 +66,7 @@ fun ModalButton(
     buttonType: String,
     initialActivation: Boolean,
     content: String,
-    length: String,     //long, half로 사용
+    length: String,
 ){
 
     var isActivated by remember { mutableStateOf(initialActivation) }
@@ -90,7 +91,7 @@ fun ModalButton(
                 else
                     Modifier
             )
-            .clickable {
+            .norippleclick() {
                 /* Todo - behavior after cliking the button  */
             }
     ) {
