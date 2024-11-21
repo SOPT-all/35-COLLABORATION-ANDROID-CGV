@@ -69,18 +69,18 @@ fun CompTimeCard(
                     .size(width = 90.dp, height = 41.dp)
                     .padding(horizontal = 8.dp, vertical = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround,
+                horizontalArrangement = Arrangement.Center,
             ){
                 Text(
                     text = startTime,
                     color = Black,
-                    fontSize = 18.sp
+                    style = Typography.head1_b_16
                 )
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
-                    text = " ~$endTime",
+                    text = "~$endTime",
                     color = Gray600,
-                    fontSize = 8.sp
+                    style = Typography.body0_r_8
                 )
             }
             //잔여 좌석 부분
@@ -109,17 +109,17 @@ fun CompTimeCard(
                     Text(
                         text = "$currentSeats",
                         color = leftSeatsColor,
-                        fontSize = 12.sp,
+                        style = Typography.body2_r_12
                     )
                     Text(
                         text = "/",
                         color = Black,
-                        fontSize = 12.sp,
+                        style = Typography.body2_r_12
                     )
                     Text(
                         text = "${totalSeats}석",
                         color = Black,
-                        fontSize = 10.sp,
+                        style = Typography.body2_r_12
                     )
                 }
             }

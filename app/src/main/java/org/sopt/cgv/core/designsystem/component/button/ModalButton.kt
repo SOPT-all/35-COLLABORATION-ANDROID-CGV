@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.Typography
 import org.sopt.cgv.core.designsystem.theme.White
 
 data class ButtonStyle(
@@ -100,7 +101,8 @@ fun ModalButton(
         ){
             Text(
                 text = content,
-                color = buttonStyle.textColor
+                color = buttonStyle.textColor,
+                style = Typography.head6_b_17
             )
 
         }

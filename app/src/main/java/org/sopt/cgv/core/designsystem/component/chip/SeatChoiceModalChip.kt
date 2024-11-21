@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
+import org.sopt.cgv.core.designsystem.theme.Typography
 
 @Composable
 fun SeatChoiceModalChip(
@@ -30,7 +31,7 @@ fun SeatChoiceModalChip(
         Text(
             text = content,
             color = Gray700,
-            fontSize = 14.sp,
+            style = Typography.head3_b_14
         )
     }
 }

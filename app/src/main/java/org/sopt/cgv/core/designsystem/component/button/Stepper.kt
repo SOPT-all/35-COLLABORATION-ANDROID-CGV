@@ -29,6 +29,7 @@ import org.sopt.cgv.core.common.norippleclick
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray800
+import org.sopt.cgv.core.designsystem.theme.Typography
 
 @Composable
 fun Stepper(
@@ -81,7 +82,7 @@ fun Stepper(
             ) {
                 Text(
                     text = currentValue.toString(),
-                    fontSize = 17.sp,
+                    style = Typography.head6_b_17,
                     color = Gray700
                 )
             }
