@@ -41,7 +41,12 @@ fun TimeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
+                .padding(horizontal = 18.dp)
+                .padding(top = 19.dp)
         ) {
+            TimeScreenTobBar()
+
+
             Button(
                 onClick = { isSheetOpen = !isSheetOpen }
             ) { }
