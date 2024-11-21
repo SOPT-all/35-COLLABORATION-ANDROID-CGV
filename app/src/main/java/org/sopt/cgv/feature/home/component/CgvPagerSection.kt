@@ -17,7 +17,7 @@ import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
-fun CgvIndicatorSection(
+fun CgvPagerSection(
     title: String,
     view: String,
     images: PersistentList<Int>,
@@ -71,7 +71,7 @@ fun CgvIndicatorSection(
 
 @Preview(showBackground = true)
 @Composable
-fun CgvIndicatorSectionPreview() {
+fun CgvPagerSectionPreview() {
     CGVTheme {
         val sampleImaxImages = persistentListOf(
             R.drawable.img_home_imax1,
@@ -111,7 +111,7 @@ fun CgvIndicatorSectionPreview() {
         )
 
 
-        CgvIndicatorSection(
+        CgvPagerSection(
             title = "특별관",
             view = "전체보기",
             images = sampleImaxImages,
@@ -126,7 +126,7 @@ fun CgvIndicatorSectionPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun CgvIndicatorSectionPreview2() {
+fun CgvPagerSectionPreview2() {
     CGVTheme {
         val sampleHotImages = persistentListOf(
             R.drawable.img_home_hot1,
@@ -161,7 +161,7 @@ fun CgvIndicatorSectionPreview2() {
             )
         )
 
-        CgvIndicatorSection(
+        CgvPagerSection(
             title = "오늘의 CGV",
             view = "",
             images = sampleHotImages,
