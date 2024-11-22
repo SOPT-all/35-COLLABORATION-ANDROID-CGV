@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.component.button.CgvButton
-import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.Typography
@@ -41,7 +40,7 @@ fun SeatConfirmationModal(
         containerColor = Color.White
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {

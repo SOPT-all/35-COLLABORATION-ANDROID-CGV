@@ -19,13 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.collections.immutable.persistentListOf
 import java.time.LocalDateTime
 import org.sopt.cgv.R
-import org.sopt.cgv.core.designsystem.component.chip.Chip
 import org.sopt.cgv.core.designsystem.theme.Gray900
 
 
@@ -38,7 +36,6 @@ fun SeatSelectScreen(
     chipContents: List<String>,
 ){
 
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
 
     var _showBottomSheet by remember { mutableStateOf(showBottomSheet) }
@@ -50,15 +47,15 @@ fun SeatSelectScreen(
         modifier = modifier,
     ){  innerPadding ->
 
-//        if (_showBottomSheet) {
-//            SeatSelectionModal1(
-//                modifier = Modifier,
-//                movieTitle = movieTitle,
-//                chipContents = chipContents,
-//                onBackClick = { _showBottomSheet = false },
-//                onSeatSelectionClick = { _showBottomSheet = false }
-//            )
-//        }
+        if (_showBottomSheet) {
+            SeatSelectionModal1(
+                modifier = Modifier,
+                movieTitle = movieTitle,
+                chipContents = chipContents,
+                onBackClick = { _showBottomSheet = false },
+                onSeatSelectionClick = { _showBottomSheet = false }
+            )
+        }
 
         if (showSeatConfirmBottomSheet){
             SeatConfirmationModal(

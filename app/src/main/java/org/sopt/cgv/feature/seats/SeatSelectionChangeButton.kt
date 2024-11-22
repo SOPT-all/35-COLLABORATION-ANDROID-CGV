@@ -14,10 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray400
 import org.sopt.cgv.core.designsystem.theme.Gray600
-import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Typography
 import org.sopt.cgv.core.designsystem.theme.White
 
