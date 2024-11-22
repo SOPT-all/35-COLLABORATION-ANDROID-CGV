@@ -61,10 +61,7 @@ fun SeatConfirmationModal(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                StepperRow("일반")
-                StepperRow("청소년")
-                StepperRow("경로")
-                StepperRow("우대")
+                SeatSelectionConfirmRow(label = "일반1", price = "14,000")
             }
 
             Spacer(modifier = Modifier.height(32.dp))
