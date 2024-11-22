@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
-import org.sopt.cgv.core.common.norippleclick
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray800
@@ -53,7 +53,7 @@ fun Stepper(
             // - 버튼
             Box(
                 modifier = Modifier
-                    .norippleclick {
+                    .noRippleClickable {
                         if (currentValue > 0) {
                             currentValue--
                             onValueChange(currentValue)
@@ -88,7 +88,7 @@ fun Stepper(
             // + 버튼
             Box(
                 modifier = Modifier
-                    .norippleclick {
+                    .noRippleClickable {
                         currentValue++
                         onValueChange(currentValue)
                     }
