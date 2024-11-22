@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.cgv.core.designsystem.component.button.ModalButton
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,22 +73,28 @@ fun SeatSelectionModal1(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                ModalButton(
-                    modifier = Modifier,
-                    buttonType = "Back",
-                    initialActivation = false,
-                    content = "뒤로가기",
-                    length = "half"
+                CgvButton(
+                    text = "뒤로가기",
+                    textStyle = CGVTheme.typography.head6_b_17,
+                    textColor = PrimaryRed400,
+                    borderColor = PrimaryRed400,
+                    horizontalPadding = 48.dp,
+                    verticalPadding = 17.dp,
+                    roundedCornerShape = 12.dp,
+                    onClick = {},
+                    isBack = true
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
 
-                ModalButton(
-                    modifier = Modifier,
-                    buttonType = "Choice",
-                    initialActivation = false,
-                    content = "좌석선택",
-                    length = "half"
+                CgvButton(
+                    text = "좌석선택",
+                    textStyle = CGVTheme.typography.head6_b_17,
+                    horizontalPadding = 48.dp,
+                    verticalPadding = 17.dp,
+                    roundedCornerShape = 12.dp,
+                    onClick = {},
+                    enabled = true
                 )
             }
         }
