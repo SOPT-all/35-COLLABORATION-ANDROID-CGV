@@ -109,7 +109,8 @@ fun MovieCard(
             text = "지금예매",
             horizontalPadding = 54.dp,
             verticalPadding = 8.dp,
-            textStyle = CGVTheme.typography.head3_b_14
+            textStyle = CGVTheme.typography.head3_b_14,
+            onClick = {}
         )
 
     }

@@ -74,7 +74,8 @@ fun MovieSmallCard(
             text = "예매",
             horizontalPadding = 4.dp,
             verticalPadding = 2.dp,
-            textStyle = CGVTheme.typography.body1_m_12
+            textStyle = CGVTheme.typography.body1_m_12,
+            onClick = {}
         )
 
         Spacer(modifier = Modifier.width(8.dp))
