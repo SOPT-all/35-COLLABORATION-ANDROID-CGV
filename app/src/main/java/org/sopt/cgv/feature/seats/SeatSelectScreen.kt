@@ -29,6 +29,8 @@ import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.Gray800
 import java.time.LocalDateTime
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.theme.Gray850
+import org.sopt.cgv.core.designsystem.theme.Gray900
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -48,7 +50,7 @@ fun SeatSelectScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState)
-                .background(Gray800)
+                .background(Gray900)
                 .padding(innerPadding)
         ){
             val sampleTimeCardData = persistentListOf(

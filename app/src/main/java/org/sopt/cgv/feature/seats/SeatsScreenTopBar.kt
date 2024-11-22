@@ -24,8 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
-import org.sopt.cgv.core.designsystem.theme.Gray800
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.theme.Gray850
+import org.sopt.cgv.core.designsystem.theme.Gray900
 import org.sopt.cgv.core.designsystem.theme.Typography
 import java.time.LocalDateTime
 
@@ -40,7 +41,7 @@ fun SeatsScreenTopBar(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Gray800)
+            .background(Gray850)
             .height(180.dp),
         verticalArrangement = Arrangement.Top
     ){
@@ -53,7 +54,7 @@ fun SeatsScreenTopBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp)
-                .background(Gray800),
+                .background(Gray850),
             
         ){
             Icon(
