@@ -37,7 +37,7 @@ import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
-fun TimeScreenMovieSelectionPager() {
+fun TimeScreenMovieSelectionSection() {
     val posters = listOf(
         R.drawable.img_time_poster1_selected,
         R.drawable.img_time_poster2_selected,
