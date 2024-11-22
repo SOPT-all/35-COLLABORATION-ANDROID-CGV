@@ -2,23 +2,16 @@ package org.sopt.cgv.feature.seats
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.card.CompTimeCard
 import java.time.LocalDateTime
-
-//modifier: Modifier = Modifier,
-//startTime: LocalDateTime,
-//endTime: LocalDateTime,
-//currentSeats: Int,
-//totalSeats: Int,
-//isMorning: Boolean
 
 data class TimeCardContent(
     val startTime: LocalDateTime,
@@ -28,7 +21,6 @@ data class TimeCardContent(
     val isMorning: Boolean
 )
 
-
 @Composable
 fun SeatSelectionTimeCardRow(
     contents: PersistentList<TimeCardContent>,
@@ -36,29 +28,47 @@ fun SeatSelectionTimeCardRow(
 ){
     LazyRow(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(horizontal = 20.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp)
     ) {
         items(contents) { eachCard ->
             CompTimeCard(
-                modifier = modifier,
-                startTime = eachCard.startTime
+                startTime = eachCard.startTime,
+                endTime = eachCard.endTime,
+                currentSeats = eachCard.currentSeats,
+                totalSeats = eachCard.totalSeats,
+                isMorning = eachCard.isMorning
             )
-
         }
     }
-
 }
 
-//modifier: Modifier = Modifier,
-//startTime: LocalDateTime,
-//endTime: LocalDateTime,
-//currentSeats: Int,
-//totalSeats: Int,
-//isMorning: Boolean
 
 @Preview(showBackground = true)
 @Composable
 fun SeatSelectionTimeCardRowPreview(){
-    SeatSelectionTimeCardRow()
+    val sampleTimeCardData = persistentListOf(
+        TimeCardContent(
+            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
+            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            currentSeats = 185,
+            totalSeats = 178,
+            isMorning = true,
+        ),
+        TimeCardContent(
+            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
+            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            currentSeats = 185,
+            totalSeats = 178,
+            isMorning = true,
+        ),
+        TimeCardContent(
+            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
+            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            currentSeats = 185,
+            totalSeats = 178,
+            isMorning = true,
+        )
+    )
+    SeatSelectionTimeCardRow(contents = sampleTimeCardData)
 }
