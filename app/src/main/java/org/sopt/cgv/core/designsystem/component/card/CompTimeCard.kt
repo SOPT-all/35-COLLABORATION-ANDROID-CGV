@@ -1,7 +1,10 @@
 package org.sopt.cgv.core.designsystem.component.card
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,7 +34,7 @@ import org.sopt.cgv.core.common.norippleclick
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CompTimeCard(
     modifier: Modifier = Modifier,
@@ -39,37 +42,37 @@ fun CompTimeCard(
     endTime: LocalDateTime,
     currentSeats: Int,
     totalSeats: Int,
-    isMorning: Boolean
+    isMorning: Boolean,
+    isActivated: Boolean = false,
+    onClick: () -> Unit,
 ){
 
-    var isClicked by remember { mutableStateOf(false) }
-    var isClickedCard by remember { mutableStateOf(true) }
 
-    val backgroundColor = if (isClicked) Gray700 else White
-    val backgroundColor2 = if (isClicked) Gray700 else Gray200
-    val leftSeatsColor = if (isClickedCard) PrimaryRed400 else Green
+    val backgroundColor = if (isActivated) White else Gray700
+    val backgroundColor2 = if (isActivated) Gray200 else Gray700
+    val leftSeatsColor = if (isActivated) PrimaryRed400 else Green
 
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
     val formattedStartTime = startTime.format(timeFormatter)
     val formattedEndTime = endTime.format(timeFormatter)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(width = 90.dp, height = 64.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(backgroundColor)
-            .border(width = 2.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
-            .norippleclick() {
-                isClicked = !isClicked
+            .border(width = 1.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
+            .clickable {
+                onClick()
             }
     ){
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween
         ){
             //시간 부분
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .size(width = 90.dp, height = 41.dp)
                     .padding(horizontal = 8.dp, vertical = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -89,7 +92,7 @@ fun CompTimeCard(
             }
             //잔여 좌석 부분
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .height(23.dp)
                     .background(backgroundColor2),
@@ -97,7 +100,7 @@ fun CompTimeCard(
                 horizontalArrangement = Arrangement.SpaceAround,
             ){
                 Row(
-                    modifier = Modifier
+                    modifier = modifier
                         .padding(top = 3.dp, bottom = 3.dp, start = 9.dp, end = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround,
@@ -107,7 +110,7 @@ fun CompTimeCard(
                             painter = painterResource(id = R.drawable.ic_time_sun),
                             contentDescription = "morning movie",
                             tint = Gray700,
-                            modifier = Modifier.size(16.dp)
+                            modifier = modifier.size(16.dp)
                         )
                     }
                     Text(
@@ -132,6 +135,7 @@ fun CompTimeCard(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun CompTimeCardPreview() {
@@ -141,7 +145,9 @@ fun CompTimeCardPreview() {
         endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
         currentSeats = 183,
         totalSeats = 185,
-        isMorning = true
+        isMorning = true,
+        isActivated = true,
+        onClick = {}
     )
 }
 
