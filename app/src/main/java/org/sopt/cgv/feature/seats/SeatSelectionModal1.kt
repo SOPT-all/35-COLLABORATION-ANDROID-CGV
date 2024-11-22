@@ -19,6 +19,7 @@ import org.sopt.cgv.core.designsystem.theme.Typography
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeatSelectionModal1(
+    modifier: Modifier = Modifier,
     seatSelectionMovieTitle: String,
     chipContents: List<String>,
     onBackClick: () -> Unit,
@@ -113,6 +114,7 @@ fun SeatSelectionModal1Preview() {
     )
 
     SeatSelectionModal1(
+        modifier = Modifier,
         seatSelectionMovieTitle = "글래디에이터 2",
         chipContents = ChipContents,
         onBackClick = {  },
