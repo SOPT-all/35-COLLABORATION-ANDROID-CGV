@@ -25,6 +25,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray200
@@ -36,13 +37,13 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 data class MovieTheatersByDetailRegion(
     val detailRegionName: String,
-    val theaterNames: List<String>
+    val theaterNames: PersistentList<String>
 )
 
 @Composable
 fun SelectableTheatersInModal(
     modifier: Modifier,
-    movieTheatersByDetailRegion: List<MovieTheatersByDetailRegion>
+    movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>
 ) {
     LazyColumn(
         modifier = modifier
@@ -71,7 +72,7 @@ fun SelectableTheatersInModal(
 
 @Composable
 fun DetailRegionTheaters(
-    theaterNames: List<String>,
+    theaterNames: PersistentList<String>,
     detailRegionName: String
 ) {
     Column(

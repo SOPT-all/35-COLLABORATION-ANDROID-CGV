@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
 
 @ExperimentalMaterial3Api
@@ -34,8 +35,8 @@ fun TheaterSelectionModalBottomSheet(
             dragHandle = null
         ) {
             val selectedIndex = remember { mutableStateOf(0) }
-            val tabs = listOf("지역별", "특별관")
-            val regions = listOf(
+            val tabs = persistentListOf("지역별", "특별관")
+            val regions = persistentListOf(
                 "추천 CGV",
                 "서울(31)",
                 "경기",
@@ -47,13 +48,13 @@ fun TheaterSelectionModalBottomSheet(
                 "경상",
                 "광주/전라/제주"
             )
-            val MovieTheatersByDetailRegion = listOf(
+            val movieTheatersByDetailRegion = persistentListOf(
                 MovieTheatersByDetailRegion(
-                    theaterNames = listOf("구리", "압구정"),
+                    theaterNames = persistentListOf("구리", "압구정"),
                     detailRegionName = "최근 이용한 CGV"
                 ),
                 MovieTheatersByDetailRegion(
-                    theaterNames = listOf("용산아이파크몰"),
+                    theaterNames = persistentListOf("용산아이파크몰"),
                     detailRegionName = "현재 주변에 있는 CGV"
                 )
             )
@@ -80,7 +81,7 @@ fun TheaterSelectionModalBottomSheet(
 
                     SelectableTheatersInModal(
                         modifier = Modifier.weight(1f),
-                        movieTheatersByDetailRegion = MovieTheatersByDetailRegion
+                        movieTheatersByDetailRegion = movieTheatersByDetailRegion
                     )
                 }
 

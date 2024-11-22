@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
@@ -20,7 +21,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TheaterClassificationTabInModal(
     selectedIndex: MutableState<Int>,
-    tabs: List<String>
+    tabs: PersistentList<String>
 ) {
     Column(
         modifier = Modifier

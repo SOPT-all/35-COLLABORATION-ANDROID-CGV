@@ -1,7 +1,5 @@
 package org.sopt.cgv.feature.time
 
-import android.text.Layout
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
@@ -17,16 +15,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray700
 
 @Composable
 fun ClickableVerticalRegionListInModal(
-    list: List<String>,
+    list: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
     var selectedItem by remember { mutableStateOf<String?>("추천 CGV") }
@@ -43,7 +43,7 @@ fun ClickableVerticalRegionListInModal(
                 modifier = Modifier
                     .width(139.dp)
                     .height(46.dp)
-                    .clickable { selectedItem = item }
+                    .noRippleClickable { selectedItem = item }
             ) {
                 Text(
                     text = item,
@@ -58,9 +58,9 @@ fun ClickableVerticalRegionListInModal(
 
 @Preview
 @Composable
-private fun ClickableVerticalRegionListInModalPreview(){
+private fun ClickableVerticalRegionListInModalPreview() {
     ClickableVerticalRegionListInModal(
-        list = listOf(
+        list = persistentListOf(
             "추천 CGV",
             "서울(31)",
             "경기",

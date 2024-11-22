@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.designsystem.theme.White
 
@@ -80,7 +81,8 @@ fun TheaterSelectionModalFooter(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ShowSelectedChipsBox() {
-    val chips = listOf("Chip 1", "Chip 2", "Chip 3", "Long Chip 4", "Chip 5", "Another Chip 6")
+    val chips =
+        persistentListOf("Chip 1", "Chip 2", "Chip 3", "Long Chip 4", "Chip 5", "Another Chip 6")
 
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),
