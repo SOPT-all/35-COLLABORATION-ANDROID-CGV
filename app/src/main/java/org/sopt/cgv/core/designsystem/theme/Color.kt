@@ -16,11 +16,11 @@ val White = Color(0xFFFFFFFF)
 val BackgroundOpacity1 = Color(0x99000000)
 val BackgroundOpacity2 = Color(0x80000000)
 
-val Gradient = Brush.verticalGradient(
+val Gradient = Brush.horizontalGradient(
     colors = listOf(Color(0xFFFA4356), Color(0xFFFF642F))
 )
 
-val Gradient_modal = Brush.horizontalGradient(
+val Gradient_modal = Brush.verticalGradient(
     colors = listOf(Color(0xFF000000), Color(0x00000000))
 )
 
