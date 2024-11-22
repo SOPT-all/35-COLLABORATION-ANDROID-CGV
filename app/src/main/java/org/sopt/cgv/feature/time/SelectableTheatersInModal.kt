@@ -48,7 +48,7 @@ fun SelectableTheatersInModal(
         modifier = modifier
             .padding(end = 18.dp)
     ) {
-        item { Spacer(modifier = Modifier.height(16.dp)) }
+        item { Spacer(modifier = Modifier.height(26.dp)) }
 
         item {
             Text(
