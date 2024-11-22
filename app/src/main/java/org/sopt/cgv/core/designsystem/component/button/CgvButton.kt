@@ -35,7 +35,7 @@ fun CgvButton(
     horizontalPadding: Dp = 54.dp,
     verticalPadding: Dp = 8.dp,
     roundedCornerShape: Dp = 8.dp,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
     enabled: Boolean = false,
     isBack: Boolean = false,
 ) {
@@ -64,28 +64,32 @@ private fun CgvButtonPreview() {
             text = "지금예매",
             textStyle = CGVTheme.typography.head3_b_14,
             horizontalPadding = 56.dp,
-            verticalPadding = 8.dp
+            verticalPadding = 8.dp,
+            onClick = {}
         )
         CgvButton(
             text = "예매",
             textStyle = CGVTheme.typography.body1_m_12,
             horizontalPadding = 4.dp,
             verticalPadding = 3.dp,
-            roundedCornerShape = 4.dp
+            roundedCornerShape = 4.dp,
+            onClick = {}
         )
         CgvButton(
             text = "극장선택",
             textStyle = CGVTheme.typography.head6_b_17,
             horizontalPadding = 136.dp,
             verticalPadding = 16.dp,
-            roundedCornerShape = 10.dp
+            roundedCornerShape = 10.dp,
+            onClick = {}
         )
         CgvButton(
             text = "좌석선택",
             textStyle = CGVTheme.typography.head6_b_17,
             horizontalPadding = 136.dp,
             verticalPadding = 16.dp,
-            roundedCornerShape = 10.dp
+            roundedCornerShape = 10.dp,
+            onClick = {}
         )
         CgvButton(
             text = "좌석선택",
@@ -93,6 +97,7 @@ private fun CgvButtonPreview() {
             horizontalPadding = 48.dp,
             verticalPadding = 17.dp,
             roundedCornerShape = 12.dp,
+            onClick = {},
             enabled = true
         )
         CgvButton(
@@ -103,6 +108,7 @@ private fun CgvButtonPreview() {
             horizontalPadding = 48.dp,
             verticalPadding = 17.dp,
             roundedCornerShape = 12.dp,
+            onClick = {},
             isBack = true
         )
     }
