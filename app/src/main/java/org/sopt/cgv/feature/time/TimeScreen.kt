@@ -49,7 +49,7 @@ fun TimeScreen(
 
             Spacer(modifier = Modifier.height(19.dp))
 
-            TimeScreenMovieSelectionPager()
+            TimeScreenMovieSelectionSection()
 
             Button(
                 onClick = { isSheetOpen = !isSheetOpen }
