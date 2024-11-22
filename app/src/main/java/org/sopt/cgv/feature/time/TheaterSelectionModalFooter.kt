@@ -1,7 +1,6 @@
 package org.sopt.cgv.feature.time
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,7 +99,7 @@ fun Chip(text: String, onClick: () -> Unit) {
                 color = Color.LightGray,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable { onClick() }
+            .noRippleClickable { onClick() }
             .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
     ) {
         Text(

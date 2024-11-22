@@ -1,7 +1,6 @@
 package org.sopt.cgv.feature.time
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import org.sopt.cgv.R
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray200
 import org.sopt.cgv.core.designsystem.theme.Gray700
@@ -104,7 +104,7 @@ fun TheaterListItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(44.dp)
-            .clickable { isSelected = !isSelected }
+            .noRippleClickable { isSelected = !isSelected }
             .background(color = if (isSelected) Gray200 else White)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()

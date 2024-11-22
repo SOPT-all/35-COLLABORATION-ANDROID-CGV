@@ -44,11 +44,13 @@ fun TheaterClassificationTabInModal(
         ) {
             tabs.forEachIndexed { index, category ->
                 Tab(
+                    // 지금 여기는 Ripple효과가 제거가 안되네요.. custom으로 만들겠습니다 추후에
                     selected = selectedIndex.value == index,
+                    modifier = Modifier
+                        .padding(vertical = 10.dp),
                     onClick = { selectedIndex.value = index },
-                    modifier = Modifier.padding(vertical = 10.dp),
                     selectedContentColor = PrimaryRed400,
-                    unselectedContentColor = Gray850
+                    unselectedContentColor = Gray850,
                 ) {
                     Text(
                         text = category,
