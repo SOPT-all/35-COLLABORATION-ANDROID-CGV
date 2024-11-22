@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -51,78 +52,91 @@ fun TimeScreenMovieSelectionSection() {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "글래디에이터 ||",
-                style = CGVTheme.typography.head6_b_17,
-                color = White
-            )
-
-            Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.ic_time_age19_20),
-                contentDescription = "",
-                tint = Color.Unspecified
-            )
-
-            Text(
-                text = "2시간 28분",
-                style = CGVTheme.typography.body0_m_11,
-                color = White
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-            Box(
-                modifier = Modifier
-                    .background(
-                        color = Gray100,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = PrimaryRed400,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .padding(horizontal = 10.dp)
-                    .height(24.dp)
-            ) {
-                Text(
-                    text = "전체",
-                    modifier = Modifier.align(Alignment.Center),
-                    style = CGVTheme.typography.head1_b_12,
-                    color = PrimaryRed400
-                )
-            }
-        }
+        SelectedMovieInformation()
 
         Spacer(modifier = Modifier.height(19.dp))
 
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(
-                items = posters,
-                key = { it }
-            ) { poster ->
-                Box(
+        SelectableMoviePosters(posters, selectedPoster)
+    }
+}
+
+@Composable
+fun SelectableMoviePosters(
+    posters: List<Int>,
+    selectedPoster: MutableState<Int>
+) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(
+            items = posters,
+            key = { it }
+        ) { poster ->
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.2f)
+                    .background(color = Black, shape = RoundedCornerShape(5.dp))
+                    .clickable { selectedPoster.value = poster },
+            ) {
+                Image(
+                    painter = painterResource(id = poster),
+                    contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth(0.2f)
-                        .background(color = Black, shape = RoundedCornerShape(5.dp))
-                        .clickable { selectedPoster.value = poster },
-                ) {
-                    Image(
-                        painter = painterResource(id = poster),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(5.dp))
-                            .fillMaxWidth(0.2f),
-                        contentScale = ContentScale.Crop,
-                        alpha = if (selectedPoster.value == poster) 1f else 0.6f
-                    )
-                }
+                        .clip(shape = RoundedCornerShape(5.dp))
+                        .fillMaxWidth(0.2f),
+                    contentScale = ContentScale.Crop,
+                    alpha = if (selectedPoster.value == poster) 1f else 0.6f
+                )
             }
+        }
+    }
+}
+
+@Composable
+fun SelectedMovieInformation() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "글래디에이터 ||",
+            style = CGVTheme.typography.head6_b_17,
+            color = White
+        )
+
+        Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.ic_time_age19_20),
+            contentDescription = "",
+            tint = Color.Unspecified
+        )
+
+        Text(
+            text = "2시간 28분",
+            style = CGVTheme.typography.body0_m_11,
+            color = White
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+        Box(
+            modifier = Modifier
+                .background(
+                    color = Gray100,
+                    shape = RoundedCornerShape(6.dp)
+                )
+                .border(
+                    width = 1.dp,
+                    color = PrimaryRed400,
+                    shape = RoundedCornerShape(6.dp)
+                )
+                .padding(horizontal = 10.dp)
+                .height(24.dp)
+        ) {
+            Text(
+                text = "전체",
+                modifier = Modifier.align(Alignment.Center),
+                style = CGVTheme.typography.head1_b_12,
+                color = PrimaryRed400
+            )
         }
     }
 }
