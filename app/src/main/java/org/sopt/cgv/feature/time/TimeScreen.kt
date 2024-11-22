@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.theme.Gradient
+import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,13 +30,20 @@ fun TimeScreen(
     var isSheetOpen by remember { mutableStateOf(true) }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(220.dp)
                 .background(Gradient)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 220.dp)
+                .background(White)
         )
 
         Column(
@@ -50,6 +58,10 @@ fun TimeScreen(
             Spacer(modifier = Modifier.height(19.dp))
 
             TimeScreenMovieSelectionSection()
+
+            Spacer(modifier = Modifier.height(19.dp))
+
+            TimeScreenDateSelectionTab()
 
             Button(
                 onClick = { isSheetOpen = !isSheetOpen }
