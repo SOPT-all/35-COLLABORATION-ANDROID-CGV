@@ -37,6 +37,6 @@ fun StepperRow(label: String) {
 @Composable
 fun StepperRowPreview(){
     StepperRow(
-        label = "하이"
+        label = "어린이"
     )
 }

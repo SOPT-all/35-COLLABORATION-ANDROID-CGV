@@ -20,16 +20,14 @@ import org.sopt.cgv.core.designsystem.theme.Typography
 @Composable
 fun SeatSelectionModal1(
     modifier: Modifier = Modifier,
-    seatSelectionMovieTitle: String,
+    movieTitle: String,
     chipContents: List<String>,
     onBackClick: () -> Unit,
     onSeatSelectionClick: () -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = {  },
-        sheetState = rememberModalBottomSheetState(
-            skipPartiallyExpanded = true
-        ),
+        sheetState = rememberModalBottomSheetState(),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         containerColor = Color.White
     ) {
@@ -39,7 +37,7 @@ fun SeatSelectionModal1(
                 .fillMaxWidth()
         ) {
             Text(
-                text = seatSelectionMovieTitle,
+                text = movieTitle,
                 style = Typography.head6_b_17,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
@@ -103,7 +101,7 @@ fun SeatSelectionModal1(
 }
 
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun SeatSelectionModal1Preview() {
     
@@ -115,7 +113,7 @@ fun SeatSelectionModal1Preview() {
 
     SeatSelectionModal1(
         modifier = Modifier,
-        seatSelectionMovieTitle = "글래디에이터 2",
+        movieTitle = "글래디에이터 2",
         chipContents = ChipContents,
         onBackClick = {  },
         onSeatSelectionClick = {  }
