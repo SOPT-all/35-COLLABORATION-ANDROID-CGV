@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
@@ -48,4 +49,23 @@ fun ClickableVerticalRegionListInModal(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun ClickableVerticalRegionListInModalPreview(){
+    ClickableVerticalRegionListInModal(
+        list = listOf(
+            "추천 CGV",
+            "서울(31)",
+            "경기",
+            "인천",
+            "강원",
+            "대전/충청",
+            "대구",
+            "울산/부산",
+            "경상",
+            "광주/전라/제주"
+        )
+    )
 }
