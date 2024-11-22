@@ -34,7 +34,6 @@ import org.sopt.cgv.core.designsystem.theme.Gray900
 fun SeatSelectScreen(
     modifier: Modifier = Modifier,
     showBottomSheet: Boolean = true,
-    showSeatConfirmBottomSheet: Boolean = false,
     movieTitle: String,
     chipContents: List<String>,
 ){
@@ -43,7 +42,7 @@ fun SeatSelectScreen(
     val scrollState = rememberScrollState()
 
     var _showBottomSheet by remember { mutableStateOf(showBottomSheet) }
-    var _showSeatConfirmBottomSheet by remember { mutableStateOf(showSeatConfirmBottomSheet) }
+    var showSeatConfirmBottomSheet by remember { mutableStateOf(false) }
 
     var isSeatSelected by remember { mutableStateOf(false) }
 
@@ -51,13 +50,23 @@ fun SeatSelectScreen(
         modifier = modifier,
     ){  innerPadding ->
 
-        if (_showBottomSheet) {
-            SeatSelectionModal1(
+//        if (_showBottomSheet) {
+//            SeatSelectionModal1(
+//                modifier = Modifier,
+//                movieTitle = movieTitle,
+//                chipContents = chipContents,
+//                onBackClick = { _showBottomSheet = false },
+//                onSeatSelectionClick = { _showBottomSheet = false }
+//            )
+//        }
+
+        if (showSeatConfirmBottomSheet){
+            SeatConfirmationModal(
                 modifier = Modifier,
-                movieTitle = movieTitle,
+                movieTitle = "글래디에이터 2",
                 chipContents = chipContents,
-                onBackClick = { _showBottomSheet = false },
-                onSeatSelectionClick = { _showBottomSheet = false }
+                onBackClick = { showSeatConfirmBottomSheet = false },
+                onSeatSelectionClick = { showSeatConfirmBottomSheet = false }
             )
         }
 
@@ -137,6 +146,7 @@ fun SeatSelectScreen(
                     .fillMaxWidth()
                     .clickable {
                         isSeatSelected = !isSeatSelected
+                        showSeatConfirmBottomSheet = true
                     },
                 contentScale = ContentScale.Crop
             )
