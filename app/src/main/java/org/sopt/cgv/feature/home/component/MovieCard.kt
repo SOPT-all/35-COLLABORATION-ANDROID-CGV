@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray800
@@ -104,11 +105,12 @@ fun MovieCard(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        ReservationButton(
+        CgvButton(
             text = "지금예매",
             horizontalPadding = 54.dp,
             verticalPadding = 8.dp,
-            textStyle = CGVTheme.typography.head3_b_14
+            textStyle = CGVTheme.typography.head3_b_14,
+            onClick = {}
         )
 
     }
