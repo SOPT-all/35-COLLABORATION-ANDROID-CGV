@@ -10,8 +10,13 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
@@ -19,8 +24,9 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TheaterClassificationTabInModal(
-    selectedIndex: MutableState<Int>,
-    tabs: List<String>
+    selectedTabInModalIndex: MutableState<Int>,
+    tabs: PersistentList<String>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier
@@ -28,12 +34,12 @@ fun TheaterClassificationTabInModal(
             .padding(horizontal = 18.dp)
     ) {
         TabRow(
-            selectedTabIndex = selectedIndex.value,
+            selectedTabIndex = selectedTabInModalIndex.value,
             containerColor = White,
             contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedIndex.value]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex.value]),
                     width = 175.dp,
                     height = 2.dp,
                     color = PrimaryRed400
@@ -43,11 +49,13 @@ fun TheaterClassificationTabInModal(
         ) {
             tabs.forEachIndexed { index, category ->
                 Tab(
-                    selected = selectedIndex.value == index,
-                    onClick = { selectedIndex.value = index },
-                    modifier = Modifier.padding(vertical = 10.dp),
+                    // 지금 여기는 Ripple효과가 제거가 안되네요.. custom으로 만들겠습니다 추후에
+                    selected = selectedTabInModalIndex.value == index,
+                    modifier = Modifier
+                        .padding(vertical = 10.dp),
+                    onClick = { selectedTabInModalIndex.value = index },
                     selectedContentColor = PrimaryRed400,
-                    unselectedContentColor = Gray850
+                    unselectedContentColor = Gray850,
                 ) {
                     Text(
                         text = category,
@@ -58,3 +66,14 @@ fun TheaterClassificationTabInModal(
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun TheaterClassificationTabInModalPreview() {
+    TheaterClassificationTabInModal(
+        selectedTabInModalIndex = remember { mutableIntStateOf(0) },
+        tabs = persistentListOf("지역별", "특별관"),
+        modifier = Modifier
+    )
+}
+

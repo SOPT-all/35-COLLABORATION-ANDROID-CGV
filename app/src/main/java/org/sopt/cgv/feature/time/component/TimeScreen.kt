@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,7 +29,11 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TimeScreen(
     modifier: Modifier = Modifier
 ) {
-    var isSheetOpen by remember { mutableStateOf(true) }
+    val isSheetOpen = remember { mutableStateOf(true) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
+    val selectedRegionInModal = remember { mutableStateOf("추천 CGV") }
+    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
 
     Scaffold(
         modifier = Modifier
@@ -68,10 +74,21 @@ fun TimeScreen(
             ) { }
         }
     }
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Button(
+            onClick = { isSheetOpen.value = !(isSheetOpen.value) }
+        ) { }
+    }
 
     TheaterSelectionModalBottomSheet(
         isSheetOpen = isSheetOpen,
-        onDismissRequest = { isSheetOpen = false }
+        onDismissRequest = { isSheetOpen.value = false },
+        sheetState = sheetState,
+        selectedTabInModalIndex = selectedTabInModalIndex,
+        selectedRegionInModal = selectedRegionInModal,
+        selectedTheaters = selectedTheaters
     )
 }
 

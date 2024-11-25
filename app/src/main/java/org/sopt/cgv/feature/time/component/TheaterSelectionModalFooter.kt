@@ -1,8 +1,6 @@
 package org.sopt.cgv.feature.time.component
 
-import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,27 +15,29 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.drawOutline
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import org.sopt.cgv.core.common.extension.dropShadow
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TheaterSelectionModalFooter(
     sheetState: SheetState,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    selectedTheaters: MutableState<Set<String>>,
+    modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -59,9 +59,11 @@ fun TheaterSelectionModalFooter(
                 .background(color = White)
                 .padding(horizontal = 18.dp)
         ) {
-            ShowSelectedChipsBox()
+            ShowSelectedChipsBox(
+                selectedTheaters = selectedTheaters
+            )
 
-            Button(
+            Button( // 임시용 버튼
                 onClick = {
                     coroutineScope.launch {
                         sheetState.hide()
@@ -79,15 +81,16 @@ fun TheaterSelectionModalFooter(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ShowSelectedChipsBox() {
-    val chips = listOf("Chip 1", "Chip 2", "Chip 3", "Long Chip 4", "Chip 5", "Another Chip 6")
-
+fun ShowSelectedChipsBox(
+    modifier: Modifier = Modifier,
+    selectedTheaters: MutableState<Set<String>>
+) {
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        chips.forEach { chip ->
+        selectedTheaters.value.forEach { chip ->
             Chip(
                 text = chip,
                 onClick = { }
@@ -96,7 +99,7 @@ fun ShowSelectedChipsBox() {
     }
 }
 
-@Composable
+@Composable // 임시용 chip
 fun Chip(text: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
@@ -104,7 +107,7 @@ fun Chip(text: String, onClick: () -> Unit) {
                 color = Color.LightGray,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable { onClick() }
+            .noRippleClickable { onClick() }
             .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
     ) {
         Text(
@@ -114,31 +117,34 @@ fun Chip(text: String, onClick: () -> Unit) {
     }
 }
 
-fun Modifier.dropShadow(
-    shape: Shape,
-    color: Color = Color.Black.copy(0.25f),
-    blur: Dp = 4.dp,
-    offsetY: Dp = 4.dp,
-    offsetX: Dp = 0.dp,
-    spread: Dp = 0.dp
-) = this.drawBehind {
-    val shadowSize = Size(size.width + spread.toPx(), size.height + spread.toPx())
-    val shadowOutline = shape.createOutline(shadowSize, layoutDirection, this)
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+private fun TheaterSelectionModalFooterPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    TheaterSelectionModalFooter(
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        onDismissRequest = {},
+        selectedTheaters = selectedTheaters,
+        modifier = Modifier
+    )
+}
 
-    val paint = Paint().apply {
-        this.color = color
-    }
+@Preview
+@Composable
+private fun ShowSelectedChipsBoxPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    ShowSelectedChipsBox(
+        modifier = Modifier,
+        selectedTheaters = selectedTheaters
+    )
+}
 
-    if (blur.toPx() > 0) {
-        paint.asFrameworkPaint().apply {
-            maskFilter = BlurMaskFilter(blur.toPx(), BlurMaskFilter.Blur.NORMAL)
-        }
-    }
-
-    drawIntoCanvas { canvas ->
-        canvas.save()
-        canvas.translate(offsetX.toPx(), offsetY.toPx())
-        canvas.drawOutline(shadowOutline, paint)
-        canvas.restore()
-    }
+@Preview
+@Composable
+private fun ChipPreview() {
+    Chip(
+        text = "Preview",
+        onClick = {}
+    )
 }
