@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
@@ -40,24 +41,22 @@ fun TimeScreenTobBar() {
             .padding(horizontal = 18.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TabRow(
+        CGVTabRow(
             selectedTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
-            modifier = Modifier.width(203.dp),
-            containerColor = Color.Transparent,
+            modifier = Modifier.width(204.dp),
             contentColor = Color.Transparent,
+            edgePadding = 0.dp,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
                     modifier = Modifier
                         .tabIndicatorOffset(tabPositions[selectedTimeScreenTobBarTabIndex.intValue]),
-                    width = widths[selectedTimeScreenTobBarTabIndex.intValue].dp,
                     height = 2.dp,
                     color = White
                 )
             },
-            divider = {}
         ) {
             reservationMethods.forEachIndexed { index, method ->
-                Tab(    // 영화별 극장별 사이의 간격이 아무리해도 커지지 않네요.
+                CGVTab(
                     selected = selectedTimeScreenTobBarTabIndex.intValue == index,
                     onClick = { selectedTimeScreenTobBarTabIndex.intValue = index },
                     modifier = Modifier
