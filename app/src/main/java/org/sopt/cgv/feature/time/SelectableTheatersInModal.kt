@@ -21,8 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import org.sopt.cgv.R
@@ -133,7 +134,7 @@ fun TheaterListItem(
 
             if (isSelected) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_time_modal_check),
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_time_modal_check),
                     contentDescription = "",
                     modifier = Modifier
                         .padding(horizontal = 5.dp, vertical = 7.dp),
