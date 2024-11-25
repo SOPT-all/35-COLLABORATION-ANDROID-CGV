@@ -50,12 +50,12 @@ fun TheaterSelectionModalBottomSheet(
             )
             val movieTheatersByDetailRegion = persistentListOf(
                 MovieTheatersByDetailRegion(
+                    detailRegionName = "최근 이용한 CGV",
                     theaterNames = persistentListOf("구리", "압구정"),
-                    detailRegionName = "최근 이용한 CGV"
                 ),
                 MovieTheatersByDetailRegion(
+                    detailRegionName = "현재 주변에 있는 CGV",
                     theaterNames = persistentListOf("용산아이파크몰"),
-                    detailRegionName = "현재 주변에 있는 CGV"
                 )
             )
 

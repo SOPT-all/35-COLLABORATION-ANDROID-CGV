@@ -72,8 +72,8 @@ fun SelectableTheatersInModal(
 
 @Composable
 fun DetailRegionTheaters(
-    theaterNames: PersistentList<String>,
-    detailRegionName: String
+    detailRegionName: String,
+    theaterNames: PersistentList<String>
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
