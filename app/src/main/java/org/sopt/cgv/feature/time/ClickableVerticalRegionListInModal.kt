@@ -56,7 +56,7 @@ fun ClickableVerticalRegionListInModal(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ClickableVerticalRegionListInModalPreview() {
     ClickableVerticalRegionListInModal(

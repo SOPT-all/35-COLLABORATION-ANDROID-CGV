@@ -15,11 +15,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
@@ -110,4 +112,32 @@ fun Chip(text: String, onClick: () -> Unit) {
             color = Color.Black
         )
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+private fun TheaterSelectionModalFooterPreview() {
+    TheaterSelectionModalFooter(
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        onDismissRequest = {},
+        modifier = Modifier
+    )
+}
+
+@Preview
+@Composable
+private fun ShowSelectedChipsBoxPreview() {
+    ShowSelectedChipsBox(
+        modifier = Modifier
+    )
+}
+
+@Preview
+@Composable
+private fun ChipPreview() {
+    Chip(
+        text = "Preview",
+        onClick = {}
+    )
 }

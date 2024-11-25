@@ -24,8 +24,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
@@ -64,8 +66,8 @@ fun SelectableTheatersInModal(
 
         items(movieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
             DetailRegionTheaters(
-                theaterNames = movieTheatersByDetailRegion.theaterNames,
-                detailRegionName = movieTheatersByDetailRegion.detailRegionName
+                detailRegionName = movieTheatersByDetailRegion.detailRegionName,
+                theaterNames = movieTheatersByDetailRegion.theaterNames
             )
         }
     }
@@ -122,6 +124,7 @@ fun TheaterListItem(
             .padding(horizontal = 8.dp, vertical = 11.dp)
     ) {
         Row(
+            modifier = Modifier.align(Alignment.CenterStart),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -143,4 +146,41 @@ fun TheaterListItem(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SelectableTheatersInModalPreview() {
+    SelectableTheatersInModal(
+        Modifier,
+        persistentListOf(
+            MovieTheatersByDetailRegion(
+                detailRegionName = "최근 이용한 CGV",
+                theaterNames = persistentListOf("구리", "압구정"),
+            ),
+            MovieTheatersByDetailRegion(
+                detailRegionName = "현재 주변에 있는 CGV",
+                theaterNames = persistentListOf("용산아이파크몰"),
+            )
+        )
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun DetailRegionTheatersPreview() {
+    DetailRegionTheaters(
+        detailRegionName = "최근 이용한 CGV",
+        theaterNames = persistentListOf("구리", "압구정"),
+        modifier = Modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TheaterListItemPreview() {
+    TheaterListItem(
+        theaterName = "용산아이파크몰",
+        modifier = Modifier
+    )
 }
