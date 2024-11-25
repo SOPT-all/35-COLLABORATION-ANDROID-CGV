@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -112,7 +113,8 @@ fun SelectedMovieInformation() {
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_time_age19_20),
             contentDescription = "",
-            tint = Color.Unspecified
+            tint = Color.Unspecified,
+            modifier = Modifier.size(30.dp)
         )
 
         Text(
