@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.time
+package org.sopt.cgv.feature.time.component
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.time
+package org.sopt.cgv.feature.time.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -144,7 +144,7 @@ private fun ClickableDatePreview() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun TimeScreenDateSelectionTabPreview() {
     CGVTheme {

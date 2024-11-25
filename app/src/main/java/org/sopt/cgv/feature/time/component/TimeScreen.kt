@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.time
+package org.sopt.cgv.feature.time.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
