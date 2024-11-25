@@ -48,8 +48,7 @@ fun TheaterClassificationTabInModal(
             divider = {}
         ) {
             tabs.forEachIndexed { index, category ->
-                Tab(
-                    // 지금 여기는 Ripple효과가 제거가 안되네요.. custom으로 만들겠습니다 추후에
+                CGVTab(
                     selected = selectedTabInModalIndex.value == index,
                     modifier = Modifier
                         .padding(vertical = 10.dp),
