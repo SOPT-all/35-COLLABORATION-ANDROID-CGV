@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.home.data.HomeLocalData
 
 @Composable
 fun CgvMySection(
@@ -38,24 +38,13 @@ fun CgvMySection(
             modifier = Modifier.padding(horizontal = 18.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            MyCgvComponent(
-                leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_home_movie),
-                title = "내가 본 영화",
-                count = 9
-            )
-
-            MyCgvComponent(
-                leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_home_like),
-                title = "기대되는 영화",
-                count = 2
-            )
-
-            MyCgvComponent(
-                leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_home_pen),
-                title = "내가 쓴 리뷰",
-                count = 1
-            )
-
+            HomeLocalData.myCgvItems.forEach { item ->
+                MyCgvComponent(
+                    leadingIcon = ImageVector.vectorResource(id = item.iconResId),
+                    title = item.title,
+                    count = item.count
+                )
+            }
             Spacer(modifier = Modifier.padding(16.dp))
         }
     }
