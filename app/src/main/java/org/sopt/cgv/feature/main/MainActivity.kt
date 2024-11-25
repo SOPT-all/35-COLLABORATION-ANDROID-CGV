@@ -11,7 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.feature.home.HomeRoute
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.NavHost
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,12 +24,34 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CGVTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainScreen()
+            }
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+
+        ) {
+            composable("home") {
+                HomeRoute(
+                    onTicketClick = { /* 네비게이션 로직 */ },
+                    onSearchClick = { /* 네비게이션 로직 */ },
+                    onMenuClick = { /* 네비게이션 로직 */ },
+                    onReservationClick = { navController.navigate("seats") }
+                )
             }
         }
     }
