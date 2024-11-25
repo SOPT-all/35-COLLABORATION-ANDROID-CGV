@@ -26,6 +26,7 @@ import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
+import org.sopt.cgv.core.designsystem.theme.White
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -70,7 +71,7 @@ fun SeatsScreenTopBar(
                 modifier = Modifier
                     .align(Alignment.Center),
                 style = CGVTheme.typography.head4_b_15,
-                color = Color.White
+                color = White
             )
 
         }
