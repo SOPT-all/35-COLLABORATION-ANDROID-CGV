@@ -31,7 +31,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TheaterSelectionModalFooter(
     sheetState: SheetState,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -55,7 +56,7 @@ fun TheaterSelectionModalFooter(
         ) {
             ShowSelectedChipsBox()
 
-            Button(
+            Button( // 임시용 버튼
                 onClick = {
                     coroutineScope.launch {
                         sheetState.hide()
@@ -73,7 +74,9 @@ fun TheaterSelectionModalFooter(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ShowSelectedChipsBox() {
+fun ShowSelectedChipsBox(
+    modifier: Modifier = Modifier
+) {
     val chips =
         persistentListOf("Chip 1", "Chip 2", "Chip 3", "Long Chip 4", "Chip 5", "Another Chip 6")
 
@@ -91,7 +94,7 @@ fun ShowSelectedChipsBox() {
     }
 }
 
-@Composable
+@Composable // 임시용 chip
 fun Chip(text: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier

@@ -21,7 +21,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TheaterClassificationTabInModal(
     selectedIndex: MutableState<Int>,
-    tabs: PersistentList<String>
+    tabs: PersistentList<String>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier

@@ -22,7 +22,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TheaterSelectionModalBottomSheet(
     isSheetOpen: Boolean,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 

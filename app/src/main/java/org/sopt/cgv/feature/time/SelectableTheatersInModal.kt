@@ -42,7 +42,7 @@ data class MovieTheatersByDetailRegion(
 
 @Composable
 fun SelectableTheatersInModal(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>
 ) {
     LazyColumn(
@@ -73,7 +73,8 @@ fun SelectableTheatersInModal(
 @Composable
 fun DetailRegionTheaters(
     detailRegionName: String,
-    theaterNames: PersistentList<String>
+    theaterNames: PersistentList<String>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -96,7 +97,8 @@ fun DetailRegionTheaters(
 
 @Composable
 fun TheaterListItem(
-    theaterName: String
+    theaterName: String,
+    modifier: Modifier = Modifier
 ) {
     var isSelected by remember { mutableStateOf(false) }
 
