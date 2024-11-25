@@ -31,6 +31,7 @@ import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray400
 import org.sopt.cgv.core.designsystem.theme.Gray600
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TimeScreenTimeSelectionHeader(
@@ -64,6 +65,10 @@ fun TimeScreenTimeSelectionHeader(
             Box(
                 modifier = Modifier
                     .clickable { isSheetOpen.value = !isSheetOpen.value }
+                    .background(
+                        color = White,
+                        shape = RoundedCornerShape(6.dp)
+                    )
                     .border(
                         width = 1.dp,
                         color = Gray400,
@@ -84,7 +89,8 @@ fun TimeScreenTimeSelectionHeader(
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_filter),
                 contentDescription = "",
-                tint = Color.Unspecified
+                tint = Color.Unspecified,
+                modifier = Modifier.padding(5.dp)
             )
 
             Spacer(modifier = Modifier.width(5.dp))
