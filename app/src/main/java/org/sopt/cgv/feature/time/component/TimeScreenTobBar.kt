@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
@@ -29,7 +30,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TimeScreenTobBar() {
 
     val selectedIndex = remember { mutableStateOf(0) }
-    val reservationMethods = listOf("영화별예매", "극장별예매", "비교예매")
+    val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
     val widths = listOf(57, 57, 46)
 
     Row(

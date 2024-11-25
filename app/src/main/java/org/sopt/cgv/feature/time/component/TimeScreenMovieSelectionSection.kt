@@ -19,7 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +30,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
@@ -39,7 +41,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TimeScreenMovieSelectionSection() {
-    val posters = listOf(
+    val posters = persistentListOf(
         R.drawable.img_time_poster1_selected,
         R.drawable.img_time_poster2_selected,
         R.drawable.img_time_poster3_selected,
@@ -47,7 +49,7 @@ fun TimeScreenMovieSelectionSection() {
         R.drawable.img_time_poster5_selected,
     )
 
-    val selectedPoster = remember { mutableStateOf(R.drawable.img_time_poster1_selected) }
+    val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
 
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -62,7 +64,7 @@ fun TimeScreenMovieSelectionSection() {
 
 @Composable
 fun SelectableMoviePosters(
-    posters: List<Int>,
+    posters: PersistentList<Int>,
     selectedPoster: MutableState<Int>
 ) {
     LazyRow(

@@ -22,6 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray700
@@ -30,7 +32,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TimeScreenDateSelectionTab() {
-    val dateList: List<Date> = listOf(
+    val dateList: PersistentList<Date> = persistentListOf(
         Date("11.28", "목"),
         Date("11.29", "금"),
         Date("11.30", "토"),
@@ -63,10 +65,10 @@ fun TimeScreenDateSelectionTab() {
             items(items = dateList) { date ->
                 ClickableDate(
                     date = date,
-                    Modifier.fillParentMaxWidth(0.13f),
                     selectedDate = selectedDate,
                     selectedDay = selectedDay,
-                    dateList = dateList
+                    dateList = dateList,
+                    modifier = Modifier.fillParentMaxWidth(0.13f),
                 )
             }
         }
@@ -76,10 +78,10 @@ fun TimeScreenDateSelectionTab() {
 @Composable
 fun ClickableDate(
     date: Date,
-    modifier: Modifier = Modifier,
     selectedDate: MutableState<String>,
     selectedDay: MutableState<String>,
-    dateList: List<Date>
+    dateList: List<Date>,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -128,7 +130,7 @@ private fun ClickableDatePreview() {
             date = Date("11.28", "목"),
             selectedDate = remember { mutableStateOf("11.28") },
             selectedDay = remember { mutableStateOf("목") },
-            dateList = listOf(
+            dateList = persistentListOf(
                 Date("11.28", "목"),
                 Date("11.29", "금"),
                 Date("11.30", "토"),
