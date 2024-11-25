@@ -1,13 +1,11 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -19,17 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
-import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
-import org.sopt.cgv.core.designsystem.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeatConfirmationModal(
     modifier: Modifier = Modifier,
     movieTitle: String,
-    chipContents: List<String>,
+    chipContents: PersistentList<String>,
     onBackClick: () -> Unit,
     onSeatSelectionClick: () -> Unit
 ) {
@@ -42,11 +40,12 @@ fun SeatConfirmationModal(
         Column(
             modifier = modifier
                 .padding(16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = movieTitle,
-                style = Typography.head6_b_17,
+                style = CGVTheme.typography.head6_b_17,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
@@ -57,7 +56,9 @@ fun SeatConfirmationModal(
             Spacer(modifier = Modifier.height(24.dp))
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 SeatSelectionConfirmRow(label = "일반1", price = "14,000")
@@ -65,34 +66,14 @@ fun SeatConfirmationModal(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                CgvButton(
-                    text = "뒤로가기",
-                    textStyle = CGVTheme.typography.head6_b_17,
-                    textColor = PrimaryRed400,
-                    borderColor = PrimaryRed400,
-                    horizontalPadding = 48.dp,
-                    verticalPadding = 17.dp,
-                    roundedCornerShape = 12.dp,
-                    onClick = {},
-                    isBack = true
-                )
-
-                Spacer(modifier = Modifier.width(16.dp))
-
-                CgvButton(
-                    text = "좌석선택",
-                    textStyle = CGVTheme.typography.head6_b_17,
-                    horizontalPadding = 48.dp,
-                    verticalPadding = 17.dp,
-                    roundedCornerShape = 12.dp,
-                    onClick = {},
-                    enabled = true
-                )
-            }
+            CgvButton(
+                text = "좌석선택",
+                textStyle = CGVTheme.typography.head6_b_17,
+                horizontalPadding = 136.dp,
+                verticalPadding = 16.dp,
+                roundedCornerShape = 10.dp,
+                onClick = {}
+            )
         }
     }
 }
@@ -102,7 +83,7 @@ fun SeatConfirmationModal(
 @Composable
 fun SeatConfirmationModalPreview() {
 
-    val ChipContents = listOf(
+    val ChipContents = persistentListOf(
         "2024.11.05 (월)",
         "구리",
         "10:40 ~ 12:39"

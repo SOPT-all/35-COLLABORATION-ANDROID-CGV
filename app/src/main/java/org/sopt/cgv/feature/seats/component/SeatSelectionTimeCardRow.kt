@@ -1,9 +1,12 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -15,11 +18,10 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.card.CompTimeCard
-import java.time.LocalDateTime
 
 data class TimeCardContent(
-    val startTime: LocalDateTime,
-    val endTime: LocalDateTime,
+    val startTime: String,
+    val endTime: String,
     val currentSeats: Int,
     val totalSeats: Int,
     val isMorning: Boolean,
@@ -61,37 +63,45 @@ fun SeatSelectionTimeCardRow(
 fun SeatSelectionTimeCardRowPreview() {
     val sampleTimeCardData = persistentListOf(
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
-            isActivated = false,
+            isActivated = true,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
         )
     )
-    SeatSelectionTimeCardRow(contents = sampleTimeCardData)
+
+    Column(
+        modifier = Modifier
+            .height(70.dp)
+            .padding(3.dp)
+    ){
+        SeatSelectionTimeCardRow(contents = sampleTimeCardData)
+    }
+
 }

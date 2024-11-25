@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,16 +18,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.extension.noRippleClickable
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray800
-import org.sopt.cgv.core.designsystem.theme.Typography
+import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun Stepper(
@@ -63,7 +64,7 @@ fun Stepper(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_seats_minus),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_seats_minus),
                     contentDescription = "인원 감소",
                     tint = Gray800,
                     modifier = Modifier.size(20.dp)
@@ -75,12 +76,12 @@ fun Stepper(
                 modifier = Modifier
                     .padding(horizontal = 5.dp)
                     .size(width = 34.dp, height = 28.dp)
-                    .background(Color.White, RoundedCornerShape(8.dp)),
+                    .background(White, RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = currentValue.toString(),
-                    style = Typography.head6_b_17,
+                    style = CGVTheme.typography.head6_b_17,
                     color = Gray700
                 )
             }
@@ -96,7 +97,7 @@ fun Stepper(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_seats_plus),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_seats_plus),
                     contentDescription = "인원 증가",
                     tint = Gray800,
                     modifier = Modifier.size(20.dp) // 아이콘 크기

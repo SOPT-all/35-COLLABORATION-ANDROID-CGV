@@ -21,10 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
-import java.time.LocalDateTime
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.Gray900
+import org.sopt.cgv.feature.seats.component.SeatConfirmationModal
+import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
+import org.sopt.cgv.feature.seats.component.TimeCardContent
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -33,7 +36,7 @@ fun SeatSelectScreen(
     modifier: Modifier = Modifier,
     showBottomSheet: Boolean = true,
     movieTitle: String,
-    chipContents: List<String>,
+    chipContents: PersistentList<String>,
 ){
 
     val scrollState = rememberScrollState()
@@ -46,16 +49,6 @@ fun SeatSelectScreen(
     Scaffold(
         modifier = modifier,
     ){  innerPadding ->
-
-        if (_showBottomSheet) {
-            SeatSelectionModal1(
-                modifier = Modifier,
-                movieTitle = movieTitle,
-                chipContents = chipContents,
-                onBackClick = { _showBottomSheet = false },
-                onSeatSelectionClick = { _showBottomSheet = false }
-            )
-        }
 
         if (showSeatConfirmBottomSheet){
             SeatConfirmationModal(
@@ -76,48 +69,48 @@ fun SeatSelectScreen(
         ){
             val sampleTimeCardData = persistentListOf(
                 TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+                    startTime = "07:50",
+                    endTime = "09:51",
+                    currentSeats = 185,
+                    totalSeats = 178,
+                    isMorning = true,
+                    isActivated = true,
+                ),
+                TimeCardContent(
+                    startTime = "07:50",
+                    endTime = "09:51",
                     currentSeats = 185,
                     totalSeats = 178,
                     isMorning = true,
                     isActivated = false,
                 ),
                 TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+                    startTime = "07:50",
+                    endTime = "09:51",
                     currentSeats = 185,
                     totalSeats = 178,
                     isMorning = true,
                     isActivated = false,
                 ),
                 TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
-                    currentSeats = 185,
-                    totalSeats = 178,
-                    isMorning = true,
-                    isActivated = false,
-                ),
-                TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+                    startTime = "07:50",
+                    endTime = "09:51",
                     currentSeats = 185,
                     totalSeats = 178,
                     isMorning = false,
                     isActivated = false,
                 ),
                 TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+                    startTime = "07:50",
+                    endTime = "09:51",
                     currentSeats = 185,
                     totalSeats = 178,
                     isMorning = false,
                     isActivated = false,
                 ),
                 TimeCardContent(
-                    startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-                    endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+                    startTime = "07:50",
+                    endTime = "09:51",
                     currentSeats = 185,
                     totalSeats = 178,
                     isMorning = false,
@@ -143,7 +136,7 @@ fun SeatSelectScreen(
                     .fillMaxWidth()
                     .clickable {
                         isSeatSelected = !isSeatSelected
-                        showSeatConfirmBottomSheet = true
+                        showSeatConfirmBottomSheet = !showSeatConfirmBottomSheet
                     },
                 contentScale = ContentScale.Crop
             )
@@ -160,7 +153,7 @@ fun SeatSelectScreen(
 @Composable
 fun SeatSelectScreenPreview(){
 
-    val ChipContents = listOf(
+    val ChipContents = persistentListOf(
         "2024.11.05 (월)",
         "구리",
         "10:40 ~ 12:39"

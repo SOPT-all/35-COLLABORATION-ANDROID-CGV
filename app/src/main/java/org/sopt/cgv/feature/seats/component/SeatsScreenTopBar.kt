@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -24,10 +24,8 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
-import org.sopt.cgv.core.designsystem.theme.Typography
-import java.time.LocalDateTime
-
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -71,7 +69,7 @@ fun SeatsScreenTopBar(
                 text = "[IMAX LASER 2D]",
                 modifier = Modifier
                     .align(Alignment.Center),
-                style = Typography.head4_b_15,
+                style = CGVTheme.typography.head4_b_15,
                 color = Color.White
             )
 
@@ -80,8 +78,12 @@ fun SeatsScreenTopBar(
         Spacer(modifier = Modifier.height(10.dp))
 
         //TimeCardRow 부분
-        SeatSelectionTimeCardRow(timeCardContent)
-
+        Column(
+            modifier = modifier.height(70.dp)
+                .padding(vertical = 1.dp)
+        ){
+            SeatSelectionTimeCardRow(timeCardContent)
+        }
 
 
     }
@@ -96,48 +98,48 @@ fun SeatsScreenTopBarPreview(){
 
     val sampleTimeCardData = persistentListOf(
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
         ),
         TimeCardContent(
-            startTime = LocalDateTime.of(2024, 11, 19, 7, 50),
-            endTime = LocalDateTime.of(2024, 11, 19, 9, 41),
+            startTime = "07:50",
+            endTime = "09:51",
             currentSeats = 185,
             totalSeats = 178,
             isMorning = false,

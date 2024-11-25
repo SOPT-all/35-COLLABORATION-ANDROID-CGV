@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -7,9 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import org.sopt.cgv.core.designsystem.theme.Typography
+import org.sopt.cgv.core.designsystem.theme.Black
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
 
 @Composable
 fun StepperRow(label: String) {
@@ -20,8 +20,8 @@ fun StepperRow(label: String) {
     ) {
         Text(
             text = label,
-            style = Typography.body4_m_15,
-            color = Color.Black
+            style = CGVTheme.typography.body4_m_15,
+            color = Black
         )
         Stepper(
             modifier = Modifier,

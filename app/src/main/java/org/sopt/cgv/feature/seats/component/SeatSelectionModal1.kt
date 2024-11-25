@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.seats
+package org.sopt.cgv.feature.seats.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -7,38 +7,40 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
-import org.sopt.cgv.core.designsystem.theme.Typography
+import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeatSelectionModal1(
     modifier: Modifier = Modifier,
     movieTitle: String,
-    chipContents: List<String>,
+    chipContents: PersistentList<String>,
     onBackClick: () -> Unit,
     onSeatSelectionClick: () -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = {  },
+        dragHandle = { },
         sheetState = rememberModalBottomSheetState(),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-        containerColor = Color.White
+        containerColor = White
     ) {
         Column(
-            modifier = Modifier
-                .padding(16.dp)
+            modifier = modifier
+                .padding(vertical = 30.dp, horizontal = 20.dp)
                 .fillMaxWidth()
         ) {
             Text(
                 text = movieTitle,
-                style = Typography.head6_b_17,
+                style = CGVTheme.typography.head6_b_17,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
@@ -50,7 +52,7 @@ fun SeatSelectionModal1(
 
             Text(
                 text = "인원선택",
-                style = Typography.head3_b_14,
+                style = CGVTheme.typography.head3_b_14,
                 color = Black
             )
 
@@ -84,7 +86,7 @@ fun SeatSelectionModal1(
                     isBack = true
                 )
 
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 CgvButton(
                     text = "좌석선택",
@@ -105,7 +107,7 @@ fun SeatSelectionModal1(
 @Composable
 fun SeatSelectionModal1Preview() {
     
-    val ChipContents = listOf(
+    val ChipContents = persistentListOf(
         "2024.11.05 (월)",
         "구리",
         "10:40 ~ 12:39"
