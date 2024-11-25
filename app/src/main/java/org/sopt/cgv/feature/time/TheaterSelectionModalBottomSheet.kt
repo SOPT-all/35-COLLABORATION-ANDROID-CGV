@@ -11,7 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -34,7 +34,7 @@ fun TheaterSelectionModalBottomSheet(
                 .height(650.dp),
             dragHandle = null
         ) {
-            val selectedIndex = remember { mutableStateOf(0) }
+            val selectedIndex = remember { mutableIntStateOf(0) }
             val tabs = persistentListOf("지역별", "특별관")
             val regions = persistentListOf(
                 "추천 CGV",
