@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.time
+package org.sopt.cgv.feature.time.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
 import org.sopt.cgv.core.common.extension.noRippleClickable
@@ -122,7 +121,7 @@ fun Chip(text: String, onClick: () -> Unit) {
 @Preview
 @Composable
 private fun TheaterSelectionModalFooterPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리","압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
     TheaterSelectionModalFooter(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {},
@@ -134,7 +133,7 @@ private fun TheaterSelectionModalFooterPreview() {
 @Preview
 @Composable
 private fun ShowSelectedChipsBoxPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리","압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
     ShowSelectedChipsBox(
         modifier = Modifier,
         selectedTheaters = selectedTheaters
