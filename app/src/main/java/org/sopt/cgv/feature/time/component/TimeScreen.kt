@@ -56,7 +56,6 @@ fun TimeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 18.dp)
                 .padding(top = 19.dp)
         ) {
             TimeScreenTobBar()
@@ -69,18 +68,14 @@ fun TimeScreen(
 
             TimeScreenDateSelectionTab()
 
-            Button(
-                onClick = { isSheetOpen.value = !isSheetOpen.value }
-            ) { }
+            Spacer(modifier = Modifier.height(22.dp))
+
+            TimeScreenTimeSelectionHeader(
+                isSheetOpen = isSheetOpen
+            )
         }
     }
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Button(
-            onClick = { isSheetOpen.value = !(isSheetOpen.value) }
-        ) { }
-    }
+
 
     TheaterSelectionModalBottomSheet(
         isSheetOpen = isSheetOpen,

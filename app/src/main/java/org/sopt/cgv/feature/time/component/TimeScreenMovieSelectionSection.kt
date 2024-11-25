@@ -53,7 +53,9 @@ fun TimeScreenMovieSelectionSection() {
     val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
 
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp)
     ) {
         SelectedMovieInformation()
 

@@ -35,7 +35,9 @@ fun TimeScreenTobBar() {
     val widths = listOf(57, 57, 46)
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TabRow(
