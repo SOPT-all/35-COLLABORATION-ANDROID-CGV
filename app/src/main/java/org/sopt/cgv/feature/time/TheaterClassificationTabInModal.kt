@@ -24,7 +24,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TheaterClassificationTabInModal(
-    selectedIndex: MutableState<Int>,
+    selectedTabInModalIndex: MutableState<Int>,
     tabs: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
@@ -34,12 +34,12 @@ fun TheaterClassificationTabInModal(
             .padding(horizontal = 18.dp)
     ) {
         TabRow(
-            selectedTabIndex = selectedIndex.value,
+            selectedTabIndex = selectedTabInModalIndex.value,
             containerColor = White,
             contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedIndex.value]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex.value]),
                     width = 175.dp,
                     height = 2.dp,
                     color = PrimaryRed400
@@ -50,10 +50,10 @@ fun TheaterClassificationTabInModal(
             tabs.forEachIndexed { index, category ->
                 Tab(
                     // 지금 여기는 Ripple효과가 제거가 안되네요.. custom으로 만들겠습니다 추후에
-                    selected = selectedIndex.value == index,
+                    selected = selectedTabInModalIndex.value == index,
                     modifier = Modifier
                         .padding(vertical = 10.dp),
-                    onClick = { selectedIndex.value = index },
+                    onClick = { selectedTabInModalIndex.value = index },
                     selectedContentColor = PrimaryRed400,
                     unselectedContentColor = Gray850,
                 ) {
@@ -71,7 +71,7 @@ fun TheaterClassificationTabInModal(
 @Composable
 private fun TheaterClassificationTabInModalPreview() {
     TheaterClassificationTabInModal(
-        selectedIndex = remember { mutableIntStateOf(0) },
+        selectedTabInModalIndex = remember { mutableIntStateOf(0) },
         tabs = persistentListOf("지역별", "특별관"),
         modifier = Modifier
     )

@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,13 +25,15 @@ import org.sopt.cgv.core.designsystem.theme.White
 @ExperimentalMaterial3Api
 @Composable
 fun TheaterSelectionModalBottomSheet(
-    isSheetOpen: Boolean,
+    isSheetOpen: MutableState<Boolean>,
     onDismissRequest: () -> Unit,
+    sheetState: SheetState,
+    selectedTabInModalIndex: MutableState<Int>,
+    selectedRegionInModal: MutableState<String>,
+    selectedTheaters: MutableState<Set<String>>,
     modifier: Modifier = Modifier
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    if (isSheetOpen) {
+    if (isSheetOpen.value) {
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
@@ -39,7 +41,7 @@ fun TheaterSelectionModalBottomSheet(
                 .height(650.dp),
             dragHandle = null
         ) {
-            val selectedIndex = remember { mutableIntStateOf(0) }
+
             val tabs = persistentListOf("지역별", "특별관")
             val regions = persistentListOf(
                 "추천 CGV",
@@ -71,7 +73,10 @@ fun TheaterSelectionModalBottomSheet(
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
 
-                TheaterClassificationTabInModal(selectedIndex, tabs)
+                TheaterClassificationTabInModal(
+                    selectedTabInModalIndex = selectedTabInModalIndex,
+                    tabs = tabs
+                )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -79,20 +84,23 @@ fun TheaterSelectionModalBottomSheet(
                     modifier = Modifier.weight(1f)
                 ) {
                     ClickableVerticalRegionListInModal(
-                        list = regions
+                        list = regions,
+                        selectedRegionInModal = selectedRegionInModal
                     )
 
                     Spacer(modifier = Modifier.width(33.dp))
 
                     SelectableTheatersInModal(
-                        modifier = Modifier.weight(1f),
-                        movieTheatersByDetailRegion = movieTheatersByDetailRegion
+                        movieTheatersByDetailRegion = movieTheatersByDetailRegion,
+                        selectedTheaters = selectedTheaters,
+                        modifier = Modifier.weight(1f)
                     )
                 }
 
                 TheaterSelectionModalFooter(
                     sheetState = sheetState,
-                    onDismissRequest = onDismissRequest
+                    onDismissRequest = onDismissRequest,
+                    selectedTheaters = selectedTheaters
                 )
             }
         }
@@ -104,12 +112,20 @@ fun TheaterSelectionModalBottomSheet(
 @Preview
 @Composable
 private fun TheaterSelectionModalBottomSheetPreview() {
-    var isSheetOpen by remember { mutableStateOf(true) }
+    val isSheetOpen = remember { mutableStateOf(true) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
+    val selectedRegionInModal = remember { mutableStateOf("추천 CGV") }
+    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
 
     TheaterSelectionModalBottomSheet(
         isSheetOpen = isSheetOpen,
-        onDismissRequest = { isSheetOpen = false },
-        modifier = Modifier
+        onDismissRequest = { isSheetOpen.value = false },
+        modifier = Modifier,
+        sheetState = sheetState,
+        selectedTabInModalIndex = selectedTabInModalIndex,
+        selectedRegionInModal = selectedRegionInModal,
+        selectedTheaters = selectedTheaters
     )
 }
 

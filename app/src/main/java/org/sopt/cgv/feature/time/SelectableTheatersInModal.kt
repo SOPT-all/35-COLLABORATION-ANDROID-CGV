@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,8 +46,9 @@ data class MovieTheatersByDetailRegion(
 
 @Composable
 fun SelectableTheatersInModal(
-    modifier: Modifier = Modifier,
-    movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>
+    movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>,
+    selectedTheaters: MutableState<Set<String>>,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
@@ -67,7 +69,8 @@ fun SelectableTheatersInModal(
         items(movieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
             DetailRegionTheaters(
                 detailRegionName = movieTheatersByDetailRegion.detailRegionName,
-                theaterNames = movieTheatersByDetailRegion.theaterNames
+                theaterNames = movieTheatersByDetailRegion.theaterNames,
+                selectedTheaters = selectedTheaters
             )
         }
     }
@@ -77,6 +80,7 @@ fun SelectableTheatersInModal(
 fun DetailRegionTheaters(
     detailRegionName: String,
     theaterNames: PersistentList<String>,
+    selectedTheaters: MutableState<Set<String>>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -91,7 +95,10 @@ fun DetailRegionTheaters(
         Spacer(modifier = Modifier.height(25.dp))
 
         theaterNames.forEach {
-            TheaterListItem(it)
+            TheaterListItem(
+                theaterName = it,
+                selectedTheaters = selectedTheaters
+            )
         }
 
         Spacer(modifier = Modifier.height(36.dp))
@@ -101,6 +108,7 @@ fun DetailRegionTheaters(
 @Composable
 fun TheaterListItem(
     theaterName: String,
+    selectedTheaters: MutableState<Set<String>>,
     modifier: Modifier = Modifier
 ) {
     var isSelected by remember { mutableStateOf(false) }
@@ -109,7 +117,11 @@ fun TheaterListItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(44.dp)
-            .noRippleClickable { isSelected = !isSelected }
+            .noRippleClickable {
+                isSelected = !isSelected
+                if (isSelected) selectedTheaters.value = selectedTheaters.value.plus(theaterName)
+                else selectedTheaters.value = selectedTheaters.value.minus(theaterName)
+            }
             .background(color = if (isSelected) Gray200 else White)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
@@ -151,9 +163,10 @@ fun TheaterListItem(
 @Preview(showBackground = true)
 @Composable
 private fun SelectableTheatersInModalPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
+
     SelectableTheatersInModal(
-        Modifier,
-        persistentListOf(
+        movieTheatersByDetailRegion = persistentListOf(
             MovieTheatersByDetailRegion(
                 detailRegionName = "최근 이용한 CGV",
                 theaterNames = persistentListOf("구리", "압구정"),
@@ -162,25 +175,32 @@ private fun SelectableTheatersInModalPreview() {
                 detailRegionName = "현재 주변에 있는 CGV",
                 theaterNames = persistentListOf("용산아이파크몰"),
             )
-        )
+        ),
+        selectedTheaters = selectedTheaters
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun DetailRegionTheatersPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
+
     DetailRegionTheaters(
         detailRegionName = "최근 이용한 CGV",
         theaterNames = persistentListOf("구리", "압구정"),
-        modifier = Modifier
+        modifier = Modifier,
+        selectedTheaters = selectedTheaters
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun TheaterListItemPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
+
     TheaterListItem(
         theaterName = "용산아이파크몰",
+        selectedTheaters = selectedTheaters,
         modifier = Modifier
     )
 }
