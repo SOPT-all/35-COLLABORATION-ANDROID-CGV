@@ -70,7 +70,7 @@ fun TimeScreen(
             TimeScreenDateSelectionTab()
 
             Button(
-                onClick = { isSheetOpen = !isSheetOpen }
+                onClick = { isSheetOpen.value = !isSheetOpen.value }
             ) { }
         }
     }
