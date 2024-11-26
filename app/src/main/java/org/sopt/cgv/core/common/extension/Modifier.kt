@@ -27,7 +27,6 @@ inline fun Modifier.noRippleClickable(
     }
 }
 
-
 fun Modifier.dropShadow(
     shape: Shape,
     color: Color = Color.Black.copy(0.25f),
