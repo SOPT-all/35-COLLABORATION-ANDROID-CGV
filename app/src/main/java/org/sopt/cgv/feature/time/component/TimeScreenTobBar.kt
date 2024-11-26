@@ -24,9 +24,10 @@ import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
-fun TimeScreenTobBar() {
-
-    val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
+fun TimeScreenTobBar(
+    selectedTimeScreenTobBarTabIndex: Int,
+    onTimeScreenTobBarTabSelected: (Int) -> Unit
+) {
     val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
 
     Row(
@@ -36,15 +37,15 @@ fun TimeScreenTobBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         CGVTabRow(
-            selectedTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
+            selectedTabIndex = selectedTimeScreenTobBarTabIndex,
             modifier = Modifier.width(204.dp),
             contentColor = Color.Transparent,
             edgePadding = 0.dp
         ) {
             reservationMethods.forEachIndexed { index, method ->
                 CGVTab(
-                    selected = selectedTimeScreenTobBarTabIndex.intValue == index,
-                    onClick = { selectedTimeScreenTobBarTabIndex.intValue = index },
+                    selected = selectedTimeScreenTobBarTabIndex == index,
+                    onClick = { onTimeScreenTobBarTabSelected(index) },
                     modifier = Modifier
                         .height(30.dp)
                         .padding(vertical = 5.dp),
@@ -72,7 +73,11 @@ fun TimeScreenTobBar() {
 @Preview
 @Composable
 private fun TimeScreenTobBarPreview() {
+    val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
+
     TimeScreenTobBar(
+        selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
+        onTimeScreenTobBarTabSelected = { selectedTimeScreenTobBarTabIndex.intValue = it }
     )
 }
 

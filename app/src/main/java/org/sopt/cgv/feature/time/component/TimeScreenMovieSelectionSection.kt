@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.time.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -42,7 +43,10 @@ import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
-fun TimeScreenMovieSelectionSection() {
+fun TimeScreenMovieSelectionSection(
+    @DrawableRes selectedPoster: Int,
+    onPosterSelected: (Int) -> Unit
+) {
     val posters = persistentListOf(
         R.drawable.img_time_poster1_selected,
         R.drawable.img_time_poster2_selected,
@@ -50,8 +54,6 @@ fun TimeScreenMovieSelectionSection() {
         R.drawable.img_time_poster4_selected,
         R.drawable.img_time_poster5_selected,
     )
-
-    val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
 
     Column(
         modifier = Modifier
@@ -62,14 +64,19 @@ fun TimeScreenMovieSelectionSection() {
 
         Spacer(modifier = Modifier.height(19.dp))
 
-        SelectableMoviePosters(posters, selectedPoster)
+        SelectableMoviePosters(
+            posters = posters,
+            selectedPoster = selectedPoster,
+            onPosterSelected = onPosterSelected
+        )
     }
 }
 
 @Composable
 fun SelectableMoviePosters(
     posters: PersistentList<Int>,
-    selectedPoster: MutableState<Int>
+    @DrawableRes selectedPoster: Int,
+    onPosterSelected: (Int) -> Unit
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -82,7 +89,7 @@ fun SelectableMoviePosters(
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
                     .background(color = Black, shape = RoundedCornerShape(5.dp))
-                    .clickable { selectedPoster.value = poster },
+                    .clickable { onPosterSelected(poster) },
             ) {
                 Image(
                     painter = painterResource(id = poster),
@@ -91,7 +98,7 @@ fun SelectableMoviePosters(
                         .clip(shape = RoundedCornerShape(5.dp))
                         .fillMaxWidth(0.2f),
                     contentScale = ContentScale.Crop,
-                    alpha = if (selectedPoster.value == poster) 1f else 0.6f
+                    alpha = if (selectedPoster == poster) 1f else 0.6f
                 )
             }
         }
@@ -151,7 +158,10 @@ fun SelectedMovieInformation() {
 @Preview
 @Composable
 private fun TimeScreenMovieSelectionSectionPreview() {
+    val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
     TimeScreenMovieSelectionSection(
+        selectedPoster = selectedPoster.intValue,
+        onPosterSelected = { selectedPoster.intValue = it}
     )
 }
 
@@ -168,7 +178,8 @@ private fun SelectableMoviePostersPreview() {
             R.drawable.img_time_poster4_selected,
             R.drawable.img_time_poster5_selected,
         ),
-        selectedPoster = selectedPoster
+        selectedPoster = selectedPoster.intValue,
+        onPosterSelected = { selectedPoster.intValue = it}
     )
 }
 

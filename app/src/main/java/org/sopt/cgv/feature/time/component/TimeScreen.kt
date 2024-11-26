@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.Gradient
 import org.sopt.cgv.core.designsystem.theme.White
 
@@ -26,11 +27,15 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TimeScreen(
     modifier: Modifier = Modifier
 ) {
-    val isSheetOpen = remember { mutableStateOf(true) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
     val selectedRegionInModal = remember { mutableStateOf("추천 CGV") }
     val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
+    val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
+    val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
+    val selectedDate = remember { mutableStateOf("11.28") }
+    val selectedDay = remember { mutableStateOf("목") }
+    val isSheetOpen = remember { mutableStateOf(true) }
 
     Scaffold(
         modifier = Modifier
@@ -55,25 +60,36 @@ fun TimeScreen(
                 .padding(innerPadding)
                 .padding(top = 19.dp)
         ) {
-            TimeScreenTobBar()
+            TimeScreenTobBar(
+                selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
+                onTimeScreenTobBarTabSelected = { selectedTimeScreenTobBarTabIndex.intValue = it }
+            )
 
             Spacer(modifier = Modifier.height(19.dp))
 
-            TimeScreenMovieSelectionSection()
+            TimeScreenMovieSelectionSection(
+                selectedPoster = selectedPoster.intValue,
+                onPosterSelected = { selectedPoster.intValue = it }
+            )
 
             Spacer(modifier = Modifier.height(19.dp))
 
-            TimeScreenDateSelectionTab()
+            TimeScreenDateSelectionTab(
+                selectedDate = selectedDate.value,
+                onDateSelected = { selectedDate.value = it },
+                selectedDay = selectedDay.value,
+                onDaySelected = { selectedDay.value = it }
+            )
 
             Spacer(modifier = Modifier.height(22.dp))
 
             TimeScreenTimeSelectionHeader(
-                isSheetOpen = isSheetOpen,
+                onSheetStateChanged = {isSheetOpen.value = !isSheetOpen.value},
                 numberOfSelectedTheaters = selectedTheaters.value.size
             )
 
             TimeScreenAuditorioumAndTimeSelection(
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters.value
             )
         }
     }
@@ -85,10 +101,10 @@ fun TimeScreen(
         selectedTabInModalIndex = selectedTabInModalIndex.intValue,
         onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         selectedRegionInModal = selectedRegionInModal.value,
-        onRegionInModalSelected = { selectedRegionInModal.value = it},
+        onRegionInModalSelected = { selectedRegionInModal.value = it },
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
         }
     )

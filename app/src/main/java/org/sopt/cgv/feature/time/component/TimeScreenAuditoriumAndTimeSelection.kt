@@ -45,10 +45,10 @@ data class CGVTimeTable(
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
-    selectedTheaters: MutableState<Set<String>>
+    selectedTheaters: Set<String>
 ) {
     LazyColumn {
-        items(items = selectedTheaters.value.toList()) { theater ->
+        items(items = selectedTheaters.toList()) { theater ->
             TimeScreenAuditoriumAndTimeInTheater(theaterName = theater)
         }
     }
@@ -165,11 +165,13 @@ fun TimeScreenTimeInAuditorium(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
+    val selectedTheaters = remember { mutableStateOf(setOf<String>("용산아이파크몰", "구리")) }
+
     TimeScreenAuditorioumAndTimeSelection(
-        selectedTheaters = remember { mutableStateOf(setOf("용산아이파크몰", "구리")) }
+        selectedTheaters = selectedTheaters.value
     )
 }
 
@@ -181,7 +183,7 @@ private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun TimeScreenTimeInAuditoriumPreview() {
     TimeScreenTimeInAuditorium(

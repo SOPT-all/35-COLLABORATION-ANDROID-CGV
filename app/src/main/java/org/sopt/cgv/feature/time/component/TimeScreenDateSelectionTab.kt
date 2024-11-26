@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,7 +31,12 @@ import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
-fun TimeScreenDateSelectionTab() {
+fun TimeScreenDateSelectionTab(
+    selectedDate: String,
+    onDateSelected: (String) -> Unit,
+    selectedDay: String,
+    onDaySelected: (String) -> Unit
+) {
     val dateList: PersistentList<Date> = persistentListOf(
         Date("11.28", "목"),
         Date("11.29", "금"),
@@ -45,8 +49,6 @@ fun TimeScreenDateSelectionTab() {
         Date("12.6", "금"),
         Date("12.7", "토")
     )
-    val selectedDate = remember { mutableStateOf("11.28") }
-    val selectedDay = remember { mutableStateOf("목") }
 
     Column(
         modifier = Modifier
@@ -54,7 +56,7 @@ fun TimeScreenDateSelectionTab() {
             .padding(horizontal = 18.dp)
     ) {
         Text(
-            text = "2024.${selectedDate.value} (${selectedDay.value})",
+            text = "2024.${selectedDate} (${selectedDay})",
             style = CGVTheme.typography.body3_m_14,
             color = Black
         )
@@ -69,7 +71,8 @@ fun TimeScreenDateSelectionTab() {
                 ClickableDate(
                     date = date,
                     selectedDate = selectedDate,
-                    selectedDay = selectedDay,
+                    onDateSelected = onDateSelected,
+                    onDaySelected = onDaySelected,
                     dateList = dateList,
                     modifier = Modifier.fillParentMaxWidth(0.13f),
                 )
@@ -81,8 +84,9 @@ fun TimeScreenDateSelectionTab() {
 @Composable
 fun ClickableDate(
     date: Date,
-    selectedDate: MutableState<String>,
-    selectedDay: MutableState<String>,
+    selectedDate: String,
+    onDateSelected: (String) -> Unit,
+    onDaySelected: (String) -> Unit,
     dateList: List<Date>,
     modifier: Modifier = Modifier
 ) {
@@ -97,19 +101,19 @@ fun ClickableDate(
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .clickable {
-                    selectedDate.value = date.date
-                    selectedDay.value = date.day
+                    onDateSelected(date.date)
+                    onDaySelected(date.day)
                 }
                 .background(
                     shape = RoundedCornerShape(6.dp),
-                    color = if (date.date == selectedDate.value) PrimaryRed400 else White
+                    color = if (date.date == selectedDate) PrimaryRed400 else White
                 )
         ) {
             Text(
                 text = date.date.slice(3 until date.date.length),
                 modifier = Modifier.align(Alignment.Center),
                 style = CGVTheme.typography.head5_b_16,
-                color = if (date.date == selectedDate.value) White else Black
+                color = if (date.date == selectedDate) White else Black
             )
         }
 
@@ -119,8 +123,8 @@ fun ClickableDate(
                 1 -> "내일"
                 else -> date.day
             },
-            style = if (date.date == selectedDate.value) CGVTheme.typography.head1_b_12 else CGVTheme.typography.body1_m_12,
-            color = if (date.date == selectedDate.value) PrimaryRed400 else Gray700
+            style = if (date.date == selectedDate) CGVTheme.typography.head1_b_12 else CGVTheme.typography.body1_m_12,
+            color = if (date.date == selectedDate) PrimaryRed400 else Gray700
         )
     }
 }
@@ -128,11 +132,14 @@ fun ClickableDate(
 @Preview
 @Composable
 private fun ClickableDatePreview() {
+    val selectedDate = remember { mutableStateOf("11.28") }
+    val selectedDay = remember { mutableStateOf("목") }
     CGVTheme {
         ClickableDate(
             date = Date("11.28", "목"),
-            selectedDate = remember { mutableStateOf("11.28") },
-            selectedDay = remember { mutableStateOf("목") },
+            selectedDate = selectedDate.value,
+            onDateSelected = { selectedDate.value = it },
+            onDaySelected = { selectedDay.value = it },
             dateList = persistentListOf(
                 Date("11.28", "목"),
                 Date("11.29", "금"),
@@ -152,9 +159,15 @@ private fun ClickableDatePreview() {
 @Preview(showBackground = true)
 @Composable
 private fun TimeScreenDateSelectionTabPreview() {
-    CGVTheme {
-        TimeScreenDateSelectionTab()
-    }
+    val selectedDate = remember { mutableStateOf("11.28") }
+    val selectedDay = remember { mutableStateOf("목") }
+    TimeScreenDateSelectionTab(
+        selectedDate = selectedDate.value,
+        onDateSelected = { selectedDate.value = it },
+        selectedDay = selectedDay.value,
+        onDaySelected = { selectedDay.value = it }
+    )
+
 }
 
 data class Date(
