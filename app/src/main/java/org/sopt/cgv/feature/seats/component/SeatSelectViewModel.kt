@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.seats.component
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.persistentListOf
@@ -9,7 +10,10 @@ import androidx.compose.runtime.setValue
 class SeatSelectViewModel : ViewModel() {
 
     var showBottomSheet by mutableStateOf(true)
+
     var isSeatSelected by mutableStateOf(false)
+        private set
+
     var showSeatConfirmBottomSheet by mutableStateOf(false)
 
     var clickedTimeCardIndex by mutableStateOf(-1)

@@ -27,6 +27,7 @@ import org.sopt.cgv.feature.seats.component.SeatConfirmationModal
 import org.sopt.cgv.feature.seats.component.SeatSelectViewModel
 import org.sopt.cgv.feature.seats.component.SeatSelectionModal1
 import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +35,7 @@ import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
 @Composable
 fun SeatSelectScreen(
     modifier: Modifier = Modifier,
-    viewModel: SeatSelectViewModel = SeatSelectViewModel(),
+    viewModel: SeatSelectViewModel = viewModel(),
     movieTitle: String,
 ){
 
