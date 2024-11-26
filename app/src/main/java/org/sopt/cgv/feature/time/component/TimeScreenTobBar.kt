@@ -33,7 +33,6 @@ fun TimeScreenTobBar() {
 
     val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
     val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
-    val widths = listOf(57, 57, 46)
 
     Row(
         modifier = Modifier
