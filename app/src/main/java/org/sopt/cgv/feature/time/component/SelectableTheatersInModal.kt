@@ -14,10 +14,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -111,18 +109,16 @@ fun TheaterListItem(
     selectedTheaters: MutableState<Set<String>>,
     modifier: Modifier = Modifier
 ) {
-    var isSelected by remember { mutableStateOf(false) }
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(44.dp)
             .noRippleClickable {
-                isSelected = !isSelected
-                if (isSelected) selectedTheaters.value = selectedTheaters.value.plus(theaterName)
-                else selectedTheaters.value = selectedTheaters.value.minus(theaterName)
+                if (selectedTheaters.value.contains(theaterName)) selectedTheaters.value =
+                    selectedTheaters.value.minus(theaterName)
+                else selectedTheaters.value = selectedTheaters.value.plus(theaterName)
             }
-            .background(color = if (isSelected) Gray200 else White)
+            .background(color = if (selectedTheaters.value.contains(theaterName)) Gray200 else White)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 val y = size.height - strokeWidth / 2
@@ -141,13 +137,13 @@ fun TheaterListItem(
         ) {
             Text(
                 text = theaterName,
-                style = if (isSelected) CGVTheme.typography.head4_b_15 else CGVTheme.typography.body3_m_14,
+                style = if (selectedTheaters.value.contains(theaterName)) CGVTheme.typography.head4_b_15 else CGVTheme.typography.body3_m_14,
                 color = Gray850
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
-            if (isSelected) {
+            if (selectedTheaters.value.contains(theaterName)) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.ic_time_modal_check),
                     contentDescription = "",

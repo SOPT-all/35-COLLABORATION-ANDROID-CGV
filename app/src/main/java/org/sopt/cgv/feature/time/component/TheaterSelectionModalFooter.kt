@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
@@ -28,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
-import org.sopt.cgv.core.common.extension.noRippleClickable
+import org.sopt.cgv.core.designsystem.component.chip.Chip
 import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -90,30 +89,13 @@ fun ShowSelectedChipsBox(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        selectedTheaters.value.forEach { chip ->
+        selectedTheaters.value.forEach { theaterName ->
             Chip(
-                text = chip,
-                onClick = { }
+                content = theaterName,
+                inTime = true,
+                selectedTheaters = selectedTheaters
             )
         }
-    }
-}
-
-@Composable // 임시용 chip
-fun Chip(text: String, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .background(
-                color = Color.LightGray,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .noRippleClickable { onClick() }
-            .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
-    ) {
-        Text(
-            text = text,
-            color = Color.Black
-        )
     }
 }
 
@@ -137,14 +119,5 @@ private fun ShowSelectedChipsBoxPreview() {
     ShowSelectedChipsBox(
         modifier = Modifier,
         selectedTheaters = selectedTheaters
-    )
-}
-
-@Preview
-@Composable
-private fun ChipPreview() {
-    Chip(
-        text = "Preview",
-        onClick = {}
     )
 }
