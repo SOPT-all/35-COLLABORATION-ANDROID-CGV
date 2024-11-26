@@ -23,6 +23,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 @Composable
 fun SeatSelectionModal1(
     modifier: Modifier = Modifier,
+    viewModel: SeatSelectViewModel,
     movieTitle: String,
     chipContents: PersistentList<String>,
     onDismiss: () -> Unit,
@@ -67,10 +68,10 @@ fun SeatSelectionModal1(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    StepperRow( modifier = Modifier, "일반")
-                    StepperRow( modifier = Modifier,"청소년")
-                    StepperRow( modifier = Modifier,"경로")
-                    StepperRow( modifier = Modifier,"우대")
+                    StepperRow( modifier = Modifier, viewModel = viewModel, label = "일반")
+                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="청소년")
+                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="경로")
+                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="우대")
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -127,6 +128,7 @@ fun SeatSelectionModal1Preview() {
         movieTitle = "글래디에이터 2",
         chipContents = ChipContents,
         onDismiss = { },
+        viewModel = SeatSelectViewModel(),
         bottomSheetState = bottomSheetState,
         onBackClick = {  },
         onSeatSelectionClick = {  }

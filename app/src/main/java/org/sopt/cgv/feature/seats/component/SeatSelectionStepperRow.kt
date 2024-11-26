@@ -14,6 +14,7 @@ import org.sopt.cgv.core.designsystem.theme.CGVTheme
 @Composable
 fun StepperRow(
     modifier: Modifier = Modifier,
+    viewModel: SeatSelectViewModel,
     label: String
 ) {
     Row(
@@ -28,10 +29,8 @@ fun StepperRow(
         )
         Stepper(
             modifier = Modifier,
-            initialValue = 0,
-            onValueChange = { newValue ->
-                println("$label 인원: $newValue")
-            }
+            viewModel = viewModel,
+            label = label
         )
     }
 }
@@ -40,6 +39,7 @@ fun StepperRow(
 @Composable
 fun StepperRowPreview(){
     StepperRow(
-        label = "어린이"
+        viewModel = SeatSelectViewModel(),
+        label = "어린이",
     )
 }

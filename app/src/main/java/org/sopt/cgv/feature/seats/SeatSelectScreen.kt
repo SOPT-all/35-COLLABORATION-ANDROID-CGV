@@ -60,6 +60,7 @@ fun SeatSelectScreen(
             LaunchedEffect(showBottomSheet) { selectionBottomSheetState.expand() }
             SeatSelectionModal1(
                 modifier = Modifier,
+                viewModel = viewModel,
                 movieTitle = movieTitle,
                 chipContents = chipContents,
                 onDismiss = {

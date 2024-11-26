@@ -14,6 +14,23 @@ class SeatSelectViewModel : ViewModel() {
 
     var clickedTimeCardIndex by mutableStateOf(-1)
 
+    private val _stepperValues = mutableStateOf(mapOf<String, Int>())
+    val stepperValues: Map<String, Int> get() = _stepperValues.value
+
+    fun increaseStepperValue(label: String) {
+        val currentValue = _stepperValues.value[label] ?: 0
+        _stepperValues.value = _stepperValues.value.toMutableMap().apply {
+            this[label] = currentValue + 1
+        }
+    }
+
+    fun decreaseStepperValue(label: String) {
+        val currentValue = _stepperValues.value[label] ?: 0
+        _stepperValues.value = _stepperValues.value.toMutableMap().apply {
+            this[label] = (currentValue - 1).coerceAtLeast(0)
+        }
+    }
+
     fun setClickedCardIndex(index: Int) {
         clickedTimeCardIndex = index
     }

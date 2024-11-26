@@ -33,11 +33,11 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun Stepper(
     modifier: Modifier = Modifier,
-    initialValue: Int = 0,
-    onValueChange: (Int) -> Unit
+    label: String,
+    viewModel: SeatSelectViewModel
 ) {
-    var currentValue by remember { mutableStateOf(initialValue) }
 
+    val currentValue = viewModel.stepperValues[label] ?: 0
     Row(
         modifier = modifier
             .size(height = 36.dp, width = 100.dp)
@@ -54,10 +54,7 @@ fun Stepper(
             Box(
                 modifier = Modifier
                     .noRippleClickable {
-                        if (currentValue > 0) {
-                            currentValue--
-                            onValueChange(currentValue)
-                        }
+                        viewModel.decreaseStepperValue(label)
                     }
                     .size(20.dp),
                 contentAlignment = Alignment.Center
@@ -87,8 +84,7 @@ fun Stepper(
             Box(
                 modifier = Modifier
                     .noRippleClickable {
-                        currentValue++
-                        onValueChange(currentValue)
+                        viewModel.increaseStepperValue(label)
                     }
                     .size(20.dp),
                 contentAlignment = Alignment.Center
@@ -110,9 +106,7 @@ fun Stepper(
 fun StepperPreview() {
     Stepper(
         modifier = Modifier,
-        initialValue = 0,
-        onValueChange = { newValue ->
-            println("Stepper value changed: $newValue")
-        }
+        viewModel = SeatSelectViewModel(),
+        label = "일반"
     )
 }
