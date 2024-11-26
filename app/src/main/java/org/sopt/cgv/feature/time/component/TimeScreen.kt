@@ -71,7 +71,12 @@ fun TimeScreen(
             Spacer(modifier = Modifier.height(22.dp))
 
             TimeScreenTimeSelectionHeader(
-                isSheetOpen = isSheetOpen
+                isSheetOpen = isSheetOpen,
+                numberOfSelectedTheaters = selectedTheaters.value.size
+            )
+
+            TimeScreenAuditorioumAndTimeSelection(
+                selectedTheaters = selectedTheaters
             )
         }
     }

@@ -36,6 +36,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TimeScreenTimeSelectionHeader(
     isSheetOpen: MutableState<Boolean>,
+    numberOfSelectedTheaters: Int,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -55,7 +56,7 @@ fun TimeScreenTimeSelectionHeader(
             )
 
             Text(
-                text = "2",
+                text = numberOfSelectedTheaters.toString(),
                 style = CGVTheme.typography.head1_b_12,
                 color = PrimaryRed400
             )
@@ -109,5 +110,5 @@ fun TimeScreenTimeSelectionHeader(
 private fun TimeScreenTimeSelectionHeaderPreview() {
     val isSheetOpen = remember { mutableStateOf(true) }
 
-    TimeScreenTimeSelectionHeader(isSheetOpen = isSheetOpen)
+    TimeScreenTimeSelectionHeader(isSheetOpen = isSheetOpen, numberOfSelectedTheaters = 2)
 }
