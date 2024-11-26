@@ -100,7 +100,6 @@ fun ShowSelectedChipsBox(
             Chip(
                 content = theaterName,
                 inTime = true,
-                selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )
         }

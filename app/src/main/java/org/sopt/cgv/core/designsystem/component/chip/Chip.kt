@@ -35,7 +35,6 @@ fun Chip(
     modifier: Modifier = Modifier,
     content: String,
     inTime: Boolean = false,
-    selectedTheaters: Set<String>? = null,
     onTheaterSelected: ((String) -> Unit)? = null
 ) {
     Row(
@@ -63,6 +62,7 @@ fun Chip(
                 modifier = Modifier
                     .size(16.dp)
                     .clickable {
+                        if (onTheaterSelected != null) onTheaterSelected(content)
                     }
             )
         }
@@ -87,7 +87,6 @@ fun SeatChoiceModalChipPreview2() {
         modifier = Modifier,
         content = "용산",
         inTime = true,
-        selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
