@@ -27,7 +27,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
-import org.sopt.cgv.core.designsystem.theme.*
+import org.sopt.cgv.core.designsystem.theme.Black
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gray200
+import org.sopt.cgv.core.designsystem.theme.Gray600
+import org.sopt.cgv.core.designsystem.theme.Gray700
+import org.sopt.cgv.core.designsystem.theme.Green
+import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun CompTimeCard(
@@ -38,13 +45,15 @@ fun CompTimeCard(
     totalSeats: Int,
     isMorning: Boolean,
     isActivated: Boolean = false,
+    isInTime: Boolean = false,
     onClick: () -> Unit,
 ) {
 
 
     val backgroundColor = if (isActivated) White else Gray700
     val backgroundColor2 = if (isActivated) Gray200 else Gray700
-    val leftSeatsColor = if (isActivated) PrimaryRed400 else Green
+    val leftSeatsColor =
+        if (isActivated && isInTime) Green else if (isActivated) PrimaryRed400 else Green
 
     Box(
         modifier = Modifier
@@ -80,7 +89,7 @@ fun CompTimeCard(
                     modifier = Modifier.padding(top = 4.dp),
                     text = "~${endTime}",
                     color = Gray600,
-                    style = CGVTheme.typography.body0_r_8
+                    style = CGVTheme.typography.body1_r_10
                 )
             }
             //잔여 좌석 부분

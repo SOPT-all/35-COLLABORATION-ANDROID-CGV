@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -157,7 +156,8 @@ fun TimeScreenTimeInAuditorium(
                         currentSeats = 183,
                         totalSeats = 185,
                         isMorning = cgvTimeTable.isMorning,
-                        isActivated = true
+                        isActivated = true,
+                        isInTime = true
                     ) { }
                 }
             }
@@ -169,7 +169,7 @@ fun TimeScreenTimeInAuditorium(
 @Composable
 private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
     TimeScreenAuditorioumAndTimeSelection(
-        selectedTheaters = remember {mutableStateOf(setOf("용산아이파크몰","구리"))}
+        selectedTheaters = remember { mutableStateOf(setOf("용산아이파크몰", "구리")) }
     )
 }
 
@@ -177,49 +177,7 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 @Composable
 private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     TimeScreenAuditoriumAndTimeInTheater(
-        theaterName = "용산 아이파크몰",
-//        cgvTimeTableList = persistentListOf(
-//            CGVTimeTable(
-//                auditorium = "7관",
-//                auditoriumType = "2D",
-//                movieId = 1,
-//                startTime = "07:50",
-//                endTime = "09:41",
-//                isMorning = true,
-//                movieName = "글래디에이터",
-//                theaterId = 1
-//            ),
-//            CGVTimeTable(
-//                auditorium = "7관",
-//                auditoriumType = "2D",
-//                movieId = 1,
-//                startTime = "07:50",
-//                endTime = "09:41",
-//                isMorning = true,
-//                movieName = "글래디에이터",
-//                theaterId = 1
-//            ),
-//            CGVTimeTable(
-//                auditorium = "7관",
-//                auditoriumType = "2D",
-//                movieId = 1,
-//                startTime = "07:50",
-//                endTime = "09:41",
-//                isMorning = true,
-//                movieName = "글래디에이터",
-//                theaterId = 1
-//            ),
-//            CGVTimeTable(
-//                auditorium = "7관",
-//                auditoriumType = "2D",
-//                movieId = 1,
-//                startTime = "07:50",
-//                endTime = "09:41",
-//                isMorning = true,
-//                movieName = "글래디에이터",
-//                theaterId = 1
-//            )
-//        )
+        theaterName = "용산 아이파크몰"
     )
 }
 
