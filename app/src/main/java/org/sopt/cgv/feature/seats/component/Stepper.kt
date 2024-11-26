@@ -26,14 +26,14 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray800
 import org.sopt.cgv.core.designsystem.theme.White
 
+
 @Composable
 fun Stepper(
     modifier: Modifier = Modifier,
-    label: String,
-    viewModel: SeatSelectViewModel
+    value: Int,
+    onStepperIncrease: () -> Unit,
+    onStepperDecrease: () -> Unit,
 ) {
-
-    val currentValue = viewModel.stepperValues[label] ?: 0
     Row(
         modifier = modifier
             .size(height = 36.dp, width = 100.dp)
@@ -50,7 +50,7 @@ fun Stepper(
             Box(
                 modifier = Modifier
                     .noRippleClickable {
-                        viewModel.decreaseStepperValue(label)
+                        onStepperDecrease()
                     }
                     .size(20.dp),
                 contentAlignment = Alignment.Center
@@ -71,7 +71,7 @@ fun Stepper(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = currentValue.toString(),
+                    text = value.toString(),
                     style = CGVTheme.typography.head6_b_17,
                     color = Gray700
                 )
@@ -80,7 +80,7 @@ fun Stepper(
             Box(
                 modifier = Modifier
                     .noRippleClickable {
-                        viewModel.increaseStepperValue(label)
+                        onStepperIncrease()
                     }
                     .size(20.dp),
                 contentAlignment = Alignment.Center
@@ -102,7 +102,8 @@ fun Stepper(
 fun StepperPreview() {
     Stepper(
         modifier = Modifier,
-        viewModel = SeatSelectViewModel(),
-        label = "일반"
+        value = 1,
+        onStepperIncrease = { },
+        onStepperDecrease = { }
     )
 }

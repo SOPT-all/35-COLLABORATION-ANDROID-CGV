@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.card.CompTimeCard
+import org.sopt.cgv.feature.seats.SeatSelectViewModel
 
 data class TimeCardContent(
     val startTime: String,

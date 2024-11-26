@@ -1,36 +1,34 @@
-package org.sopt.cgv.feature.seats.component
+package org.sopt.cgv.feature.seats
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.persistentListOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.setValue
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.toPersistentList
+import org.sopt.cgv.feature.seats.component.TimeCardContent
 
 class SeatSelectViewModel : ViewModel() {
 
     var showBottomSheet by mutableStateOf(true)
-
     var isSeatSelected by mutableStateOf(false)
         private set
-
     var showSeatConfirmBottomSheet by mutableStateOf(false)
 
     var clickedTimeCardIndex by mutableStateOf(-1)
 
-    private val _stepperValues = mutableStateOf(mapOf<String, Int>())
-    val stepperValues: Map<String, Int> get() = _stepperValues.value
+    private val _stepperValues = mutableStateListOf(0, 0, 0, 0)
+    val stepperValues: List<Int> get() = _stepperValues
 
-    fun increaseStepperValue(label: String) {
-        val currentValue = _stepperValues.value[label] ?: 0
-        _stepperValues.value = _stepperValues.value.toMutableMap().apply {
-            this[label] = currentValue + 1
-        }
+    fun increaseStepperValue(index: Int){
+        _stepperValues[index] = _stepperValues[index] + 1
     }
 
-    fun decreaseStepperValue(label: String) {
-        val currentValue = _stepperValues.value[label] ?: 0
-        _stepperValues.value = _stepperValues.value.toMutableMap().apply {
-            this[label] = (currentValue - 1).coerceAtLeast(0)
+    fun decreaseStepperValue(index: Int){
+        if(_stepperValues[index] > 0){
+            _stepperValues[index] = _stepperValues[index] - 1
         }
     }
 

@@ -27,6 +27,7 @@ import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.seats.SeatSelectViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)

@@ -11,11 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 
+
 @Composable
-fun StepperRow(
+fun SeatSelectionStepperRow(
     modifier: Modifier = Modifier,
-    viewModel: SeatSelectViewModel,
-    label: String
+    label: String,
+    value: Int,
+    onStepperIncrease: () -> Unit,
+    onStepperDecrease: () -> Unit,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -29,8 +32,9 @@ fun StepperRow(
         )
         Stepper(
             modifier = Modifier,
-            viewModel = viewModel,
-            label = label
+            value = value,
+            onStepperIncrease = onStepperIncrease,
+            onStepperDecrease = onStepperDecrease,
         )
     }
 }
@@ -38,8 +42,10 @@ fun StepperRow(
 @Preview(showBackground = true)
 @Composable
 fun StepperRowPreview(){
-    StepperRow(
-        viewModel = SeatSelectViewModel(),
+    SeatSelectionStepperRow(
         label = "어린이",
+        value = 1,
+        onStepperIncrease = { },
+        onStepperDecrease = { },
     )
 }

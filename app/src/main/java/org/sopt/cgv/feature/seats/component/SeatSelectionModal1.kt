@@ -23,12 +23,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 @Composable
 fun SeatSelectionModal1(
     modifier: Modifier = Modifier,
-    viewModel: SeatSelectViewModel,
+    stepperValues: List<Int>,
+    onStepperIncrease: (Int) -> Unit,
+    onStepperDecrease: (Int) -> Unit,
     movieTitle: String,
     chipContents: PersistentList<String>,
     onDismiss: () -> Unit,
-    onBackClick: () -> Unit,
-    onSeatSelectionClick: () -> Unit,
     bottomSheetState: SheetState
 ) {
     if (bottomSheetState.isVisible){
@@ -64,14 +64,21 @@ fun SeatSelectionModal1(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+                val labels = persistentListOf("일반", "청소년", "경로", "우대")
+
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    StepperRow( modifier = Modifier, viewModel = viewModel, label = "일반")
-                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="청소년")
-                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="경로")
-                    StepperRow( modifier = Modifier, viewModel = viewModel, label ="우대")
+                    labels.forEachIndexed { index, label ->
+                        SeatSelectionStepperRow(
+                            modifier = Modifier,
+                            label = label,
+                            value = stepperValues[index],
+                            onStepperIncrease = { onStepperIncrease(index) },
+                            onStepperDecrease = { onStepperDecrease(index) }
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -111,26 +118,28 @@ fun SeatSelectionModal1(
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
 fun SeatSelectionModal1Preview() {
 
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     
-    val ChipContents = persistentListOf(
+    val chipContents = persistentListOf(
         "2024.11.05 (월)",
         "구리",
         "10:40 ~ 12:39"
     )
 
+    val stepperValues = remember { mutableStateListOf(0, 0, 0, 0) }
+
     SeatSelectionModal1(
         modifier = Modifier,
         movieTitle = "글래디에이터 2",
-        chipContents = ChipContents,
+        chipContents = chipContents,
         onDismiss = { },
-        viewModel = SeatSelectViewModel(),
+        stepperValues = stepperValues,
+        onStepperIncrease = { },
+        onStepperDecrease = { },
         bottomSheetState = bottomSheetState,
-        onBackClick = {  },
-        onSeatSelectionClick = {  }
     )
 }
