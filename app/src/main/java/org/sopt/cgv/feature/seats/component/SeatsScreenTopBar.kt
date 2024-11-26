@@ -43,10 +43,8 @@ fun SeatsScreenTopBar(
         verticalArrangement = Arrangement.Top
     ){
 
-        //상태표시줄 여백
         Spacer(modifier = Modifier.height(30.dp))
 
-        //TopBar 부분
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -78,7 +76,6 @@ fun SeatsScreenTopBar(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        //TimeCardRow 부분
         Column(
             modifier = modifier.height(70.dp)
                 .padding(vertical = 1.dp)

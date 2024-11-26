@@ -60,7 +60,6 @@ fun CompTimeCard(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            //시간 부분
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,7 +80,6 @@ fun CompTimeCard(
                     style = CGVTheme.typography.body0_r_8
                 )
             }
-            //잔여 좌석 부분
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

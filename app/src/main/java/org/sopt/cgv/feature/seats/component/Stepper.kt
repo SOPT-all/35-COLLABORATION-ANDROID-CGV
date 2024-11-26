@@ -51,7 +51,6 @@ fun Stepper(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
         ){
-            // - 버튼
             Box(
                 modifier = Modifier
                     .noRippleClickable {
@@ -71,7 +70,6 @@ fun Stepper(
                 )
             }
 
-            // 현재 값
             Box(
                 modifier = Modifier
                     .padding(horizontal = 5.dp)
@@ -86,7 +84,6 @@ fun Stepper(
                 )
             }
 
-            // + 버튼
             Box(
                 modifier = Modifier
                     .noRippleClickable {
@@ -100,7 +97,7 @@ fun Stepper(
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_seats_plus),
                     contentDescription = "인원 증가",
                     tint = Gray800,
-                    modifier = Modifier.size(20.dp) // 아이콘 크기
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
