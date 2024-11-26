@@ -11,13 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.component.card.CompTimeCard
-import org.sopt.cgv.feature.seats.SeatSelectViewModel
 
 data class TimeCardContent(
     val startTime: String,
@@ -32,7 +34,8 @@ data class TimeCardContent(
 @Composable
 fun SeatSelectionTimeCardRow(
     contents: PersistentList<TimeCardContent>,
-    viewModel: SeatSelectViewModel,
+    selectedIndex: MutableState<Int>,
+    onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -42,17 +45,21 @@ fun SeatSelectionTimeCardRow(
         contentPadding = PaddingValues(horizontal = 10.dp)
     ) {
         itemsIndexed(contents) { index: Int, eachCard ->
+            val isCardActivated = selectedIndex.value == index
+
             CompTimeCard(
                 modifier = Modifier.clickable{
-                    viewModel.setClickedCardIndex(index)
+                    onCardClick(index)
                 },
                 startTime = eachCard.startTime,
                 endTime = eachCard.endTime,
                 currentSeats = eachCard.currentSeats,
                 totalSeats = eachCard.totalSeats,
                 isMorning = eachCard.isMorning,
-                isActivated = eachCard.isActivated,
-                onClick = {}
+                isActivated = isCardActivated,
+                onClick = {
+                    onCardClick(index)
+                }
             )
         }
     }
@@ -86,7 +93,7 @@ fun SeatSelectionTimeCardRowPreview() {
             currentSeats = 185,
             totalSeats = 178,
             isMorning = true,
-            isActivated = true,
+            isActivated = false,
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -98,13 +105,17 @@ fun SeatSelectionTimeCardRowPreview() {
         )
     )
 
+    val selectedIndex = remember { mutableStateOf(1) } // 초기 값 설정
+
+
     Column(
         modifier = Modifier
             .height(70.dp)
             .padding(3.dp)
     ){
         SeatSelectionTimeCardRow(
-            viewModel = SeatSelectViewModel(),
+            selectedIndex = selectedIndex,
+            onCardClick = { },
             contents = sampleTimeCardData
         )
     }

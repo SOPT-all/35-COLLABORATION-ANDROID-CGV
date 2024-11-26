@@ -13,7 +13,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,7 +27,6 @@ import org.sopt.cgv.feature.seats.component.SeatConfirmationModal
 import org.sopt.cgv.feature.seats.component.SeatSelectionModal1
 import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
 import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlinx.collections.immutable.PersistentList
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,6 +36,7 @@ fun SeatSelectScreen(
     modifier: Modifier = Modifier,
     viewModel: SeatSelectViewModel = viewModel(),
     movieTitle: String,
+    onNavigateBack: () -> Unit = {},
 ){
 
     val scrollState = rememberScrollState()
@@ -50,10 +49,12 @@ fun SeatSelectScreen(
     val isSeatSelected = viewModel.isSeatSelected
     val showSeatConfirmBottomSheet = viewModel.showSeatConfirmBottomSheet
 
-    val chipContents = viewModel.chipContents
+    val stepperValues = viewModel.stepperValues
+
+    val clickedTimeCardIndex = viewModel.clickedTimeCardIndex
     val sampleTimeCardData = viewModel.sampleTimeCardData
 
-    val stepperValues = viewModel.stepperValues
+    val chipContents = viewModel.chipContents
 
     Scaffold(
         modifier = modifier,
@@ -105,8 +106,10 @@ fun SeatSelectScreen(
         ){
             SeatsScreenTopBar(
                 modifier = Modifier,
-                viewModel = viewModel,
-                timeCardContent = sampleTimeCardData
+                clickedTimeCardIndex = clickedTimeCardIndex,
+                onTimeCardClick = { index -> viewModel.setClickedTimeCardIndex(index) },
+                timeCardContent = sampleTimeCardData,
+                onBackClick = onNavigateBack
             )
 
             Image(

@@ -45,7 +45,7 @@ fun CompTimeCard(
 ){
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxHeight()
             .aspectRatio(1.4f)
             .clip(RoundedCornerShape(8.dp))

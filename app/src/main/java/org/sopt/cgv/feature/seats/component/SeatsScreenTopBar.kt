@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,15 +30,15 @@ import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.White
-import org.sopt.cgv.feature.seats.SeatSelectViewModel
-
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SeatsScreenTopBar(
     modifier: Modifier = Modifier,
-    viewModel: SeatSelectViewModel,
-    timeCardContent: PersistentList<TimeCardContent>
+    clickedTimeCardIndex: MutableState<Int>,
+    onTimeCardClick: (Int) -> Unit,
+    timeCardContent: PersistentList<TimeCardContent>,
+    onBackClick: () -> Unit,
 ){
     Column(
         modifier = modifier
@@ -61,7 +64,7 @@ fun SeatsScreenTopBar(
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .align(Alignment.CenterStart)
-                    .clickable(){
+                    .clickable() {
 
                     }
             )
@@ -79,10 +82,15 @@ fun SeatsScreenTopBar(
         Spacer(modifier = Modifier.height(10.dp))
 
         Column(
-            modifier = modifier.height(70.dp)
+            modifier = modifier
+                .height(70.dp)
                 .padding(vertical = 1.dp)
         ){
-            SeatSelectionTimeCardRow(viewModel = viewModel, contents = timeCardContent)
+            SeatSelectionTimeCardRow(
+                selectedIndex = clickedTimeCardIndex,
+                onCardClick = onTimeCardClick,
+                contents = timeCardContent
+            )
         }
 
 
@@ -147,9 +155,13 @@ fun SeatsScreenTopBarPreview(){
         )
     )
 
+    val selectedIndex = remember { mutableStateOf(1) }
+
     SeatsScreenTopBar(
         modifier = Modifier,
-        viewModel = SeatSelectViewModel(),
-        timeCardContent = sampleTimeCardData
+        clickedTimeCardIndex = selectedIndex,
+        onTimeCardClick = {   },
+        timeCardContent = sampleTimeCardData,
+        onBackClick = { }
     )
 }

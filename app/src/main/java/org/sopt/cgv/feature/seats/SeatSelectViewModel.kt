@@ -1,51 +1,46 @@
 package org.sopt.cgv.feature.seats
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.persistentListOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.setValue
-import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.toPersistentList
 import org.sopt.cgv.feature.seats.component.TimeCardContent
 
 class SeatSelectViewModel : ViewModel() {
 
     var showBottomSheet by mutableStateOf(true)
+    fun toggleBottomSheet(){
+        showBottomSheet = !showBottomSheet
+    }
+
     var isSeatSelected by mutableStateOf(false)
         private set
+    fun toggleSeat(){
+        isSeatSelected = !isSeatSelected
+    }
     var showSeatConfirmBottomSheet by mutableStateOf(false)
-
-    var clickedTimeCardIndex by mutableStateOf(-1)
+    fun toggleSeatConfirmBottomSheet(){
+        showSeatConfirmBottomSheet = !showSeatConfirmBottomSheet
+    }
 
     private val _stepperValues = mutableStateListOf(0, 0, 0, 0)
     val stepperValues: List<Int> get() = _stepperValues
-
     fun increaseStepperValue(index: Int){
         _stepperValues[index] = _stepperValues[index] + 1
     }
-
     fun decreaseStepperValue(index: Int){
         if(_stepperValues[index] > 0){
             _stepperValues[index] = _stepperValues[index] - 1
         }
     }
 
-    fun setClickedCardIndex(index: Int) {
-        clickedTimeCardIndex = index
-    }
-
-    fun toggleBottomSheet(){
-        showBottomSheet = !showBottomSheet
-    }
-
-    fun toggleSeat(){
-        isSeatSelected = !isSeatSelected
-    }
-
-    fun toggleSeatConfirmBottomSheet(){
-        showSeatConfirmBottomSheet = !showSeatConfirmBottomSheet
+    private val _clickedTimeCardIndex = mutableStateOf(-1)
+    val clickedTimeCardIndex: MutableState<Int> get() = _clickedTimeCardIndex
+    fun setClickedTimeCardIndex(index: Int) {
+        _clickedTimeCardIndex.value = index
     }
 
     val chipContents = persistentListOf(
