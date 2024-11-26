@@ -7,11 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
@@ -44,15 +39,7 @@ fun TimeScreenTobBar() {
             selectedTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
             modifier = Modifier.width(204.dp),
             contentColor = Color.Transparent,
-            edgePadding = 0.dp,
-            indicator = { tabPositions ->
-                TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier
-                        .tabIndicatorOffset(tabPositions[selectedTimeScreenTobBarTabIndex.intValue]),
-                    height = 2.dp,
-                    color = White
-                )
-            },
+            edgePadding = 0.dp
         ) {
             reservationMethods.forEachIndexed { index, method ->
                 CGVTab(
@@ -76,7 +63,8 @@ fun TimeScreenTobBar() {
 
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_x),
-            contentDescription = ""
+            contentDescription = "",
+            tint = White
         )
     }
 }
