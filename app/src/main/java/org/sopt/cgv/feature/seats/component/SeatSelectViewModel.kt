@@ -12,6 +12,12 @@ class SeatSelectViewModel : ViewModel() {
     var isSeatSelected by mutableStateOf(false)
     var showSeatConfirmBottomSheet by mutableStateOf(false)
 
+    var clickedTimeCardIndex by mutableStateOf(-1)
+
+    fun setClickedCardIndex(index: Int) {
+        clickedTimeCardIndex = index
+    }
+
     fun toggleBottomSheet(){
         showBottomSheet = !showBottomSheet
     }

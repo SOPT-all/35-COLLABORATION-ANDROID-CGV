@@ -2,6 +2,7 @@ package org.sopt.cgv.feature.seats.component
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,9 +33,9 @@ data class TimeCardContent(
 @Composable
 fun SeatSelectionTimeCardRow(
     contents: PersistentList<TimeCardContent>,
+    viewModel: SeatSelectViewModel,
     modifier: Modifier = Modifier,
 ) {
-    var clickedCardIndex = remember { mutableStateOf(Int) }
 
     LazyRow(
         modifier = modifier,
@@ -43,7 +44,9 @@ fun SeatSelectionTimeCardRow(
     ) {
         itemsIndexed(contents) { index: Int, eachCard ->
             CompTimeCard(
-                modifier = Modifier,
+                modifier = Modifier.clickable{
+                    viewModel.setClickedCardIndex(index)
+                },
                 startTime = eachCard.startTime,
                 endTime = eachCard.endTime,
                 currentSeats = eachCard.currentSeats,
@@ -101,7 +104,9 @@ fun SeatSelectionTimeCardRowPreview() {
             .height(70.dp)
             .padding(3.dp)
     ){
-        SeatSelectionTimeCardRow(contents = sampleTimeCardData)
+        SeatSelectionTimeCardRow(
+            viewModel = SeatSelectViewModel(),
+            contents = sampleTimeCardData
+        )
     }
-
 }

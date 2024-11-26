@@ -33,6 +33,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun SeatsScreenTopBar(
     modifier: Modifier = Modifier,
+    viewModel: SeatSelectViewModel,
     timeCardContent: PersistentList<TimeCardContent>
 ){
     Column(
@@ -80,7 +81,7 @@ fun SeatsScreenTopBar(
             modifier = modifier.height(70.dp)
                 .padding(vertical = 1.dp)
         ){
-            SeatSelectionTimeCardRow(timeCardContent)
+            SeatSelectionTimeCardRow(viewModel = viewModel, contents = timeCardContent)
         }
 
 
@@ -147,6 +148,7 @@ fun SeatsScreenTopBarPreview(){
 
     SeatsScreenTopBar(
         modifier = Modifier,
+        viewModel = SeatSelectViewModel(),
         timeCardContent = sampleTimeCardData
     )
 }

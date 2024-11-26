@@ -104,6 +104,7 @@ fun SeatSelectScreen(
         ){
             SeatsScreenTopBar(
                 modifier = Modifier,
+                viewModel = viewModel,
                 timeCardContent = sampleTimeCardData
             )
 
