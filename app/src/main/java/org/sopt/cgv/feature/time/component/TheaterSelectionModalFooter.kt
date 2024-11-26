@@ -27,7 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.component.chip.Chip
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,16 +64,19 @@ fun TheaterSelectionModalFooter(
                 selectedTheaters = selectedTheaters
             )
 
-            Button( // 임시용 버튼
+            CgvButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = "극장선택",
+                textStyle = CGVTheme.typography.head6_b_17,
+                verticalPadding = 16.dp,
+                roundedCornerShape = 10.dp,
                 onClick = {
                     coroutineScope.launch {
                         sheetState.hide()
                         onDismissRequest()
                     }
                 }
-            ) {
-                Text("극장 선택")
-            }
+            )
 
             Spacer(modifier = Modifier.height(38.dp))
         }
