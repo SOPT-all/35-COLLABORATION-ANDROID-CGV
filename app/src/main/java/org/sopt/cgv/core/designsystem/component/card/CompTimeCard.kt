@@ -44,17 +44,12 @@ fun CompTimeCard(
     onClick: () -> Unit,
 ){
 
-
-    val backgroundColor = if (isActivated) White else Gray700
-    val backgroundColor2 = if (isActivated) Gray200 else Gray700
-    val leftSeatsColor = if (isActivated) PrimaryRed400 else Green
-
     Box(
         modifier = Modifier
             .fillMaxHeight()
             .aspectRatio(1.4f)
             .clip(RoundedCornerShape(8.dp))
-            .background(backgroundColor)
+            .background(if (isActivated) White else Gray700)
             .border(width = 1.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
             .clickable {
                 onClick()
@@ -90,7 +85,7 @@ fun CompTimeCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(backgroundColor2),
+                    .background(if (isActivated) Gray200 else Gray700),
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.Center,
             ) {
@@ -112,7 +107,7 @@ fun CompTimeCard(
                     }
                     Text(
                         text = "$currentSeats",
-                        color = leftSeatsColor,
+                        color = if (isActivated) PrimaryRed400 else Green,
                         style = CGVTheme.typography.body2_r_12
                     )
                     Text(
