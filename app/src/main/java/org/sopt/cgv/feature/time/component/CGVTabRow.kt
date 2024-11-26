@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
@@ -35,10 +34,8 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.sopt.cgv.feature.time.component.TabRowDefaults.Divider
 
 @Composable
 @UiComposable
@@ -51,7 +48,6 @@ fun CGVTabRow(
     contentColor: Color = contentColorFor(backgroundColor),
     edgePadding: Dp = 0.dp,
     indicatorColor: Color = Color.White,
-    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit,
     tabs: @Composable @UiComposable () -> Unit
 ) {
     Surface(
@@ -122,11 +118,6 @@ fun CGVTabRow(
             }
         }
     }
-    Divider(
-        modifier = Modifier
-            .zIndex(1f)
-            .padding(bottom = (0.5).dp)
-    )
 }
 
 @Immutable
