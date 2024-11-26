@@ -92,7 +92,7 @@ fun CompTimeCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp) // 위아래 여백 조정
+                        .padding(vertical = 4.dp)
                         .background(if (isActivated) Gray200 else Gray700),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
