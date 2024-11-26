@@ -1,6 +1,5 @@
 package org.sopt.cgv.feature.seats.component
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.persistentListOf

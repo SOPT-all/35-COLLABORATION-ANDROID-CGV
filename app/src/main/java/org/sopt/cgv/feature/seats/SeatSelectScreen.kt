@@ -41,7 +41,6 @@ fun SeatSelectScreen(
 
     val scrollState = rememberScrollState()
 
-    // 각 모달의 상태를 독립적으로 관리
     val selectionBottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val confirmationBottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val focusManager = LocalFocusManager.current
