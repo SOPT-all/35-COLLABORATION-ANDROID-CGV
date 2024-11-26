@@ -12,7 +12,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +32,7 @@ fun TheaterSelectionModalBottomSheet(
     selectedRegionInModal: String,
     onRegionInModalSelected: (String) -> Unit,
     selectedTheaters: Set<String>,
-    onTheaterSelected : (String) -> Unit,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (isSheetOpen) {
@@ -131,10 +130,10 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         selectedTabInModalIndex = selectedTabInModalIndex.value,
         onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         selectedRegionInModal = selectedRegionInModal.value,
-        onRegionInModalSelected = { selectedRegionInModal.value = it},
+        onRegionInModalSelected = { selectedRegionInModal.value = it },
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
         }
     )

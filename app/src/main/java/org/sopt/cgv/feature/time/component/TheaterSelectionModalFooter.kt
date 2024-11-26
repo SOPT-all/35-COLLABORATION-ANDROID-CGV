@@ -17,7 +17,6 @@ import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -107,7 +106,7 @@ fun Chip(text: String, onClick: () -> Unit) {
                 color = Color.LightGray,
                 shape = RoundedCornerShape(8.dp)
             )
-            .noRippleClickable {  }
+            .noRippleClickable { }
             .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
     ) {
         Text(

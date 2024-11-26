@@ -13,10 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -178,7 +176,7 @@ private fun SelectableTheatersInModalPreview() {
         ),
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
         }
     )
@@ -195,7 +193,7 @@ private fun DetailRegionTheatersPreview() {
         modifier = Modifier,
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
         }
     )
@@ -210,7 +208,7 @@ private fun TheaterListItemPreview() {
         theaterName = "용산아이파크몰",
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
         }
     )
