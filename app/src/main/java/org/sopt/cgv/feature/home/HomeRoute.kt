@@ -70,7 +70,8 @@ fun HomeScreen(
             unselectedTextColor = White.copy(alpha = 0.8f),
             indicatorColor = White,
             textStyle = CGVTheme.typography.head3_b_14,
-            indicatorHeight = 2.dp
+            indicatorHeight = 2.dp,
+            startPadding = 16.dp
         )
 
         Column(
