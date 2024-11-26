@@ -12,9 +12,12 @@ import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 
 @Composable
-fun StepperRow(label: String) {
+fun StepperRow(
+    modifier: Modifier = Modifier,
+    label: String
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
