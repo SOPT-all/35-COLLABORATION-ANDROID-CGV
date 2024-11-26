@@ -33,12 +33,18 @@ fun TimeScreen(
     }
 
     TheaterSelectionModalBottomSheet(
-        isSheetOpen = isSheetOpen,
+        isSheetOpen = isSheetOpen.value,
         onDismissRequest = { isSheetOpen.value = false },
         sheetState = sheetState,
-        selectedTabInModalIndex = selectedTabInModalIndex,
-        selectedRegionInModal = selectedRegionInModal,
-        selectedTheaters = selectedTheaters
+        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
+        onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
+        selectedRegionInModal = selectedRegionInModal.value,
+        onRegionInModalSelected = { selectedRegionInModal.value = it},
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }
 

@@ -36,7 +36,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTheaters: Set<String>,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -83,14 +83,14 @@ fun TheaterSelectionModalFooter(
 @Composable
 fun ShowSelectedChipsBox(
     modifier: Modifier = Modifier,
-    selectedTheaters: MutableState<Set<String>>
+    selectedTheaters: Set<String>
 ) {
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        selectedTheaters.value.forEach { chip ->
+        selectedTheaters.forEach { chip ->
             Chip(
                 text = chip,
                 onClick = { }
@@ -107,7 +107,7 @@ fun Chip(text: String, onClick: () -> Unit) {
                 color = Color.LightGray,
                 shape = RoundedCornerShape(8.dp)
             )
-            .noRippleClickable { onClick() }
+            .noRippleClickable {  }
             .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
     ) {
         Text(
@@ -125,8 +125,7 @@ private fun TheaterSelectionModalFooterPreview() {
     TheaterSelectionModalFooter(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {},
-        selectedTheaters = selectedTheaters,
-        modifier = Modifier
+        selectedTheaters = selectedTheaters.value
     )
 }
 
@@ -136,7 +135,7 @@ private fun ShowSelectedChipsBoxPreview() {
     val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
     ShowSelectedChipsBox(
         modifier = Modifier,
-        selectedTheaters = selectedTheaters
+        selectedTheaters = selectedTheaters.value,
     )
 }
 

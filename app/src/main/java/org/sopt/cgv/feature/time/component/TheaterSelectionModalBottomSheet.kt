@@ -25,15 +25,18 @@ import org.sopt.cgv.core.designsystem.theme.White
 @ExperimentalMaterial3Api
 @Composable
 fun TheaterSelectionModalBottomSheet(
-    isSheetOpen: MutableState<Boolean>,
+    isSheetOpen: Boolean,
     onDismissRequest: () -> Unit,
     sheetState: SheetState,
-    selectedTabInModalIndex: MutableState<Int>,
-    selectedRegionInModal: MutableState<String>,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTabInModalIndex: Int,
+    onCGVTabInModalSelected: (Int) -> Unit,
+    selectedRegionInModal: String,
+    onRegionInModalSelected: (String) -> Unit,
+    selectedTheaters: Set<String>,
+    onTheaterSelected : (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if (isSheetOpen.value) {
+    if (isSheetOpen) {
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
@@ -75,6 +78,7 @@ fun TheaterSelectionModalBottomSheet(
 
                 TheaterClassificationTabInModal(
                     selectedTabInModalIndex = selectedTabInModalIndex,
+                    onCGVTabInModalSelected = onCGVTabInModalSelected,
                     tabs = tabs
                 )
 
@@ -85,7 +89,8 @@ fun TheaterSelectionModalBottomSheet(
                 ) {
                     ClickableVerticalRegionListInModal(
                         list = regions,
-                        selectedRegionInModal = selectedRegionInModal
+                        selectedRegionInModal = selectedRegionInModal,
+                        onRegionInModalSelected = onRegionInModalSelected
                     )
 
                     Spacer(modifier = Modifier.width(33.dp))
@@ -93,6 +98,7 @@ fun TheaterSelectionModalBottomSheet(
                     SelectableTheatersInModal(
                         movieTheatersByDetailRegion = movieTheatersByDetailRegion,
                         selectedTheaters = selectedTheaters,
+                        onTheaterSelected = onTheaterSelected,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -119,13 +125,18 @@ private fun TheaterSelectionModalBottomSheetPreview() {
     val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
 
     TheaterSelectionModalBottomSheet(
-        isSheetOpen = isSheetOpen,
+        isSheetOpen = isSheetOpen.value,
         onDismissRequest = { isSheetOpen.value = false },
-        modifier = Modifier,
         sheetState = sheetState,
-        selectedTabInModalIndex = selectedTabInModalIndex,
-        selectedRegionInModal = selectedRegionInModal,
-        selectedTheaters = selectedTheaters
+        selectedTabInModalIndex = selectedTabInModalIndex.value,
+        onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
+        selectedRegionInModal = selectedRegionInModal.value,
+        onRegionInModalSelected = { selectedRegionInModal.value = it},
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value -= it
+        }
     )
 }
 

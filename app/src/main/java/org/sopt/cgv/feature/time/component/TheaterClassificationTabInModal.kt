@@ -24,7 +24,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TheaterClassificationTabInModal(
-    selectedTabInModalIndex: MutableState<Int>,
+    selectedTabInModalIndex: Int,
+    onCGVTabInModalSelected: (Int) -> Unit,
     tabs: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
@@ -34,12 +35,12 @@ fun TheaterClassificationTabInModal(
             .padding(horizontal = 18.dp)
     ) {
         TabRow(
-            selectedTabIndex = selectedTabInModalIndex.value,
+            selectedTabIndex = selectedTabInModalIndex,
             containerColor = White,
             contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex.value]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex]),
                     width = 175.dp,
                     height = 2.dp,
                     color = PrimaryRed400
@@ -49,10 +50,10 @@ fun TheaterClassificationTabInModal(
         ) {
             tabs.forEachIndexed { index, category ->
                 CGVTab(
-                    selected = selectedTabInModalIndex.value == index,
+                    selected = selectedTabInModalIndex == index,
                     modifier = Modifier
                         .padding(vertical = 10.dp),
-                    onClick = { selectedTabInModalIndex.value = index },
+                    onClick = { onCGVTabInModalSelected(index) },
                     selectedContentColor = PrimaryRed400,
                     unselectedContentColor = Gray850,
                 ) {
@@ -69,8 +70,11 @@ fun TheaterClassificationTabInModal(
 @Preview(showBackground = true)
 @Composable
 private fun TheaterClassificationTabInModalPreview() {
+    val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
+
     TheaterClassificationTabInModal(
-        selectedTabInModalIndex = remember { mutableIntStateOf(0) },
+        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
+        onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         tabs = persistentListOf("지역별", "특별관"),
         modifier = Modifier
     )
