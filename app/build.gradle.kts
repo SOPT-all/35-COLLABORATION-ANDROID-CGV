@@ -81,5 +81,6 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.immutable)
+    implementation(libs.coil.compose)
 }
