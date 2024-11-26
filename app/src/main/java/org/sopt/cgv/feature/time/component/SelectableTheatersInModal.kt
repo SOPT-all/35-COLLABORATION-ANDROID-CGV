@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,7 +44,8 @@ data class MovieTheatersByDetailRegion(
 @Composable
 fun SelectableTheatersInModal(
     movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -68,7 +68,8 @@ fun SelectableTheatersInModal(
             DetailRegionTheaters(
                 detailRegionName = movieTheatersByDetailRegion.detailRegionName,
                 theaterNames = movieTheatersByDetailRegion.theaterNames,
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
             )
         }
     }
@@ -78,7 +79,8 @@ fun SelectableTheatersInModal(
 fun DetailRegionTheaters(
     detailRegionName: String,
     theaterNames: PersistentList<String>,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -95,7 +97,8 @@ fun DetailRegionTheaters(
         theaterNames.forEach {
             TheaterListItem(
                 theaterName = it,
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
             )
         }
 
@@ -106,7 +109,8 @@ fun DetailRegionTheaters(
 @Composable
 fun TheaterListItem(
     theaterName: String,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -114,11 +118,9 @@ fun TheaterListItem(
             .fillMaxWidth()
             .height(44.dp)
             .noRippleClickable {
-                if (selectedTheaters.value.contains(theaterName)) selectedTheaters.value =
-                    selectedTheaters.value.minus(theaterName)
-                else selectedTheaters.value = selectedTheaters.value.plus(theaterName)
+                onTheaterSelected(theaterName)
             }
-            .background(color = if (selectedTheaters.value.contains(theaterName)) Gray200 else White)
+            .background(color = if (selectedTheaters.contains(theaterName)) Gray200 else White)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 val y = size.height - strokeWidth / 2
@@ -137,13 +139,13 @@ fun TheaterListItem(
         ) {
             Text(
                 text = theaterName,
-                style = if (selectedTheaters.value.contains(theaterName)) CGVTheme.typography.head4_b_15 else CGVTheme.typography.body3_m_14,
+                style = if (selectedTheaters.contains(theaterName)) CGVTheme.typography.head4_b_15 else CGVTheme.typography.body3_m_14,
                 color = Gray850
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
-            if (selectedTheaters.value.contains(theaterName)) {
+            if (selectedTheaters.contains(theaterName)) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.ic_time_modal_check),
                     contentDescription = "",
@@ -172,7 +174,11 @@ private fun SelectableTheatersInModalPreview() {
                 theaterNames = persistentListOf("용산아이파크몰"),
             )
         ),
-        selectedTheaters = selectedTheaters
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value -= it
+        }
     )
 }
 
@@ -185,7 +191,11 @@ private fun DetailRegionTheatersPreview() {
         detailRegionName = "최근 이용한 CGV",
         theaterNames = persistentListOf("구리", "압구정"),
         modifier = Modifier,
-        selectedTheaters = selectedTheaters
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value -= it
+        }
     )
 }
 
@@ -196,7 +206,10 @@ private fun TheaterListItemPreview() {
 
     TheaterListItem(
         theaterName = "용산아이파크몰",
-        selectedTheaters = selectedTheaters,
-        modifier = Modifier
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }

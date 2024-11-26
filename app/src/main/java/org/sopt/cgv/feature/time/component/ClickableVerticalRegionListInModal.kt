@@ -1,6 +1,5 @@
 package org.sopt.cgv.feature.time.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
@@ -10,11 +9,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +25,8 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 @Composable
 fun ClickableVerticalRegionListInModal(
     list: PersistentList<String>,
-    selectedRegionInModal: MutableState<String>,
+    selectedRegionInModal: String,
+    onRegionInModalSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -44,13 +41,13 @@ fun ClickableVerticalRegionListInModal(
                 modifier = Modifier
                     .width(139.dp)
                     .height(46.dp)
-                    .noRippleClickable { selectedRegionInModal.value = item }
+                    .noRippleClickable { onRegionInModalSelected(item) }
             ) {
                 Text(
                     text = item,
                     modifier = Modifier.align(Alignment.CenterStart),
-                    style = if (selectedRegionInModal.value == item) CGVTheme.typography.head3_b_14 else CGVTheme.typography.body3_m_14,
-                    color = if (selectedRegionInModal.value == item) Black else Gray700
+                    style = if (selectedRegionInModal == item) CGVTheme.typography.head3_b_14 else CGVTheme.typography.body3_m_14,
+                    color = if (selectedRegionInModal == item) Black else Gray700
                 )
             }
         }
@@ -75,6 +72,7 @@ private fun ClickableVerticalRegionListInModalPreview() {
             "경상",
             "광주/전라/제주"
         ),
-        selectedRegionInModal = selectedRegionInModal
+        selectedRegionInModal = selectedRegionInModal.value,
+        onRegionInModalSelected = { selectedRegionInModal.value = it }
     )
 }

@@ -16,7 +16,6 @@ import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,7 +36,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
-    selectedTheaters: MutableState<Set<String>>,
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -61,7 +61,8 @@ fun TheaterSelectionModalFooter(
                 .padding(horizontal = 18.dp)
         ) {
             ShowSelectedChipsBox(
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
             )
 
             CgvButton(
@@ -87,18 +88,20 @@ fun TheaterSelectionModalFooter(
 @Composable
 fun ShowSelectedChipsBox(
     modifier: Modifier = Modifier,
-    selectedTheaters: MutableState<Set<String>>
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit
 ) {
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        selectedTheaters.value.forEach { theaterName ->
+        selectedTheaters.forEach { theaterName ->
             Chip(
                 content = theaterName,
                 inTime = true,
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
             )
         }
     }
@@ -112,8 +115,11 @@ private fun TheaterSelectionModalFooterPreview() {
     TheaterSelectionModalFooter(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {},
-        selectedTheaters = selectedTheaters,
-        modifier = Modifier
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }
 
@@ -123,6 +129,10 @@ private fun ShowSelectedChipsBoxPreview() {
     val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
     ShowSelectedChipsBox(
         modifier = Modifier,
-        selectedTheaters = selectedTheaters
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }

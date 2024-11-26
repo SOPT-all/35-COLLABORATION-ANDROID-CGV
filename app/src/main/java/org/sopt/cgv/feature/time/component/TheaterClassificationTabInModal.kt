@@ -3,13 +3,11 @@ package org.sopt.cgv.feature.time.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -24,7 +22,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun TheaterClassificationTabInModal(
-    selectedTabInModalIndex: MutableState<Int>,
+    selectedTabInModalIndex: Int,
+    onCGVTabInModalSelected: (Int) -> Unit,
     tabs: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
@@ -34,12 +33,12 @@ fun TheaterClassificationTabInModal(
             .padding(horizontal = 18.dp)
     ) {
         TabRow(
-            selectedTabIndex = selectedTabInModalIndex.value,
+            selectedTabIndex = selectedTabInModalIndex,
             containerColor = White,
             contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex.value]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabInModalIndex]),
                     width = 175.dp,
                     height = 2.dp,
                     color = PrimaryRed400
@@ -49,10 +48,10 @@ fun TheaterClassificationTabInModal(
         ) {
             tabs.forEachIndexed { index, category ->
                 CGVTab(
-                    selected = selectedTabInModalIndex.value == index,
+                    selected = selectedTabInModalIndex == index,
                     modifier = Modifier
                         .padding(vertical = 10.dp),
-                    onClick = { selectedTabInModalIndex.value = index },
+                    onClick = { onCGVTabInModalSelected(index) },
                     selectedContentColor = PrimaryRed400,
                     unselectedContentColor = Gray850,
                 ) {
@@ -69,8 +68,11 @@ fun TheaterClassificationTabInModal(
 @Preview(showBackground = true)
 @Composable
 private fun TheaterClassificationTabInModalPreview() {
+    val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
+
     TheaterClassificationTabInModal(
-        selectedTabInModalIndex = remember { mutableIntStateOf(0) },
+        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
+        onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         tabs = persistentListOf("지역별", "특별관"),
         modifier = Modifier
     )
