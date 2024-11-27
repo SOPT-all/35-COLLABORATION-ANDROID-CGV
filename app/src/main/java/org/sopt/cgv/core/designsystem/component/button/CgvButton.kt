@@ -27,7 +27,6 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun CgvButton(
     text: String,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = CGVTheme.typography.head3_b_14,
     textColor: Color = White,
@@ -38,6 +37,7 @@ fun CgvButton(
     roundedCornerShape: Dp = 8.dp,
     enabled: Boolean = false,
     isBack: Boolean = false,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
