@@ -35,7 +35,8 @@ fun TimeScreenDateSelectionTab(
     selectedDate: String,
     onDateSelected: (String) -> Unit,
     selectedDay: String,
-    onDaySelected: (String) -> Unit
+    onDaySelected: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val dateList: PersistentList<Date> = persistentListOf(
         Date("11.28", "목"),

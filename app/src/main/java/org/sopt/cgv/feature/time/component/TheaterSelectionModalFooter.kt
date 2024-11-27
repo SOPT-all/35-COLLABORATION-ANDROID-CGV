@@ -85,9 +85,9 @@ fun TheaterSelectionModalFooter(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ShowSelectedChipsBox(
-    modifier: Modifier = Modifier,
     selectedTheaters: Set<String>,
-    onTheaterSelected: (String) -> Unit
+    onTheaterSelected: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),

@@ -31,8 +31,8 @@ import org.sopt.cgv.core.designsystem.theme.Gray850
 
 @Composable
 fun Chip(
-    modifier: Modifier = Modifier,
     content: String,
+    modifier: Modifier = Modifier,
     inTime: Boolean = false,
     onTheaterSelected: ((String) -> Unit)? = null
 ) {

@@ -42,7 +42,8 @@ data class CGVTimeTable(
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
-    selectedTheaters: Set<String>
+    selectedTheaters: Set<String>,
+    modifier: Modifier = Modifier
 ) {
     Column {
         selectedTheaters.forEach{ theater ->
@@ -53,7 +54,8 @@ fun TimeScreenAuditorioumAndTimeSelection(
 
 @Composable
 fun TimeScreenAuditoriumAndTimeInTheater(
-    theaterName: String
+    theaterName: String,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -116,7 +118,8 @@ fun TimeScreenAuditoriumAndTimeInTheater(
 
 @Composable
 fun TimeScreenTimeInAuditorium(
-    cgvTimeTable: CGVTimeTable
+    cgvTimeTable: CGVTimeTable,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()

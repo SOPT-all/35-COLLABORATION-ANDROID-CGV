@@ -29,7 +29,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TimeScreenTobBar(
     selectedTimeScreenTobBarTabIndex: Int,
-    onTimeScreenTobBarTabSelected: (Int) -> Unit
+    onTimeScreenTobBarTabSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
 

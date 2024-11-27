@@ -45,7 +45,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TimeScreenMovieSelectionSection(
     @DrawableRes selectedPoster: Int,
-    onPosterSelected: (Int) -> Unit
+    onPosterSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val posters = persistentListOf(
         R.drawable.img_time_poster1_selected,
@@ -89,7 +90,8 @@ fun TimeScreenMovieSelectionSection(
 fun SelectableMoviePosters(
     posters: PersistentList<Int>,
     @DrawableRes selectedPoster: Int,
-    onPosterSelected: (Int) -> Unit
+    onPosterSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -119,7 +121,9 @@ fun SelectableMoviePosters(
 }
 
 @Composable
-fun SelectedMovieInformation() {
+fun SelectedMovieInformation(
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
