@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,8 +31,8 @@ import org.sopt.cgv.core.designsystem.theme.Gray850
 
 @Composable
 fun Chip(
-    modifier: Modifier = Modifier,
     content: String,
+    modifier: Modifier = Modifier,
     inTime: Boolean = false,
     onTheaterSelected: ((String) -> Unit)? = null
 ) {
@@ -62,7 +61,7 @@ fun Chip(
                 modifier = Modifier
                     .size(16.dp)
                     .clickable {
-                        if (onTheaterSelected != null) onTheaterSelected(content)
+                        onTheaterSelected?.invoke(content)
                     }
             )
         }

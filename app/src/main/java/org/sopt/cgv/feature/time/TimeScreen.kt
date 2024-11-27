@@ -4,7 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -76,10 +75,6 @@ fun TimeScreen(
                         selectedPoster = selectedPoster.intValue,
                         onPosterSelected = { selectedPoster.intValue = it }
                     )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(19.dp))
                 }
 
                 stickyHeader {

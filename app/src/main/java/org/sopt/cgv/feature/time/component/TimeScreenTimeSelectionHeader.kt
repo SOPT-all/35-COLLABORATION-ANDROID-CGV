@@ -11,21 +11,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
@@ -64,27 +62,17 @@ fun TimeScreenTimeSelectionHeader(
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Box(
-                modifier = Modifier
-                    .clickable { onSheetStateChanged() }
-                    .background(
-                        color = White,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = Gray400,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .padding(horizontal = 10.dp,vertical = 6.dp)
-
-            ) {
-                Text(
-                    text = "극장변경",
-                    color = Gray600,
-                    style = CGVTheme.typography.body1_m_12
-                )
-            }
+            CgvButton(
+                text = "극장변경",
+                textStyle = CGVTheme.typography.body1_m_12,
+                textColor = Gray600,
+                background = White,
+                borderColor = Gray400,
+                horizontalPadding = 10.dp,
+                verticalPadding = 6.dp,
+                roundedCornerShape = 6.dp,
+                onClick = {onSheetStateChanged()}
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -112,7 +100,7 @@ private fun TimeScreenTimeSelectionHeaderPreview() {
     val isSheetOpen = remember { mutableStateOf(true) }
 
     TimeScreenTimeSelectionHeader(
-        onSheetStateChanged = {isSheetOpen.value = !isSheetOpen.value},
+        onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
         numberOfSelectedTheaters = 2
     )
 }

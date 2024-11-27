@@ -38,15 +38,15 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun CompTimeCard(
-    modifier: Modifier = Modifier,
     startTime: String,
     endTime: String,
     currentSeats: Int,
     totalSeats: Int,
     isMorning: Boolean,
+    modifier: Modifier = Modifier,
     isActivated: Boolean = false,
     isInTime: Boolean = false,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
 
 

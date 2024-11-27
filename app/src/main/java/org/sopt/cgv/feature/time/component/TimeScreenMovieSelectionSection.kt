@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,6 +35,7 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.extension.noRippleClickable
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gradient
@@ -47,7 +46,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun TimeScreenMovieSelectionSection(
     @DrawableRes selectedPoster: Int,
-    onPosterSelected: (Int) -> Unit
+    onPosterSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val posters = persistentListOf(
         R.drawable.img_time_poster1_selected,
@@ -91,7 +91,8 @@ fun TimeScreenMovieSelectionSection(
 fun SelectableMoviePosters(
     posters: PersistentList<Int>,
     @DrawableRes selectedPoster: Int,
-    onPosterSelected: (Int) -> Unit
+    onPosterSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -103,8 +104,9 @@ fun SelectableMoviePosters(
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
+                    .clip(shape = RoundedCornerShape(5.dp))
                     .background(color = Black, shape = RoundedCornerShape(5.dp))
-                    .noRippleClickable{ onPosterSelected(poster) },
+                    .noRippleClickable { onPosterSelected(poster) },
             ) {
                 Image(
                     painter = painterResource(id = poster),
@@ -121,7 +123,9 @@ fun SelectableMoviePosters(
 }
 
 @Composable
-fun SelectedMovieInformation() {
+fun SelectedMovieInformation(
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -146,27 +150,18 @@ fun SelectedMovieInformation() {
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        Box(
-            modifier = Modifier
-                .background(
-                    color = Gray100,
-                    shape = RoundedCornerShape(6.dp)
-                )
-                .border(
-                    width = 1.dp,
-                    color = PrimaryRed400,
-                    shape = RoundedCornerShape(6.dp)
-                )
-                .padding(horizontal = 10.dp)
-                .height(24.dp)
-        ) {
-            Text(
-                text = "전체",
-                modifier = Modifier.align(Alignment.Center),
-                style = CGVTheme.typography.head1_b_12,
-                color = PrimaryRed400
-            )
-        }
+
+        CgvButton(
+            text = "전체",
+            textStyle = CGVTheme.typography.head1_b_12,
+            textColor = PrimaryRed400,
+            background = Gray100,
+            borderColor = PrimaryRed400,
+            horizontalPadding = 10.dp,
+            verticalPadding = 2.dp,
+            roundedCornerShape = 6.dp,
+            onClick = {}
+        )
     }
 }
 
@@ -176,7 +171,7 @@ private fun TimeScreenMovieSelectionSectionPreview() {
     val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
     TimeScreenMovieSelectionSection(
         selectedPoster = selectedPoster.intValue,
-        onPosterSelected = { selectedPoster.intValue = it}
+        onPosterSelected = { selectedPoster.intValue = it }
     )
 }
 
@@ -194,7 +189,7 @@ private fun SelectableMoviePostersPreview() {
             R.drawable.img_time_poster5_selected,
         ),
         selectedPoster = selectedPoster.intValue,
-        onPosterSelected = { selectedPoster.intValue = it}
+        onPosterSelected = { selectedPoster.intValue = it }
     )
 }
 
