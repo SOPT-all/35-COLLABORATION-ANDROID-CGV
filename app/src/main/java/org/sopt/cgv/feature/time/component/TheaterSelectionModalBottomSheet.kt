@@ -128,7 +128,7 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         isSheetOpen = isSheetOpen.value,
         onDismissRequest = { isSheetOpen.value = false },
         sheetState = sheetState,
-        selectedTabInModalIndex = selectedTabInModalIndex.value,
+        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
         onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         selectedRegionInModal = selectedRegionInModal.value,
         onRegionInModalSelected = { selectedRegionInModal.value = it },
