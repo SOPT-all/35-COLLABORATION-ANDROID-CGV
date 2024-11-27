@@ -1,6 +1,7 @@
 package org.sopt.cgv.feature.time.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,48 +51,52 @@ fun TimeScreen(
             )
         }
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .background(White)
+        CompositionLocalProvider(
+            LocalOverscrollConfiguration provides null // LazyColumn에만 적용
         ) {
-            item {
-                TimeScreenMovieSelectionSection(
-                    selectedPoster = selectedPoster.intValue,
-                    onPosterSelected = { selectedPoster.intValue = it }
-                )
-            }
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(White)
+            ) {
+                item {
+                    TimeScreenMovieSelectionSection(
+                        selectedPoster = selectedPoster.intValue,
+                        onPosterSelected = { selectedPoster.intValue = it }
+                    )
+                }
 
-            item {
-                Spacer(modifier = Modifier.height(19.dp))
-            }
+                item {
+                    Spacer(modifier = Modifier.height(19.dp))
+                }
 
-            stickyHeader {
-                TimeScreenDateSelectionTab(
-                    selectedDate = selectedDate.value,
-                    onDateSelected = { selectedDate.value = it },
-                    selectedDay = selectedDay.value,
-                    onDaySelected = { selectedDay.value = it }
-                )
+                stickyHeader {
+                    TimeScreenDateSelectionTab(
+                        selectedDate = selectedDate.value,
+                        onDateSelected = { selectedDate.value = it },
+                        selectedDay = selectedDay.value,
+                        onDaySelected = { selectedDay.value = it }
+                    )
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(22.dp)
-                        .background(White)
-                )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(22.dp)
+                            .background(White)
+                    )
 
-                TimeScreenTimeSelectionHeader(
-                    onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
-                    numberOfSelectedTheaters = selectedTheaters.value.size
-                )
-            }
+                    TimeScreenTimeSelectionHeader(
+                        onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
+                        numberOfSelectedTheaters = selectedTheaters.value.size
+                    )
+                }
 
-            item {
-                TimeScreenAuditorioumAndTimeSelection(
-                    selectedTheaters = selectedTheaters.value
-                )
+                item {
+                    TimeScreenAuditorioumAndTimeSelection(
+                        selectedTheaters = selectedTheaters.value
+                    )
+                }
             }
         }
     }
