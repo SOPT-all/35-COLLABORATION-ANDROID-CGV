@@ -35,7 +35,6 @@ import org.sopt.cgv.feature.time.component.TimeScreenTobBar
 fun TimeScreen(
     modifier: Modifier = Modifier
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
     val selectedRegionInModal = remember { mutableStateOf("추천 CGV") }
     val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
@@ -110,7 +109,7 @@ fun TimeScreen(
     TheaterSelectionModalBottomSheet(
         isSheetOpen = isSheetOpen.value,
         onDismissRequest = { isSheetOpen.value = false },
-        sheetState = sheetState,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         selectedTabInModalIndex = selectedTabInModalIndex.intValue,
         onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         selectedRegionInModal = selectedRegionInModal.value,
