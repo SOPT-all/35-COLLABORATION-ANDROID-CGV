@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -110,7 +108,7 @@ fun ShowSelectedChipsBox(
 @Preview
 @Composable
 private fun TheaterSelectionModalFooterPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf("구리", "압구정")) }
     TheaterSelectionModalFooter(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {},
@@ -125,7 +123,7 @@ private fun TheaterSelectionModalFooterPreview() {
 @Preview
 @Composable
 private fun ShowSelectedChipsBoxPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf("구리", "압구정")) }
     ShowSelectedChipsBox(
         modifier = Modifier,
         selectedTheaters = selectedTheaters.value,
