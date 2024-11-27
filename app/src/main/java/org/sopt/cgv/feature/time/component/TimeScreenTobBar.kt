@@ -61,8 +61,7 @@ fun TimeScreenTobBar(
                         modifier = Modifier
                             .height(30.dp)
                             .padding(vertical = 5.dp),
-                        selectedContentColor = White,
-                        unselectedContentColor = White
+                        selectedContentColor = White
                     ) {
                         Text(
                             text = method,
