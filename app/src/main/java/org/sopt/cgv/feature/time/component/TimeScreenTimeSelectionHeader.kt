@@ -70,8 +70,9 @@ fun TimeScreenTimeSelectionHeader(
                 borderColor = Gray400,
                 horizontalPadding = 10.dp,
                 verticalPadding = 6.dp,
-                roundedCornerShape = 6.dp
-            ){}
+                roundedCornerShape = 6.dp,
+                onClick = {}
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 
