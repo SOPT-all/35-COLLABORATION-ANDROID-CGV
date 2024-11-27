@@ -26,8 +26,8 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun CgvButton(
-    modifier: Modifier = Modifier,
     text: String,
+    modifier: Modifier = Modifier,
     textStyle: TextStyle = CGVTheme.typography.head3_b_14,
     textColor: Color = White,
     background: Color = PrimaryRed400,
