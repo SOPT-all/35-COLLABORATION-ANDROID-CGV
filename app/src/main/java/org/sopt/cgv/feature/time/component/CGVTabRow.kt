@@ -10,16 +10,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -30,12 +33,16 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 @UiComposable
@@ -65,7 +72,6 @@ fun CGVTabRow(
         }
         SubcomposeLayout(
             Modifier
-                .fillMaxWidth()
                 .wrapContentSize(align = Alignment.CenterStart)
                 .horizontalScroll(scrollState)
                 .selectableGroup()
@@ -87,7 +93,7 @@ fun CGVTabRow(
                 val tabPositions = mutableListOf<TabPosition>()
                 var left = padding
 
-                tabPlaceables.forEachIndexed { index, placeable ->
+                tabPlaceables.forEachIndexed { _, placeable ->
                     placeable.placeRelative(left, 0)
                     tabPositions.add(
                         TabPosition(
@@ -145,49 +151,6 @@ class TabPosition internal constructor(val left: Dp, val width: Dp) {
     }
 }
 
-object TabRowDefaults {
-    /**
-     * @param modifier modifier for the divider's layout
-     * @param thickness thickness of the divider
-     * @param color color of the divider
-     */
-    @Composable
-    fun Divider(
-        modifier: Modifier = Modifier,
-        thickness: Dp = DividerThickness,
-        color: Color = LocalContentColor.current.copy(alpha = DividerOpacity)
-    ) {
-        androidx.compose.material3.Divider(
-            modifier = modifier,
-            thickness = thickness,
-            color = color
-        )
-    }
-
-    /**
-     * @param modifier modifier for the indicator's layout
-     * @param height height of the indicator
-     * @param color color of the indicator
-     */
-    @Composable
-    fun Indicator(
-        modifier: Modifier = Modifier,
-        height: Dp = IndicatorHeight,
-        color: Color = LocalContentColor.current
-    ) {
-        Box(
-            modifier
-                .fillMaxWidth()
-                .height(height)
-                .background(color = color)
-        )
-    }
-
-    private val DividerOpacity = 0.12f
-    private val DividerThickness = 1.dp
-    private val IndicatorHeight = 2.dp
-}
-
 fun Modifier.tabIndicatorOffset(
     currentTabPosition: TabPosition
 ): Modifier = composed(
@@ -212,7 +175,6 @@ fun Modifier.tabIndicatorOffset(
 
 private enum class TabSlots {
     Tabs,
-    Divider,
     Indicator
 }
 
@@ -260,5 +222,36 @@ private class ScrollableTabData(
         val centeredTabOffset = tabOffset - (scrollerCenter - tabWidth / 2)
         val availableSpace = (totalTabRowWidth - visibleWidth).coerceAtLeast(0)
         return centeredTabOffset.coerceIn(0, availableSpace)
+    }
+}
+
+@Preview
+@Composable
+private fun CGVTabRowPreview() {
+    val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
+    val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
+
+    CGVTabRow(
+        selectedTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
+        modifier = Modifier.wrapContentWidth(),
+        contentColor = Color.Transparent,
+        edgePadding = 0.dp
+    ) {
+        reservationMethods.forEachIndexed { index, method ->
+            CGVTab(
+                selected = selectedTimeScreenTobBarTabIndex.intValue == index,
+                onClick = { selectedTimeScreenTobBarTabIndex.intValue = index },
+                modifier = Modifier
+                    .height(30.dp)
+                    .padding(vertical = 5.dp),
+                selectedContentColor = White,
+                unselectedContentColor = White
+            ) {
+                Text(
+                    text = method,
+                    style = CGVTheme.typography.body2_m_13
+                )
+            }
+        }
     }
 }
