@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gradient
@@ -103,7 +104,7 @@ fun SelectableMoviePosters(
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
                     .background(color = Black, shape = RoundedCornerShape(5.dp))
-                    .clickable { onPosterSelected(poster) },
+                    .noRippleClickable{ onPosterSelected(poster) },
             ) {
                 Image(
                     painter = painterResource(id = poster),
