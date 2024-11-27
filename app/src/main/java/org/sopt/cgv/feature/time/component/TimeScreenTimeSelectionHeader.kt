@@ -71,7 +71,7 @@ fun TimeScreenTimeSelectionHeader(
                 horizontalPadding = 10.dp,
                 verticalPadding = 6.dp,
                 roundedCornerShape = 6.dp,
-                onClick = {}
+                onClick = {onSheetStateChanged()}
             )
 
             Spacer(modifier = Modifier.weight(1f))
