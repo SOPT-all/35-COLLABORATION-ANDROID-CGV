@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.time
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
@@ -15,15 +16,11 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.component.TheaterSelectionModalBottomSheet
 import org.sopt.cgv.feature.time.component.TimeScreenAuditorioumAndTimeSelection
@@ -35,34 +32,37 @@ import org.sopt.cgv.feature.time.component.TimeScreenTobBar
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun TimeScreen(
+    selectedTabInModalIndex: Int,
+    onCGVTabInModalSelected: (Int) -> Unit,
+    selectedRegionInModal: String,
+    onRegionInModalSelected: (String) -> Unit,
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
+    selectedTimeScreenTobBarTabIndex: Int,
+    onTimeScreenTobBarTabSelected: (Int) -> Unit,
+    @DrawableRes selectedPoster: Int,
+    onPosterSelected: (Int) -> Unit,
+    selectedDate: String,
+    onDateSelected: (String) -> Unit,
+    selectedDay: String,
+    onDaySelected: (String) -> Unit,
+    isSheetOpen: Boolean,
+    onSheetStateChanged: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val selectedTabInModalIndex = remember { mutableIntStateOf(0) }
-    val selectedRegionInModal = remember { mutableStateOf("추천 CGV") }
-    val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
-    val selectedTimeScreenTobBarTabIndex = remember { mutableIntStateOf(0) }
-    val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
-    val selectedDate = remember { mutableStateOf("11.28") }
-    val selectedDay = remember { mutableStateOf("목") }
-    val isSheetOpen = remember { mutableStateOf(true) }
-
-    val signUpViewModel = viewModel<TimeScreenViewModel>()
-    val signUpUiState by signUpViewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
             TimeScreenTobBar(
-                selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
-                onTimeScreenTobBarTabSelected = {
-                    selectedTimeScreenTobBarTabIndex.intValue = it
-                }
+                selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex,
+                onTimeScreenTobBarTabSelected = onTimeScreenTobBarTabSelected
             )
         }
     ) { innerPadding ->
         CompositionLocalProvider(
-            LocalOverscrollConfiguration provides null // LazyColumn에만 적용
+            LocalOverscrollConfiguration provides null
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -72,17 +72,17 @@ fun TimeScreen(
             ) {
                 item {
                     TimeScreenMovieSelectionSection(
-                        selectedPoster = selectedPoster.intValue,
-                        onPosterSelected = { selectedPoster.intValue = it }
+                        selectedPoster = selectedPoster,
+                        onPosterSelected = onPosterSelected
                     )
                 }
 
                 stickyHeader {
                     TimeScreenDateSelectionTab(
-                        selectedDate = selectedDate.value,
-                        onDateSelected = { selectedDate.value = it },
-                        selectedDay = selectedDay.value,
-                        onDaySelected = { selectedDay.value = it }
+                        selectedDate = selectedDate,
+                        onDateSelected = onDateSelected,
+                        selectedDay = selectedDay,
+                        onDaySelected = onDaySelected
                     )
 
                     Box(
@@ -93,14 +93,14 @@ fun TimeScreen(
                     )
 
                     TimeScreenTimeSelectionHeader(
-                        onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
-                        numberOfSelectedTheaters = selectedTheaters.value.size
+                        onSheetStateChanged = onSheetStateChanged,
+                        numberOfSelectedTheaters = selectedTheaters.size
                     )
                 }
 
                 item {
                     TimeScreenAuditorioumAndTimeSelection(
-                        selectedTheaters = selectedTheaters.value
+                        selectedTheaters = selectedTheaters
                     )
                 }
             }
@@ -108,23 +108,40 @@ fun TimeScreen(
     }
 
     TheaterSelectionModalBottomSheet(
-        isSheetOpen = isSheetOpen.value,
-        onDismissRequest = { isSheetOpen.value = false },
+        isSheetOpen = isSheetOpen,
+        onDismissRequest = onSheetStateChanged,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
-        onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
-        selectedRegionInModal = selectedRegionInModal.value,
-        onRegionInModalSelected = { selectedRegionInModal.value = it },
-        selectedTheaters = selectedTheaters.value,
-        onTheaterSelected = {
-            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
-            else selectedTheaters.value += it
-        }
+        selectedTabInModalIndex = selectedTabInModalIndex,
+        onCGVTabInModalSelected = onCGVTabInModalSelected,
+        selectedRegionInModal = selectedRegionInModal,
+        onRegionInModalSelected = onRegionInModalSelected,
+        selectedTheaters = selectedTheaters,
+        onTheaterSelected = onTheaterSelected
     )
 }
 
 @Preview
 @Composable
 fun TimeScreenPreview() {
-    TimeScreen()
+    val timeScreenViewModel = viewModel<TimeScreenViewModel>()
+    val timeScreenUiState by timeScreenViewModel.uiState.collectAsStateWithLifecycle()
+
+    TimeScreen(
+        selectedTabInModalIndex = timeScreenUiState.selectedTabInModalIndex,
+        onCGVTabInModalSelected = timeScreenViewModel::onCGVTabInModalSelected,
+        selectedRegionInModal = timeScreenUiState.selectedRegionInModal,
+        onRegionInModalSelected = timeScreenViewModel::onRegionInModalSelected,
+        selectedTheaters = timeScreenUiState.selectedTheaters,
+        onTheaterSelected = timeScreenViewModel::onTheaterSelected,
+        selectedTimeScreenTobBarTabIndex = timeScreenUiState.selectedTimeScreenTobBarTabIndex,
+        onTimeScreenTobBarTabSelected = timeScreenViewModel::onTimeScreenTobBarTabSelected,
+        selectedPoster = timeScreenUiState.selectedPoster,
+        onPosterSelected = timeScreenViewModel::onPosterSelected,
+        selectedDate = timeScreenUiState.selectedDate,
+        onDateSelected = timeScreenViewModel::onDateSelected,
+        selectedDay = timeScreenUiState.selectedDay,
+        onDaySelected = timeScreenViewModel::onDaySelected,
+        isSheetOpen = timeScreenUiState.isSheetOpen,
+        onSheetStateChanged = timeScreenViewModel::onSheetStateChanged
+    )
 }
