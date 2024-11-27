@@ -38,6 +38,7 @@ import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gradient
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
@@ -55,20 +56,33 @@ fun TimeScreenMovieSelectionSection(
         R.drawable.img_time_poster5_selected,
     )
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 18.dp)
     ) {
-        SelectedMovieInformation()
-
-        Spacer(modifier = Modifier.height(19.dp))
-
-        SelectableMoviePosters(
-            posters = posters,
-            selectedPoster = selectedPoster,
-            onPosterSelected = onPosterSelected
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(138.dp)
+                .background(brush = Gradient)
         )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 18.dp)
+        ) {
+            Spacer(modifier = Modifier.height(19.dp))
+
+            SelectedMovieInformation()
+
+            Spacer(modifier = Modifier.height(19.dp))
+
+            SelectableMoviePosters(
+                posters = posters,
+                selectedPoster = selectedPoster,
+                onPosterSelected = onPosterSelected
+            )
+        }
     }
 }
 

@@ -1,5 +1,7 @@
 package org.sopt.cgv.feature.time.component
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gradient
 import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
@@ -30,43 +33,52 @@ fun TimeScreenTobBar(
 ) {
     val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
 
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 18.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .height(84.dp)
+            .background(Gradient)
     ) {
-        CGVTabRow(
-            selectedTabIndex = selectedTimeScreenTobBarTabIndex,
-            modifier = Modifier.width(204.dp),
-            contentColor = Color.Transparent,
-            edgePadding = 0.dp
+        Spacer(modifier = Modifier.height(54.dp))
+        
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 18.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            reservationMethods.forEachIndexed { index, method ->
-                CGVTab(
-                    selected = selectedTimeScreenTobBarTabIndex == index,
-                    onClick = { onTimeScreenTobBarTabSelected(index) },
-                    modifier = Modifier
-                        .height(30.dp)
-                        .padding(vertical = 5.dp),
-                    selectedContentColor = White,
-                    unselectedContentColor = White
-                ) {
-                    Text(
-                        text = method,
-                        style = CGVTheme.typography.body2_m_13
-                    )
+            CGVTabRow(
+                selectedTabIndex = selectedTimeScreenTobBarTabIndex,
+                modifier = Modifier.width(204.dp),
+                contentColor = Color.Transparent,
+                edgePadding = 0.dp
+            ) {
+                reservationMethods.forEachIndexed { index, method ->
+                    CGVTab(
+                        selected = selectedTimeScreenTobBarTabIndex == index,
+                        onClick = { onTimeScreenTobBarTabSelected(index) },
+                        modifier = Modifier
+                            .height(30.dp)
+                            .padding(vertical = 5.dp),
+                        selectedContentColor = White,
+                        unselectedContentColor = White
+                    ) {
+                        Text(
+                            text = method,
+                            style = CGVTheme.typography.body2_m_13
+                        )
+                    }
                 }
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_x),
+                contentDescription = "",
+                tint = White
+            )
         }
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_x),
-            contentDescription = "",
-            tint = White
-        )
     }
 }
 

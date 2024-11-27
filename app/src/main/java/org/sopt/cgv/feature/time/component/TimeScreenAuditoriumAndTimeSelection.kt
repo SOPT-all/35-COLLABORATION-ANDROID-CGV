@@ -47,8 +47,8 @@ data class CGVTimeTable(
 fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>
 ) {
-    LazyColumn {
-        items(items = selectedTheaters.toList()) { theater ->
+    Column {
+        selectedTheaters.forEach{ theater ->
             TimeScreenAuditoriumAndTimeInTheater(theaterName = theater)
         }
     }

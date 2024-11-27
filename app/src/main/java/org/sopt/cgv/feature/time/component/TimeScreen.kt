@@ -1,13 +1,14 @@
 package org.sopt.cgv.feature.time.component
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -19,10 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
-import org.sopt.cgv.core.designsystem.theme.Gradient
 import org.sopt.cgv.core.designsystem.theme.White
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun TimeScreen(
     modifier: Modifier = Modifier
@@ -39,58 +39,59 @@ fun TimeScreen(
 
     Scaffold(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        topBar = {
+            TimeScreenTobBar(
+                selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
+                onTimeScreenTobBarTabSelected = {
+                    selectedTimeScreenTobBarTabIndex.intValue = it
+                }
+            )
+        }
     ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(220.dp)
-                .background(Gradient)
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 220.dp)
-                .background(White)
-        )
-
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(top = 19.dp)
+                .background(White)
         ) {
-            TimeScreenTobBar(
-                selectedTimeScreenTobBarTabIndex = selectedTimeScreenTobBarTabIndex.intValue,
-                onTimeScreenTobBarTabSelected = { selectedTimeScreenTobBarTabIndex.intValue = it }
-            )
+            item {
+                TimeScreenMovieSelectionSection(
+                    selectedPoster = selectedPoster.intValue,
+                    onPosterSelected = { selectedPoster.intValue = it }
+                )
+            }
 
-            Spacer(modifier = Modifier.height(19.dp))
+            item {
+                Spacer(modifier = Modifier.height(19.dp))
+            }
 
-            TimeScreenMovieSelectionSection(
-                selectedPoster = selectedPoster.intValue,
-                onPosterSelected = { selectedPoster.intValue = it }
-            )
+            stickyHeader {
+                TimeScreenDateSelectionTab(
+                    selectedDate = selectedDate.value,
+                    onDateSelected = { selectedDate.value = it },
+                    selectedDay = selectedDay.value,
+                    onDaySelected = { selectedDay.value = it }
+                )
 
-            Spacer(modifier = Modifier.height(19.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(22.dp)
+                        .background(White)
+                )
 
-            TimeScreenDateSelectionTab(
-                selectedDate = selectedDate.value,
-                onDateSelected = { selectedDate.value = it },
-                selectedDay = selectedDay.value,
-                onDaySelected = { selectedDay.value = it }
-            )
+                TimeScreenTimeSelectionHeader(
+                    onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
+                    numberOfSelectedTheaters = selectedTheaters.value.size
+                )
+            }
 
-            Spacer(modifier = Modifier.height(22.dp))
-
-            TimeScreenTimeSelectionHeader(
-                onSheetStateChanged = {isSheetOpen.value = !isSheetOpen.value},
-                numberOfSelectedTheaters = selectedTheaters.value.size
-            )
-
-            TimeScreenAuditorioumAndTimeSelection(
-                selectedTheaters = selectedTheaters.value
-            )
+            item {
+                TimeScreenAuditorioumAndTimeSelection(
+                    selectedTheaters = selectedTheaters.value
+                )
+            }
         }
     }
 

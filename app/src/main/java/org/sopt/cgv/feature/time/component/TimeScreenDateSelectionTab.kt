@@ -53,6 +53,7 @@ fun TimeScreenDateSelectionTab(
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .background(White)
             .padding(horizontal = 18.dp)
     ) {
         Text(
