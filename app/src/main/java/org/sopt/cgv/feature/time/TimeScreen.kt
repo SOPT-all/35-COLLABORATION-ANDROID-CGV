@@ -15,12 +15,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.component.TheaterSelectionModalBottomSheet
@@ -43,6 +46,9 @@ fun TimeScreen(
     val selectedDate = remember { mutableStateOf("11.28") }
     val selectedDay = remember { mutableStateOf("목") }
     val isSheetOpen = remember { mutableStateOf(true) }
+
+    val signUpViewModel = viewModel<TimeScreenViewModel>()
+    val signUpUiState by signUpViewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier
