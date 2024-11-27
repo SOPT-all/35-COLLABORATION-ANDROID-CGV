@@ -23,6 +23,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
@@ -61,27 +62,16 @@ fun TimeScreenTimeSelectionHeader(
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Box(
-                modifier = Modifier
-                    .clickable { onSheetStateChanged() }
-                    .background(
-                        color = White,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = Gray400,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .padding(horizontal = 10.dp, vertical = 6.dp)
-
-            ) {
-                Text(
-                    text = "극장변경",
-                    color = Gray600,
-                    style = CGVTheme.typography.body1_m_12
-                )
-            }
+            CgvButton(
+                text = "극장변경",
+                textStyle = CGVTheme.typography.body1_m_12,
+                textColor = Gray600,
+                background = White,
+                borderColor = Gray400,
+                horizontalPadding = 10.dp,
+                verticalPadding = 6.dp,
+                roundedCornerShape = 6.dp
+            ){}
 
             Spacer(modifier = Modifier.weight(1f))
 
