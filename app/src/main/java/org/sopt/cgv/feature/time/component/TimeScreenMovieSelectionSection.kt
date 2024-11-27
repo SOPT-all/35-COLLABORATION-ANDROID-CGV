@@ -103,6 +103,7 @@ fun SelectableMoviePosters(
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
+                    .clip(shape = RoundedCornerShape(5.dp))
                     .background(color = Black, shape = RoundedCornerShape(5.dp))
                     .noRippleClickable { onPosterSelected(poster) },
             ) {

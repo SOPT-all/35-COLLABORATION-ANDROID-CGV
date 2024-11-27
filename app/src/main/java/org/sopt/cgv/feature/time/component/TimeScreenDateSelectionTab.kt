@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
@@ -90,7 +91,7 @@ fun ClickableDate(
     selectedDate: String,
     onDateSelected: (String) -> Unit,
     onDaySelected: (String) -> Unit,
-    dateList: List<Date>,
+    dateList: PersistentList<Date>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -103,6 +104,7 @@ fun ClickableDate(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
+                .clip(shape = RoundedCornerShape(6.dp))
                 .clickable {
                     onDateSelected(date.date)
                     onDaySelected(date.day)
