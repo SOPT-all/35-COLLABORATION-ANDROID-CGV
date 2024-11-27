@@ -61,7 +61,7 @@ fun Chip(
                 modifier = Modifier
                     .size(16.dp)
                     .clickable {
-                        if (onTheaterSelected != null) onTheaterSelected(content)
+                        onTheaterSelected?.invoke(content)
                     }
             )
         }
