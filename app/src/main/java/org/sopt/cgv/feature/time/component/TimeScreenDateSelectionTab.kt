@@ -55,6 +55,7 @@ fun TimeScreenDateSelectionTab(
             .fillMaxWidth()
             .background(White)
             .padding(horizontal = 18.dp)
+            .padding(top = 19.dp)
     ) {
         Text(
             text = "2024.${selectedDate} (${selectedDay})",

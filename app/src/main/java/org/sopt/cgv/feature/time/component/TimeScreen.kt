@@ -67,10 +67,6 @@ fun TimeScreen(
                     )
                 }
 
-                item {
-                    Spacer(modifier = Modifier.height(19.dp))
-                }
-
                 stickyHeader {
                     TimeScreenDateSelectionTab(
                         selectedDate = selectedDate.value,
