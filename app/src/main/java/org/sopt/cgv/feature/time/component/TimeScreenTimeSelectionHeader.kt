@@ -11,16 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -76,7 +73,7 @@ fun TimeScreenTimeSelectionHeader(
                         color = Gray400,
                         shape = RoundedCornerShape(6.dp)
                     )
-                    .padding(horizontal = 10.dp,vertical = 6.dp)
+                    .padding(horizontal = 10.dp, vertical = 6.dp)
 
             ) {
                 Text(
@@ -112,7 +109,7 @@ private fun TimeScreenTimeSelectionHeaderPreview() {
     val isSheetOpen = remember { mutableStateOf(true) }
 
     TimeScreenTimeSelectionHeader(
-        onSheetStateChanged = {isSheetOpen.value = !isSheetOpen.value},
+        onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
         numberOfSelectedTheaters = 2
     )
 }

@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -104,7 +102,7 @@ fun SelectableMoviePosters(
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
                     .background(color = Black, shape = RoundedCornerShape(5.dp))
-                    .noRippleClickable{ onPosterSelected(poster) },
+                    .noRippleClickable { onPosterSelected(poster) },
             ) {
                 Image(
                     painter = painterResource(id = poster),
@@ -176,7 +174,7 @@ private fun TimeScreenMovieSelectionSectionPreview() {
     val selectedPoster = remember { mutableIntStateOf(R.drawable.img_time_poster1_selected) }
     TimeScreenMovieSelectionSection(
         selectedPoster = selectedPoster.intValue,
-        onPosterSelected = { selectedPoster.intValue = it}
+        onPosterSelected = { selectedPoster.intValue = it }
     )
 }
 
@@ -194,7 +192,7 @@ private fun SelectableMoviePostersPreview() {
             R.drawable.img_time_poster5_selected,
         ),
         selectedPoster = selectedPoster.intValue,
-        onPosterSelected = { selectedPoster.intValue = it}
+        onPosterSelected = { selectedPoster.intValue = it }
     )
 }
 

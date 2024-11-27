@@ -9,13 +9,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -168,7 +165,7 @@ fun TimeScreenTimeInAuditorium(
 @Preview(showBackground = true)
 @Composable
 private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("용산아이파크몰", "구리")) }
+    val selectedTheaters = remember { mutableStateOf(setOf("용산아이파크몰", "구리")) }
 
     TimeScreenAuditorioumAndTimeSelection(
         selectedTheaters = selectedTheaters.value
