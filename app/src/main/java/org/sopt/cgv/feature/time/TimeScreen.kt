@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.time.component
+package org.sopt.cgv.feature.time
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
@@ -23,6 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.time.component.TheaterSelectionModalBottomSheet
+import org.sopt.cgv.feature.time.component.TimeScreenAuditorioumAndTimeSelection
+import org.sopt.cgv.feature.time.component.TimeScreenDateSelectionTab
+import org.sopt.cgv.feature.time.component.TimeScreenMovieSelectionSection
+import org.sopt.cgv.feature.time.component.TimeScreenTimeSelectionHeader
+import org.sopt.cgv.feature.time.component.TimeScreenTobBar
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
