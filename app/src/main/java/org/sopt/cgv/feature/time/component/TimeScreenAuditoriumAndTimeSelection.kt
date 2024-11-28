@@ -45,7 +45,9 @@ fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>,
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         selectedTheaters.forEach{ theater ->
             TimeScreenAuditoriumAndTimeInTheater(theaterName = theater)
         }
@@ -58,7 +60,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Spacer(Modifier.height(26.dp))
 
@@ -122,7 +124,7 @@ fun TimeScreenTimeInAuditorium(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()

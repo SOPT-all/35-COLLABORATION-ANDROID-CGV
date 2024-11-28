@@ -84,7 +84,7 @@ fun DetailRegionTheaters(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Text(
             text = detailRegionName,
@@ -114,7 +114,7 @@ fun TheaterListItem(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(44.dp)
             .noRippleClickable {

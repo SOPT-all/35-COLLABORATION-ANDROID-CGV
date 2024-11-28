@@ -41,7 +41,7 @@ fun TheaterSelectionModalFooter(
     val coroutineScope = rememberCoroutineScope()
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .dropShadow(
                 shape = RectangleShape,
                 color = Color(0x1A000000),
@@ -90,7 +90,7 @@ fun ShowSelectedChipsBox(
     modifier: Modifier = Modifier
 ) {
     FlowRow(
-        modifier = Modifier.padding(vertical = 14.dp),
+        modifier = modifier.padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

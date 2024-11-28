@@ -39,7 +39,7 @@ fun TheaterSelectionModalBottomSheet(
         ModalBottomSheet(
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
-            modifier = Modifier
+            modifier = modifier
                 .height(650.dp),
             dragHandle = null
         ) {

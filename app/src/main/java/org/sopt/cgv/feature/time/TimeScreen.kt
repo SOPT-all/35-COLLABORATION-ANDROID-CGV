@@ -52,7 +52,7 @@ fun TimeScreen(
 ) {
 
     Scaffold(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         topBar = {
             TimeScreenTobBar(

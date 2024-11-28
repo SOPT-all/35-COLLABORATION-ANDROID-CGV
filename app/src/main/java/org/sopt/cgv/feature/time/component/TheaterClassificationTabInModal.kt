@@ -28,7 +28,7 @@ fun TheaterClassificationTabInModal(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 18.dp)
     ) {
