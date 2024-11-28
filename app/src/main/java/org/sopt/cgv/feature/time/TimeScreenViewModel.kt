@@ -10,57 +10,60 @@ class TimeScreenViewModel : ViewModel() {
     private val _timeScreenState = MutableStateFlow(TimeScreenState())
     val timeScreenState: StateFlow<TimeScreenState> = _timeScreenState.asStateFlow()
 
+    private val _timeModalState = MutableStateFlow(TimeModalState())
+    val timeModalState: StateFlow<TimeModalState> = _timeModalState.asStateFlow()
+
     fun onTimeScreenTobBarTabSelected(selectedIndex: Int) {
         _timeScreenState.value = _timeScreenState.value.copy(
-            selectedTimeScreenTobBarTabIndex = selectedIndex
+            tobBarTabIndex = selectedIndex
         )
     }
 
     fun onPosterSelected(@DrawableRes selectedPoster: Int) {
 
         _timeScreenState.value = _timeScreenState.value.copy(
-            selectedPoster = selectedPoster
+            poster = selectedPoster
         )
 
     }
 
     fun onDateSelected(selectedDate: String) {
         _timeScreenState.value = _timeScreenState.value.copy(
-            selectedDate = selectedDate
+            date = selectedDate
         )
     }
 
     fun onDaySelected(selectedDay: String) {
         _timeScreenState.value = _timeScreenState.value.copy(
-            selectedDay = selectedDay
+            day = selectedDay
         )
     }
 
     fun onSheetStateChanged() {
-        _timeScreenState.value = _timeScreenState.value.copy(
-            isSheetOpen = !_timeScreenState.value.isSheetOpen
+        _timeModalState.value = _timeModalState.value.copy(
+            isSheetOpen = !_timeModalState.value.isSheetOpen
         )
     }
 
     fun onCGVTabInModalSelected(selectedIndex: Int) {
-        _timeScreenState.value = _timeScreenState.value.copy(
-            selectedTabInModalIndex = selectedIndex
+        _timeModalState.value = _timeModalState.value.copy(
+            tabIndex = selectedIndex
         )
     }
 
     fun onRegionInModalSelected(selectedRegion: String) {
-        _timeScreenState.value = _timeScreenState.value.copy(
-            selectedRegionInModal = selectedRegion
+        _timeModalState.value = _timeModalState.value.copy(
+            region = selectedRegion
         )
     }
 
     fun onTheaterSelected(selectedTheater: String) {
-        if (_timeScreenState.value.selectedTheaters.contains(selectedTheater))
-            _timeScreenState.value = _timeScreenState.value.copy(
-                selectedTheaters = _timeScreenState.value.selectedTheaters.minus(selectedTheater)
+        if (_timeModalState.value.theaters.contains(selectedTheater))
+            _timeModalState.value = _timeModalState.value.copy(
+                theaters = _timeModalState.value.theaters.minus(selectedTheater)
             )
-        else _timeScreenState.value = _timeScreenState.value.copy(
-            selectedTheaters = _timeScreenState.value.selectedTheaters.plus(selectedTheater)
+        else _timeModalState.value = _timeModalState.value.copy(
+            theaters = _timeModalState.value.theaters.plus(selectedTheater)
         )
     }
 }
