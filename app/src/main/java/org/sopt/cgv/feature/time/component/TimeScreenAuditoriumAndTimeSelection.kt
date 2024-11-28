@@ -28,17 +28,7 @@ import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray600
-
-data class CGVTimeTable(
-    val auditorium: String,
-    val auditoriumType: String,
-    val movieId: Int,
-    val startTime: String,
-    val endTime: String,
-    val isMorning: Boolean,
-    val movieName: String,
-    val theaterId: Int
-)
+import org.sopt.cgv.feature.seats.data.CGVTimeTable
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
@@ -49,7 +39,7 @@ fun TimeScreenAuditorioumAndTimeSelection(
     Column(
         modifier = modifier
     ) {
-        selectedTheaters.forEach{ theater ->
+        selectedTheaters.forEach { theater ->
             TimeScreenAuditoriumAndTimeInTheater(
                 theaterName = theater,
                 navigateToSeat = navigateToSeat
