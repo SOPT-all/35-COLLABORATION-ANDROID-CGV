@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class TimeScreenViewModel() : ViewModel() {
+class TimeScreenViewModel : ViewModel() {
     private val _timeScreenUiState = MutableStateFlow(TimeScreenUiState())
     val uiState: StateFlow<TimeScreenUiState> = _timeScreenUiState.asStateFlow()
 
