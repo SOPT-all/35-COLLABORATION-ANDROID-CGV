@@ -31,7 +31,7 @@ fun CgvFooter(
         modifier = modifier
             .fillMaxWidth()
             .background(Gray100)
-            .padding(horizontal = 16.dp)
+            .padding(top = 16.dp, start = 18.dp)
     ) {
         Row(
             modifier = Modifier.padding(vertical = 8.dp),

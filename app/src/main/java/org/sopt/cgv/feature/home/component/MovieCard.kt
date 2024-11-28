@@ -37,7 +37,8 @@ fun MovieCard(
     likePercentage: String,
     rating: String,
     ageRatingIcon: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.width(160.dp),
@@ -110,7 +111,7 @@ fun MovieCard(
             horizontalPadding = 54.dp,
             verticalPadding = 8.dp,
             textStyle = CGVTheme.typography.head3_b_14,
-            onClick = {}
+            onClick = onClick
         )
 
     }
@@ -124,6 +125,7 @@ private fun MovieCardPreview() {
         movieTitle = "청설",
         likePercentage = "99.9",
         rating = "D-1",
-        ageRatingIcon = R.drawable.ic_all
+        ageRatingIcon = R.drawable.ic_all,
+        onClick = {}
     )
 }
