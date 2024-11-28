@@ -144,11 +144,9 @@ fun TimeScreen(
                 item {
                     TimeScreenAuditorioumAndTimeSelection(
                         selectedTheaters = selectedTheaters,
-                        getTimeTables = getTimeTables,
                         timeTableList = timeTableList,
                         theaterList = theaterList,
-                        navigateToSeat = navigateToSeat,
-                        isSheetOpen = isSheetOpen
+                        navigateToSeat = navigateToSeat
                     )
                 }
             }
@@ -167,8 +165,7 @@ fun TimeScreen(
         onTheaterSelected = onTheaterSelected,
         theaterList = theaterList,
         getTimeTables = getTimeTables,
-        getTheaters = getTheaters,
-        initTimeTableList = initTimeTableList
+        getTheaters = getTheaters
     )
 }
 
@@ -199,7 +196,7 @@ fun TimeScreenPreview() {
         theaterList = listOf(),
         getTheaters = {},
         timeTableList = listOf(),
-        getTimeTables = {a,b,c ->},
+        getTimeTables = {_,_,_ ->},
         initTimeTableList = {},
         navigateToSeat = {}
     )

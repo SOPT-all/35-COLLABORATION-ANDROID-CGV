@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.extension.noRippleClickable
@@ -34,7 +33,6 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
-import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
 import org.sopt.cgv.feature.time.data.Theater
 
 @Composable
@@ -69,10 +67,10 @@ fun SelectableTheatersInModal(
         item {
             DetailRegionTheaters(
                 detailRegionName = "최근 이용한 CGV",
-                theaterNames = if(theaterList.isNotEmpty()) listOf(
+                theaterNames = if (theaterList.isNotEmpty()) listOf(
                     theaterList[0].theaterName,
                     theaterList[1].theaterName
-                    ) else listOf() ,
+                ) else listOf(),
                 selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )
@@ -81,7 +79,7 @@ fun SelectableTheatersInModal(
         item {
             DetailRegionTheaters(
                 detailRegionName = "현재 주변에 있는 CGV",
-                theaterNames = if(theaterList.isNotEmpty()) listOf(theaterList[2].theaterName) else listOf(),
+                theaterNames = if (theaterList.isNotEmpty()) listOf(theaterList[2].theaterName) else listOf(),
                 selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )

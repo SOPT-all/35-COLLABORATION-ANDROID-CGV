@@ -33,40 +33,22 @@ import org.sopt.cgv.core.designsystem.theme.Gray600
 import org.sopt.cgv.feature.time.data.Theater
 import org.sopt.cgv.feature.time.data.TimeTable
 
-//data class Combination(
-//    val id: Int,
-//    val auditorium: String,
-//    val auditoriumType: String
-//)
-//
-//val combinationList: PersistentList<Combination> = persistentListOf(
-//    Combination(1, "1관", "2D"),
-//    Combination(1, "2관", "2D"),
-//    Combination(2, "1관", "IMAX"),
-//    Combination(2, "2관", "2D"),
-//    Combination(3, "1관", "IMAX"),
-//    Combination(3, "2관", "2D"),
-//)
-
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>,
-    getTimeTables: (Int, String, String) -> Unit,
     theaterList: List<Theater>,
     navigateToSeat: () -> Unit,
     timeTableList: List<TimeTable>,
-    isSheetOpen: Boolean,
     modifier: Modifier = Modifier
 ) {
     Log.d("ㅋㅋ", timeTableList.size.toString() + timeTableList.toString())
     Column(
         modifier = modifier
     ) {
-        selectedTheaters.forEachIndexed { index, theater ->
+        selectedTheaters.forEach { theater ->
             val theaterId = theaterList.filter { it.theaterName == theater }[0].id
             TimeScreenAuditoriumAndTimeInTheater(
                 theaterName = theater,
-                boxIndex = index,
                 theaterId = theaterId,
                 navigateToSeat = navigateToSeat,
                 timeTableList = timeTableList.filter { timeTable ->
@@ -80,7 +62,6 @@ fun TimeScreenAuditorioumAndTimeSelection(
 @Composable
 fun TimeScreenAuditoriumAndTimeInTheater(
     theaterName: String,
-    boxIndex: Int,
     theaterId: Int,
     navigateToSeat: () -> Unit,
     timeTableList: List<TimeTable>,
@@ -211,10 +192,8 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
     TimeScreenAuditorioumAndTimeSelection(
         selectedTheaters = selectedTheaters.value,
         theaterList = listOf(),
-        getTimeTables = { a, b, c -> },
         timeTableList = listOf(),
-        navigateToSeat = {},
-        isSheetOpen = true
+        navigateToSeat = {}
     )
 }
 
@@ -222,9 +201,8 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 @Composable
 private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     TimeScreenAuditoriumAndTimeInTheater(
-        theaterName = "용산 아이파크몰",
-        theaterId = 1,
-        boxIndex = 1,
+        theaterName = "용산아이파크몰",
+        theaterId = 3,
         timeTableList = listOf(),
         navigateToSeat = {}
     )

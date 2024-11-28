@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
-import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
 import org.sopt.cgv.feature.time.data.Theater
 
 @ExperimentalMaterial3Api
@@ -38,7 +37,6 @@ fun TheaterSelectionModalBottomSheet(
     theaterList: List<Theater>,
     getTheaters: () -> Unit,
     getTimeTables: (Int, String, String) -> Unit,
-    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (isSheetOpen) {
@@ -104,15 +102,13 @@ fun TheaterSelectionModalBottomSheet(
                     selectedTheaters = selectedTheaters,
                     onTheaterSelected = onTheaterSelected,
                     getTimeTables = getTimeTables,
-                    theaterList = theaterList,
-                    initTimeTableList = initTimeTableList
+                    theaterList = theaterList
                 )
             }
         }
     }
 }
 
-// interaction mode로 해야만 preview 보임
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -138,8 +134,7 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         },
         theaterList = listOf(),
         getTheaters = {},
-        getTimeTables = { a, b, c -> },
-        initTimeTableList = {}
+        getTimeTables = { a, b, c -> }
     )
 }
 

@@ -1,6 +1,5 @@
 package org.sopt.cgv.feature.time.component
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -57,7 +56,6 @@ fun TheaterSelectionModalFooter(
     theaterList: List<Theater>,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
-    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -150,8 +148,7 @@ private fun TheaterSelectionModalFooterPreview() {
             else selectedTheaters.value += it
         },
         getTimeTables = {a,b,c ->},
-        theaterList = listOf(),
-        initTimeTableList = {}
+        theaterList = listOf()
     )
 }
 
