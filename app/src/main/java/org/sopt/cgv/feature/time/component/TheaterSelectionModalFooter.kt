@@ -10,11 +10,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
-import org.sopt.cgv.core.common.extension.noRippleClickable
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
+import org.sopt.cgv.core.designsystem.component.chip.Chip
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,6 +35,7 @@ fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
     selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -59,19 +59,23 @@ fun TheaterSelectionModalFooter(
                 .padding(horizontal = 18.dp)
         ) {
             ShowSelectedChipsBox(
-                selectedTheaters = selectedTheaters
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
             )
 
-            Button( // 임시용 버튼
+            CgvButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = "극장선택",
+                textStyle = CGVTheme.typography.head6_b_17,
+                verticalPadding = 16.dp,
+                roundedCornerShape = 10.dp,
                 onClick = {
                     coroutineScope.launch {
                         sheetState.hide()
                         onDismissRequest()
                     }
                 }
-            ) {
-                Text("극장 선택")
-            }
+            )
 
             Spacer(modifier = Modifier.height(38.dp))
         }
@@ -81,38 +85,22 @@ fun TheaterSelectionModalFooter(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ShowSelectedChipsBox(
-    modifier: Modifier = Modifier,
-    selectedTheaters: Set<String>
+    selectedTheaters: Set<String>,
+    onTheaterSelected: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     FlowRow(
         modifier = Modifier.padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        selectedTheaters.forEach { chip ->
+        selectedTheaters.forEach { theaterName ->
             Chip(
-                text = chip,
-                onClick = { }
+                content = theaterName,
+                inTime = true,
+                onTheaterSelected = onTheaterSelected
             )
         }
-    }
-}
-
-@Composable // 임시용 chip
-fun Chip(text: String, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .background(
-                color = Color.LightGray,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .noRippleClickable { }
-            .padding(start = 12.dp, end = 6.dp, top = 8.dp, bottom = 8.dp)
-    ) {
-        Text(
-            text = text,
-            color = Color.Black
-        )
     }
 }
 
@@ -120,29 +108,28 @@ fun Chip(text: String, onClick: () -> Unit) {
 @Preview
 @Composable
 private fun TheaterSelectionModalFooterPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf("구리", "압구정")) }
     TheaterSelectionModalFooter(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = {},
-        selectedTheaters = selectedTheaters.value
+        selectedTheaters = selectedTheaters.value,
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }
 
 @Preview
 @Composable
 private fun ShowSelectedChipsBoxPreview() {
-    val selectedTheaters = remember { mutableStateOf(setOf<String>("구리", "압구정")) }
+    val selectedTheaters = remember { mutableStateOf(setOf("구리", "압구정")) }
     ShowSelectedChipsBox(
         modifier = Modifier,
         selectedTheaters = selectedTheaters.value,
-    )
-}
-
-@Preview
-@Composable
-private fun ChipPreview() {
-    Chip(
-        text = "Preview",
-        onClick = {}
+        onTheaterSelected = {
+            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            else selectedTheaters.value += it
+        }
     )
 }

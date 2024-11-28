@@ -105,7 +105,8 @@ fun TheaterSelectionModalBottomSheet(
                 TheaterSelectionModalFooter(
                     sheetState = sheetState,
                     onDismissRequest = onDismissRequest,
-                    selectedTheaters = selectedTheaters
+                    selectedTheaters = selectedTheaters,
+                    onTheaterSelected = onTheaterSelected
                 )
             }
         }
@@ -127,7 +128,7 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         isSheetOpen = isSheetOpen.value,
         onDismissRequest = { isSheetOpen.value = false },
         sheetState = sheetState,
-        selectedTabInModalIndex = selectedTabInModalIndex.value,
+        selectedTabInModalIndex = selectedTabInModalIndex.intValue,
         onCGVTabInModalSelected = { selectedTabInModalIndex.intValue = it },
         selectedRegionInModal = selectedRegionInModal.value,
         onRegionInModalSelected = { selectedRegionInModal.value = it },

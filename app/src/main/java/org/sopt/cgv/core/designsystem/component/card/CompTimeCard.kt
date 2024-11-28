@@ -1,7 +1,5 @@
 package org.sopt.cgv.core.designsystem.component.card
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,10 +26,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.cgv.core.designsystem.theme.*
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.theme.Black
+import org.sopt.cgv.core.designsystem.theme.CGVTheme
+import org.sopt.cgv.core.designsystem.theme.Gray200
+import org.sopt.cgv.core.designsystem.theme.Gray600
+import org.sopt.cgv.core.designsystem.theme.Gray700
+import org.sopt.cgv.core.designsystem.theme.Green
+import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
+import org.sopt.cgv.core.designsystem.theme.White
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CompTimeCard(
     modifier: Modifier = Modifier,
@@ -41,8 +45,9 @@ fun CompTimeCard(
     totalSeats: Int,
     isMorning: Boolean,
     isActivated: Boolean = false,
-    onClick: () -> Unit,
-){
+    isInTime: Boolean = false,
+    onClick: () -> Unit
+) {
 
     Box(
         modifier = modifier
@@ -54,19 +59,19 @@ fun CompTimeCard(
             .clickable {
                 onClick()
             }
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.4f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 Text(
                     text = startTime,
                     color = Black,
@@ -77,7 +82,7 @@ fun CompTimeCard(
                     modifier = Modifier.padding(top = 4.dp),
                     text = "~${endTime}",
                     color = Gray600,
-                    style = CGVTheme.typography.body0_r_8
+                    style = CGVTheme.typography.body1_r_10
                 )
             }
             Row(
@@ -90,8 +95,8 @@ fun CompTimeCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                        .background(if (isActivated) Gray200 else Gray700),
+                        .background(if (isActivated) Gray200 else Gray700)
+                        .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -105,7 +110,7 @@ fun CompTimeCard(
                     }
                     Text(
                         text = "$currentSeats",
-                        color = if (isActivated) PrimaryRed400 else Green,
+                        color = if (isActivated && isInTime) Green else if (isActivated) PrimaryRed400 else Green,
                         style = CGVTheme.typography.body2_r_12
                     )
                     Text(
@@ -124,13 +129,12 @@ fun CompTimeCard(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun CompTimeCardPreview() {
     Column(
         modifier = Modifier.height(70.dp)
-    ){
+    ) {
         CompTimeCard(
             modifier = Modifier,
             startTime = "07:50",
@@ -143,7 +147,3 @@ fun CompTimeCardPreview() {
         )
     }
 }
-
-
-
-
