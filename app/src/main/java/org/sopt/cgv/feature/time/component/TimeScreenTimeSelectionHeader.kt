@@ -33,6 +33,7 @@ import org.sopt.cgv.core.designsystem.theme.White
 fun TimeScreenTimeSelectionHeader(
     onSheetStateChanged: () -> Unit,
     numberOfSelectedTheaters: Int,
+    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -68,7 +69,10 @@ fun TimeScreenTimeSelectionHeader(
                 horizontalPadding = 10.dp,
                 verticalPadding = 6.dp,
                 roundedCornerShape = 6.dp,
-                onClick = { onSheetStateChanged() }
+                onClick = {
+                    onSheetStateChanged()
+                    initTimeTableList()
+                }
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -98,6 +102,7 @@ private fun TimeScreenTimeSelectionHeaderPreview() {
 
     TimeScreenTimeSelectionHeader(
         onSheetStateChanged = { isSheetOpen.value = !isSheetOpen.value },
+        initTimeTableList = {},
         numberOfSelectedTheaters = 2
     )
 }

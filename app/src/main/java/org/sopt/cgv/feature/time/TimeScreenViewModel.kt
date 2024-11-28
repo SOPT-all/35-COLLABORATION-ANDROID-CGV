@@ -75,13 +75,39 @@ class TimeScreenViewModel : ViewModel() {
         viewModelScope.launch {
             runCatching {
                 timeService.getTheaters()
-            }.onSuccess { theaterList ->
-                Log.d("ㅋㅋ", theaterList.toString())
+            }.onSuccess { theaterResponse ->
+                Log.d("service", theaterResponse.toString())
                 _timeModalState.value =
-                    _timeModalState.value.copy(theaterList = theaterList.data)
+                    _timeModalState.value.copy(theaterList = theaterResponse.data)
+            }.onFailure { error ->
+                Log.e("service", error.toString())
+            }
+        }
+    }
+
+    fun getTimeTables(
+        theaterId: Int,
+        auditorium: String,
+        auditoriumType: String
+    ) {
+        viewModelScope.launch {
+            runCatching {
+                timeService.getTimeTables(
+                    theaterId = theaterId,
+                    auditorium = auditorium,
+                    auditoriumType = auditoriumType
+                )
+            }.onSuccess { timeTableResponse ->
+                Log.d("ㅋㅋ", timeTableResponse.toString())
+                _timeScreenState.value =
+                    _timeScreenState.value.copy(timeTableList = _timeScreenState.value.timeTableList + timeTableResponse.data.movieList)
             }.onFailure { error ->
                 Log.e("ㅋㅋ", error.toString())
             }
         }
     }
+
+    fun initTimeTableList(): () -> Unit =
+        { _timeScreenState.value = _timeScreenState.value.copy(timeTableList = listOf()) }
+
 }

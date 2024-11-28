@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.time.component
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,20 +23,41 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.common.extension.dropShadow
 import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.component.chip.Chip
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.time.data.Theater
+
+data class Combination(
+    val id: Int,
+    val auditorium: String,
+    val auditoriumType: String
+)
+
+val combinationList: PersistentList<Combination> = persistentListOf(
+    Combination(1, "1관", "2D"),
+    Combination(1, "2관", "2D"),
+    Combination(2, "1관", "IMAX"),
+    Combination(2, "2관", "2D"),
+    Combination(3, "1관", "IMAX"),
+    Combination(3, "2관", "2D"),
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
+    getTimeTables: (Int, String, String) -> Unit,
+    theaterList: List<Theater>,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
+    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -73,6 +95,16 @@ fun TheaterSelectionModalFooter(
                     coroutineScope.launch {
                         sheetState.hide()
                         onDismissRequest()
+                        selectedTheaters.forEach { selectedTheater ->
+                            val id = theaterList.filter { it.theaterName == selectedTheater }[0].id
+                            for (i in 0..1) {
+                                getTimeTables(
+                                    id,
+                                    combinationList[(id - 1) * 2 + i].auditorium,
+                                    combinationList[(id - 1) * 2 + i].auditoriumType
+                                )
+                            }
+                        }
                     }
                 }
             )
@@ -114,9 +146,12 @@ private fun TheaterSelectionModalFooterPreview() {
         onDismissRequest = {},
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
-        }
+        },
+        getTimeTables = {a,b,c ->},
+        theaterList = listOf(),
+        initTimeTableList = {}
     )
 }
 

@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.time.component
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,21 +30,48 @@ import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray600
-import org.sopt.cgv.feature.time.data.CGVTimeTable
+import org.sopt.cgv.feature.time.data.Theater
+import org.sopt.cgv.feature.time.data.TimeTable
+
+//data class Combination(
+//    val id: Int,
+//    val auditorium: String,
+//    val auditoriumType: String
+//)
+//
+//val combinationList: PersistentList<Combination> = persistentListOf(
+//    Combination(1, "1관", "2D"),
+//    Combination(1, "2관", "2D"),
+//    Combination(2, "1관", "IMAX"),
+//    Combination(2, "2관", "2D"),
+//    Combination(3, "1관", "IMAX"),
+//    Combination(3, "2관", "2D"),
+//)
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>,
+    getTimeTables: (Int, String, String) -> Unit,
+    theaterList: List<Theater>,
     navigateToSeat: () -> Unit,
+    timeTableList: List<TimeTable>,
+    isSheetOpen: Boolean,
     modifier: Modifier = Modifier
 ) {
+    Log.d("ㅋㅋ", timeTableList.size.toString() + timeTableList.toString())
     Column(
         modifier = modifier
     ) {
-        selectedTheaters.forEach { theater ->
+        selectedTheaters.forEachIndexed { index, theater ->
+            val theaterId = theaterList.filter { it.theaterName == theater }[0].id
             TimeScreenAuditoriumAndTimeInTheater(
                 theaterName = theater,
-                navigateToSeat = navigateToSeat
+                boxIndex = index,
+                theaterId = theaterId,
+                navigateToSeat = navigateToSeat,
+                timeTableList = timeTableList.filter { timeTable ->
+                    timeTable.id in (theaterId - 1) * 6 + 1..(theaterId - 1) * 6 + 6
+                }
             )
         }
     }
@@ -51,7 +80,10 @@ fun TimeScreenAuditorioumAndTimeSelection(
 @Composable
 fun TimeScreenAuditoriumAndTimeInTheater(
     theaterName: String,
+    boxIndex: Int,
+    theaterId: Int,
     navigateToSeat: () -> Unit,
+    timeTableList: List<TimeTable>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -85,21 +117,26 @@ fun TimeScreenAuditoriumAndTimeInTheater(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             modifier = Modifier.padding(horizontal = 18.dp)
         ) {
-            repeat(4) {
-                TimeScreenTimeInAuditorium(
-                    cgvTimeTable = CGVTimeTable(
-                        auditorium = "7관",
-                        auditoriumType = "2D",
-                        movieId = 1,
-                        startTime = "07:50",
-                        endTime = "09:41",
-                        isMorning = true,
-                        movieName = "글래디에이터",
-                        theaterId = 1
-                    ),
-                    navigateToSeat = navigateToSeat
-                )
-            }
+            TimeScreenTimeInAuditorium(
+                timeTableList = timeTableList.filter { timeTable ->
+                    timeTable.auditorium == (
+                            combinationList.filter { combination ->
+                                combination.id == theaterId
+                            }[0].auditorium
+                            )
+                },
+                navigateToSeat = navigateToSeat
+            )
+            TimeScreenTimeInAuditorium(
+                timeTableList = timeTableList.filter { timeTable ->
+                    timeTable.auditorium == (
+                            combinationList.filter { combination ->
+                                combination.id == theaterId
+                            }[1].auditorium
+                            )
+                },
+                navigateToSeat = navigateToSeat
+            )
         }
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -116,48 +153,50 @@ fun TimeScreenAuditoriumAndTimeInTheater(
 
 @Composable
 fun TimeScreenTimeInAuditorium(
-    cgvTimeTable: CGVTimeTable,
+    timeTableList: List<TimeTable>,
     navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier.fillMaxWidth()
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
+    if (timeTableList.isNotEmpty()) {
+        Column(
+            modifier = modifier.fillMaxWidth()
         ) {
-            Text(
-                text = cgvTimeTable.auditoriumType,
-                style = CGVTheme.typography.head1_b_12,
-                color = Gray600
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = timeTableList[0].auditoriumType,
+                    style = CGVTheme.typography.head1_b_12,
+                    color = Gray600
+                )
 
-            Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(1f))
 
-            Text(
-                text = cgvTimeTable.auditorium,
-                style = CGVTheme.typography.body1_m_12,
-                color = Gray600
-            )
-        }
+                Text(
+                    text = timeTableList[0].auditorium,
+                    style = CGVTheme.typography.body1_m_12,
+                    color = Gray600
+                )
+            }
 
-        Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
-        LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            items(count = 5) {
-                Column(modifier = Modifier.height(70.dp)) {
-                    CompTimeCard(
-                        startTime = cgvTimeTable.startTime,
-                        endTime = cgvTimeTable.endTime,
-                        currentSeats = 183,
-                        totalSeats = 185,
-                        isMorning = cgvTimeTable.isMorning,
-                        isActivated = true,
-                        isInTime = true
-                    ) { navigateToSeat() }
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(items = timeTableList) { timeTable ->
+                    Column(modifier = Modifier.height(70.dp)) {
+                        CompTimeCard(
+                            startTime = timeTable.startTime.slice(11..15),
+                            endTime = timeTable.endTime.slice(11..15),
+                            currentSeats = 183,
+                            totalSeats = 185,
+                            isMorning = timeTable.morning,
+                            isActivated = true,
+                            isInTime = true
+                        ) { navigateToSeat() }
+                    }
                 }
             }
         }
@@ -171,7 +210,11 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 
     TimeScreenAuditorioumAndTimeSelection(
         selectedTheaters = selectedTheaters.value,
-        navigateToSeat = {}
+        theaterList = listOf(),
+        getTimeTables = { a, b, c -> },
+        timeTableList = listOf(),
+        navigateToSeat = {},
+        isSheetOpen = true
     )
 }
 
@@ -180,6 +223,9 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     TimeScreenAuditoriumAndTimeInTheater(
         theaterName = "용산 아이파크몰",
+        theaterId = 1,
+        boxIndex = 1,
+        timeTableList = listOf(),
         navigateToSeat = {}
     )
 }
@@ -188,15 +234,19 @@ private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
 @Composable
 private fun TimeScreenTimeInAuditoriumPreview() {
     TimeScreenTimeInAuditorium(
-        cgvTimeTable = CGVTimeTable(
-            auditorium = "7관",
-            auditoriumType = "2D",
-            movieId = 1,
-            startTime = "07:50",
-            endTime = "09:41",
-            isMorning = true,
-            movieName = "글래디에이터",
-            theaterId = 1
+        timeTableList = listOf(
+            TimeTable(
+                auditorium = "7관",
+                auditoriumType = "2D",
+                id = 1,
+                startTime = "07:50",
+                endTime = "09:41",
+                morning = true,
+                movieName = "글래디에이터",
+                ticket = listOf(),
+                seatAnd = "",
+                seatiOS = ""
+            )
         ),
         navigateToSeat = {}
     )

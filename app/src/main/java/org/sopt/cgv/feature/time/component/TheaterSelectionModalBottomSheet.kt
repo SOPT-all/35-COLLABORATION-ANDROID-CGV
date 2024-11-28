@@ -37,6 +37,8 @@ fun TheaterSelectionModalBottomSheet(
     onTheaterSelected: (String) -> Unit,
     theaterList: List<Theater>,
     getTheaters: () -> Unit,
+    getTimeTables: (Int, String, String) -> Unit,
+    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (isSheetOpen) {
@@ -59,16 +61,6 @@ fun TheaterSelectionModalBottomSheet(
                 "울산/부산",
                 "경상",
                 "광주/전라/제주"
-            )
-            val movieTheatersByDetailRegion = persistentListOf(
-                MovieTheatersByDetailRegion(
-                    detailRegionName = "최근 이용한 CGV",
-                    theaterNames = persistentListOf("구리", "압구정"),
-                ),
-                MovieTheatersByDetailRegion(
-                    detailRegionName = "현재 주변에 있는 CGV",
-                    theaterNames = persistentListOf("용산아이파크몰"),
-                )
             )
 
             Column(
@@ -110,7 +102,10 @@ fun TheaterSelectionModalBottomSheet(
                     sheetState = sheetState,
                     onDismissRequest = onDismissRequest,
                     selectedTheaters = selectedTheaters,
-                    onTheaterSelected = onTheaterSelected
+                    onTheaterSelected = onTheaterSelected,
+                    getTimeTables = getTimeTables,
+                    theaterList = theaterList,
+                    initTimeTableList = initTimeTableList
                 )
             }
         }
@@ -142,7 +137,9 @@ private fun TheaterSelectionModalBottomSheetPreview() {
             else selectedTheaters.value -= it
         },
         theaterList = listOf(),
-        getTheaters = {}
+        getTheaters = {},
+        getTimeTables = { a, b, c -> },
+        initTimeTableList = {}
     )
 }
 
