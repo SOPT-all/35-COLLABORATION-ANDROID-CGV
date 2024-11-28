@@ -107,7 +107,7 @@ class TimeScreenViewModel : ViewModel() {
         }
     }
 
-    fun initTimeTableList(): () -> Unit =
-        { _timeScreenState.value = _timeScreenState.value.copy(timeTableList = listOf()) }
-
+    fun initTimeTableList() {
+        _timeScreenState.value = _timeScreenState.value.copy(timeTableList = listOf())
+    }
 }
