@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
+import org.sopt.cgv.core.designsystem.component.button.CgvButton
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray700
@@ -69,11 +70,12 @@ fun MovieSmallCard(
             )
         }
 
-        ReservationButton(
+        CgvButton(
             text = "예매",
             horizontalPadding = 4.dp,
             verticalPadding = 2.dp,
-            textStyle = CGVTheme.typography.body1_m_12
+            textStyle = CGVTheme.typography.body1_m_12,
+            onClick = {}
         )
 
         Spacer(modifier = Modifier.width(8.dp))
