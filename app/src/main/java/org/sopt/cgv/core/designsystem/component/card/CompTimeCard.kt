@@ -38,29 +38,23 @@ import org.sopt.cgv.core.designsystem.theme.White
 
 @Composable
 fun CompTimeCard(
+    modifier: Modifier = Modifier,
     startTime: String,
     endTime: String,
     currentSeats: Int,
     totalSeats: Int,
     isMorning: Boolean,
-    modifier: Modifier = Modifier,
     isActivated: Boolean = false,
     isInTime: Boolean = false,
     onClick: () -> Unit
 ) {
 
-
-    val backgroundColor = if (isActivated) White else Gray700
-    val backgroundColor2 = if (isActivated) Gray200 else Gray700
-    val leftSeatsColor =
-        if (isActivated && isInTime) Green else if (isActivated) PrimaryRed400 else Green
-
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxHeight()
             .aspectRatio(1.4f)
             .clip(RoundedCornerShape(8.dp))
-            .background(backgroundColor)
+            .background(if (isActivated) White else Gray700)
             .border(width = 1.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
             .clickable {
                 onClick()
@@ -71,7 +65,6 @@ fun CompTimeCard(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //시간 부분
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -92,19 +85,18 @@ fun CompTimeCard(
                     style = CGVTheme.typography.body1_r_10
                 )
             }
-            //잔여 좌석 부분
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(backgroundColor2),
+                    .background(if (isActivated) Gray200 else Gray700),
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp) // 위아래 여백 조정
-                        .background(if (isActivated) Gray200 else Gray700),
+                        .background(if (isActivated) Gray200 else Gray700)
+                        .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -118,7 +110,7 @@ fun CompTimeCard(
                     }
                     Text(
                         text = "$currentSeats",
-                        color = leftSeatsColor,
+                        color = if (isActivated && isInTime) Green else if (isActivated) PrimaryRed400 else Green,
                         style = CGVTheme.typography.body2_r_12
                     )
                     Text(
