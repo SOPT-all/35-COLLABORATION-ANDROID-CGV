@@ -52,7 +52,8 @@ fun TimeRoute(
         selectedDay = timeScreenUiState.selectedDay,
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeScreenUiState.isSheetOpen,
-        onSheetStateChanged = timeScreenViewModel::onSheetStateChanged
+        onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
+        navigateToSeat = navigateToSeat
     )
 }
 
@@ -75,6 +76,7 @@ fun TimeScreen(
     onDaySelected: (String) -> Unit,
     isSheetOpen: Boolean,
     onSheetStateChanged: () -> Unit,
+    navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -127,7 +129,8 @@ fun TimeScreen(
 
                 item {
                     TimeScreenAuditorioumAndTimeSelection(
-                        selectedTheaters = selectedTheaters
+                        selectedTheaters = selectedTheaters,
+                        navigateToSeat = navigateToSeat
                     )
                 }
             }
@@ -169,6 +172,7 @@ fun TimeScreenPreview() {
         selectedDay = timeScreenUiState.selectedDay,
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeScreenUiState.isSheetOpen,
-        onSheetStateChanged = timeScreenViewModel::onSheetStateChanged
+        onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
+        navigateToSeat = {}
     )
 }
