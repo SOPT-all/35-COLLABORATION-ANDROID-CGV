@@ -31,9 +31,9 @@ import org.sopt.cgv.feature.time.component.TimeScreenTobBar
 
 @Composable
 fun TimeRoute(
-    navigateToSeat: () -> Unit
+    navigateToSeat: () -> Unit,
+    timeScreenViewModel: TimeScreenViewModel
 ) {
-    val timeScreenViewModel = viewModel<TimeScreenViewModel>()
     val timeScreenUiState by timeScreenViewModel.uiState.collectAsStateWithLifecycle()
 
     TimeScreen(
