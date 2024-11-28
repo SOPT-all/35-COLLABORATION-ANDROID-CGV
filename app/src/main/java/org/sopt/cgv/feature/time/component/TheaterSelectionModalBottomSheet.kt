@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
+import org.sopt.cgv.feature.time.data.Theater
 
 @ExperimentalMaterial3Api
 @Composable
@@ -34,6 +35,8 @@ fun TheaterSelectionModalBottomSheet(
     onRegionInModalSelected: (String) -> Unit,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
+    theaterList: List<Theater>,
+    getTheaters: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (isSheetOpen) {
@@ -44,7 +47,6 @@ fun TheaterSelectionModalBottomSheet(
                 .height(650.dp),
             dragHandle = null
         ) {
-
             val tabs = persistentListOf("지역별", "특별관")
             val regions = persistentListOf(
                 "추천 CGV",
@@ -96,10 +98,11 @@ fun TheaterSelectionModalBottomSheet(
                     Spacer(modifier = Modifier.width(33.dp))
 
                     SelectableTheatersInModal(
-                        movieTheatersByDetailRegion = movieTheatersByDetailRegion,
                         selectedTheaters = selectedTheaters,
                         onTheaterSelected = onTheaterSelected,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        theaterList = theaterList,
+                        getTheaters = getTheaters
                     )
                 }
 
@@ -137,7 +140,9 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         onTheaterSelected = {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
-        }
+        },
+        theaterList = listOf(),
+        getTheaters = {}
     )
 }
 

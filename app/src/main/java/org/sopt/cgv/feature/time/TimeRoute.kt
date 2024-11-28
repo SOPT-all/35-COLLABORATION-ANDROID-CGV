@@ -28,6 +28,7 @@ import org.sopt.cgv.feature.time.component.TimeScreenDateSelectionTab
 import org.sopt.cgv.feature.time.component.TimeScreenMovieSelectionSection
 import org.sopt.cgv.feature.time.component.TimeScreenTimeSelectionHeader
 import org.sopt.cgv.feature.time.component.TimeScreenTobBar
+import org.sopt.cgv.feature.time.data.Theater
 
 @Composable
 fun TimeRoute(
@@ -54,7 +55,9 @@ fun TimeRoute(
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeModalState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
-        navigateToSeat = navigateToSeat
+        navigateToSeat = navigateToSeat,
+        theaterList = timeModalState.theaterList,
+        getTheaters = timeScreenViewModel::getTheaters
     )
 }
 
@@ -78,6 +81,8 @@ fun TimeScreen(
     isSheetOpen: Boolean,
     onSheetStateChanged: () -> Unit,
     navigateToSeat: () -> Unit,
+    theaterList: List<Theater>,
+    getTheaters: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -147,7 +152,9 @@ fun TimeScreen(
         selectedRegionInModal = selectedRegionInModal,
         onRegionInModalSelected = onRegionInModalSelected,
         selectedTheaters = selectedTheaters,
-        onTheaterSelected = onTheaterSelected
+        onTheaterSelected = onTheaterSelected,
+        theaterList = theaterList,
+        getTheaters = getTheaters
     )
 }
 
@@ -175,6 +182,8 @@ fun TimeScreenPreview() {
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeModalState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
+        theaterList = listOf(),
+        getTheaters = {},
         navigateToSeat = {}
     )
 }

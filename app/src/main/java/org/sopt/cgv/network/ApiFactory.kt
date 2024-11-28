@@ -6,7 +6,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.cgv.BuildConfig
-import org.sopt.cgv.BuildConfig.BASE_URL
 import retrofit2.Retrofit
 
 object ApiFactory {
@@ -31,6 +30,6 @@ object ApiFactory {
     inline fun <reified T> create(): T = retrofit.create(T::class.java)
 }
 
-//object ServicePool {
-//    val userService = ApiFactory.create< >()
-//}
+object ServicePool {
+    fun timeService() = ApiFactory.create<TimeService>()
+}
