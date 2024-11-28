@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
 
 @ExperimentalMaterial3Api
 @Composable
