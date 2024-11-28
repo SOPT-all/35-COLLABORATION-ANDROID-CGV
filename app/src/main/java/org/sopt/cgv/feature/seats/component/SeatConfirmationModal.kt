@@ -77,7 +77,7 @@ fun SeatConfirmationModal(
                     horizontalPadding = 136.dp,
                     verticalPadding = 16.dp,
                     roundedCornerShape = 10.dp,
-                    onClick = {}
+                    onClick = { onSeatSelectionClick() }
                 )
             }
         }

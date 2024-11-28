@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -27,7 +28,7 @@ import org.sopt.cgv.feature.seats.component.SeatConfirmationModal
 import org.sopt.cgv.feature.seats.component.SeatSelectionModal1
 import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
@@ -35,11 +36,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun SeatSelectScreen(
     modifier: Modifier = Modifier,
     viewModel: SeatSelectViewModel = viewModel(),
+    movieId: Long,
     movieTitle: String,
     onNavigateBack: () -> Unit = {},
 ){
-
     val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
 
     val selectionBottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val confirmationBottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -91,7 +93,9 @@ fun SeatSelectScreen(
                     viewModel.toggleSeatConfirmBottomSheet()
                 },
                 onSeatSelectionClick = {
-                    viewModel.toggleSeatConfirmBottomSheet()
+                    coroutineScope.launch {
+                        viewModel.bookMovie(movieId)
+                    }
                 },
                 bottomSheetState = confirmationBottomSheetState
             )
@@ -139,6 +143,7 @@ fun SeatSelectScreen(
 fun SeatSelectScreenPreview(){
     SeatSelectScreen(
         modifier = Modifier,
+        movieId = 2L,
         movieTitle = "글래디에이터 2",
     )
 }
