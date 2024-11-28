@@ -28,7 +28,7 @@ import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray600
-import org.sopt.cgv.feature.seats.data.CGVTimeTable
+import org.sopt.cgv.feature.time.data.CGVTimeTable
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(

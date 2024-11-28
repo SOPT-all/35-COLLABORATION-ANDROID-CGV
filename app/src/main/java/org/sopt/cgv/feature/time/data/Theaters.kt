@@ -1,4 +1,4 @@
-package org.sopt.cgv.feature.seats.data
+package org.sopt.cgv.feature.time.data
 
 data class Theaters(
     val id: Int,
