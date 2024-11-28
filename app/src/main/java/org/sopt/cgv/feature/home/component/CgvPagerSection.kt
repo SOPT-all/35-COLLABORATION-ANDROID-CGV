@@ -15,6 +15,7 @@ import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.home.data.SpecialTheaterMovieItem
 
 @Composable
 fun CgvPagerSection(
@@ -22,7 +23,7 @@ fun CgvPagerSection(
     view: String,
     images: PersistentList<Int>,
     indicators: PersistentList<String>,
-    movies: PersistentList<MovieDetail>,
+    movies: PersistentList<SpecialTheaterMovieItem>,
     modifier: Modifier = Modifier,
     showViewAll: Boolean = true,
     onViewAllClick: () -> Unit = {},
@@ -59,7 +60,7 @@ fun CgvPagerSection(
         ) {
             movies.forEach { movie ->
                 MovieSmallCard(
-                    movieImage = movie.image,
+                    movieImage = movie.imageUrl,
                     title = movie.title,
                     percentage = movie.percentage
                 )
@@ -93,18 +94,21 @@ fun CgvPagerSectionPreview() {
         )
 
         val movieDetails = persistentListOf(
-            MovieDetail(
-                image = R.drawable.img_special1,
+            SpecialTheaterMovieItem(
+                id = 1,
+                imageUrl = R.drawable.img_special1,
                 title = "윙카",
                 percentage = "22.1%"
             ),
-            MovieDetail(
-                image = R.drawable.img_special2,
+            SpecialTheaterMovieItem(
+                id = 2,
+                imageUrl = R.drawable.img_special2,
                 title = "듄: 파트2",
                 percentage = "19.4%"
             ),
-            MovieDetail(
-                image = R.drawable.img_special1,
+            SpecialTheaterMovieItem(
+                id = 3,
+                imageUrl = R.drawable.img_special1,
                 title = "가여운 것들",
                 percentage = "16.2%"
             )
@@ -144,18 +148,21 @@ fun CgvPagerSectionPreview2() {
         )
 
         val movieDetails = persistentListOf(
-            MovieDetail(
-                image = R.drawable.img_special1,
+            SpecialTheaterMovieItem(
+                id = 1,
+                imageUrl = R.drawable.img_special1,
                 title = "윙카",
                 percentage = "22.1%"
             ),
-            MovieDetail(
-                image = R.drawable.img_special2,
+            SpecialTheaterMovieItem(
+                id = 2,
+                imageUrl = R.drawable.img_special2,
                 title = "듄: 파트2",
                 percentage = "19.4%"
             ),
-            MovieDetail(
-                image = R.drawable.img_special1,
+            SpecialTheaterMovieItem(
+                id = 3,
+                imageUrl = R.drawable.img_special1,
                 title = "가여운 것들",
                 percentage = "16.2%"
             )
@@ -172,9 +179,3 @@ fun CgvPagerSectionPreview2() {
         )
     }
 }
-
-data class MovieDetail(
-    val image: Int,
-    val title: String,
-    val percentage: String
-)

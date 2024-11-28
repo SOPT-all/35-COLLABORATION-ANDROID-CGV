@@ -50,11 +50,11 @@ fun CGVTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     minItemWidth: Dp = 0.dp,
-    spacing: Dp = 8.dp, // 탭 간 간격
+    spacing: Dp = 8.dp,
     backgroundColor: Color = Color.Transparent,
     contentColor: Color = contentColorFor(backgroundColor),
     edgePadding: Dp = 0.dp,
-    indicatorColor: Color = Color.White,
+    indicatorColor: Color = White,
     tabs: @Composable @UiComposable () -> Unit
 ) {
     Surface(
@@ -244,8 +244,7 @@ private fun CGVTabRowPreview() {
                 modifier = Modifier
                     .height(30.dp)
                     .padding(vertical = 5.dp),
-                selectedContentColor = White,
-                unselectedContentColor = White
+                selectedContentColor = White
             ) {
                 Text(
                     text = method,
