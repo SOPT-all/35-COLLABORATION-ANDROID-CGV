@@ -82,19 +82,21 @@ fun CompTimeCard(
                     modifier = Modifier.padding(top = 4.dp),
                     text = "~${endTime}",
                     color = Gray600,
-                    style = CGVTheme.typography.body0_r_8
+                    style = CGVTheme.typography.body1_r_10
                 )
             }
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .background(if (isActivated) Gray200 else Gray700),
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(if (isActivated) Gray200 else Gray700),
+                        .background(if (isActivated) Gray200 else Gray700)
+                        .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
