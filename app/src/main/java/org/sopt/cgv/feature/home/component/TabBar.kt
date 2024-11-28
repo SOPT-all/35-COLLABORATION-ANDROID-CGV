@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -47,6 +48,7 @@ fun CgvTabBar(
     indicatorColor: Color = Black,
     textStyle: TextStyle = CGVTheme.typography.body1_m_12,
     indicatorHeight: Dp = 1.dp,
+    startPadding: Dp = 0.dp,
     onIndexSelected: (Int) -> Unit = {}
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
@@ -59,6 +61,10 @@ fun CgvTabBar(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        if (startPadding > 0.dp) {
+            Spacer(modifier = Modifier.width(startPadding))
+        }
+
         contentsList.forEachIndexed { index, content ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,7 +84,8 @@ fun CgvTabBar(
                         selectedTextColor
                     } else {
                         unselectedTextColor
-                    }
+                    },
+                    textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.padding(3.dp))
                 Box(
@@ -162,6 +169,7 @@ private fun CGVNavigationPreview4() {
     )
 
     Column {
+        Spacer(modifier = Modifier.padding(start = 18.dp))
         CgvTabBar(
             contentsList = navigationItems,
             backgroundColor = PrimaryRed600,
@@ -169,7 +177,8 @@ private fun CGVNavigationPreview4() {
             unselectedTextColor = White.copy(alpha = 0.8f),
             indicatorColor = White,
             textStyle = CGVTheme.typography.head3_b_14,
-            indicatorHeight = 2.dp
+            indicatorHeight = 2.dp,
+            startPadding = 16.dp
         )
     }
 }

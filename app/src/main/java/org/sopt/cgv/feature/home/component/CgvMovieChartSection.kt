@@ -14,6 +14,7 @@ import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.home.data.MovieItem
 
 @Composable
 fun CgvMovieChartSection(
@@ -23,8 +24,9 @@ fun CgvMovieChartSection(
     movies: PersistentList<MovieItem>,
     modifier: Modifier = Modifier,
     showViewAll: Boolean = true,
-    onViewAllClick: () -> Unit = {},
-    onIndicatorSelected: (Int) -> Unit = {}
+    onClick: () -> Unit = {},
+    onIndicatorSelected: (Int) -> Unit = {},
+    onReservationClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -34,7 +36,7 @@ fun CgvMovieChartSection(
             title = title,
             view = view,
             showViewAll = showViewAll,
-            onViewAllClick = onViewAllClick
+            onViewAllClick = onClick
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -47,7 +49,10 @@ fun CgvMovieChartSection(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        MovieChart(movies = movies)
+        MovieChart(
+            movies = movies,
+            onReservationClick = onReservationClick
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
     }
@@ -138,7 +143,7 @@ fun CgvMovieChartSectionPreview() {
             indicators = movieChartTypes,
             movies = sampleMovies,
             showViewAll = true,
-            onViewAllClick = {},
+            onClick = {},
             onIndicatorSelected = {}
         )
     }

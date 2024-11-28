@@ -11,19 +11,13 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
-
-data class MovieItem(
-    val movieImageRes: Int,
-    val movieTitle: String,
-    val likePercentage: String,
-    val rating: String,
-    val ageRatingIcon: Int
-)
+import org.sopt.cgv.feature.home.data.MovieItem
 
 @Composable
 fun MovieChart(
     movies: PersistentList<MovieItem>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onReservationClick: () -> Unit = {}
 ) {
     LazyRow(
         modifier = modifier,
@@ -36,7 +30,8 @@ fun MovieChart(
                 movieTitle = movie.movieTitle,
                 likePercentage = movie.likePercentage,
                 rating = movie.rating,
-                ageRatingIcon = movie.ageRatingIcon
+                ageRatingIcon = movie.ageRatingIcon,
+                onClick = onReservationClick
             )
         }
     }
