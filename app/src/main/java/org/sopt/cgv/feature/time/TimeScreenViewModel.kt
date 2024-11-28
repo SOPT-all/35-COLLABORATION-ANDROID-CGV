@@ -7,70 +7,60 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class TimeScreenViewModel : ViewModel() {
-    private val _timeScreenUiState = MutableStateFlow(TimeScreenUiState())
-    val uiState: StateFlow<TimeScreenUiState> = _timeScreenUiState.asStateFlow()
+    private val _timeScreenState = MutableStateFlow(TimeScreenState())
+    val timeScreenState: StateFlow<TimeScreenState> = _timeScreenState.asStateFlow()
 
     fun onTimeScreenTobBarTabSelected(selectedIndex: Int) {
-        if (_timeScreenUiState.value.selectedTimeScreenTobBarTabIndex != selectedIndex) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedTimeScreenTobBarTabIndex = selectedIndex
-            )
-        }
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedTimeScreenTobBarTabIndex = selectedIndex
+        )
     }
 
     fun onPosterSelected(@DrawableRes selectedPoster: Int) {
-        if (_timeScreenUiState.value.selectedPoster != selectedPoster) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedPoster = selectedPoster
-            )
-        }
+
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedPoster = selectedPoster
+        )
+
     }
 
     fun onDateSelected(selectedDate: String) {
-        if (_timeScreenUiState.value.selectedDate != selectedDate) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedDate = selectedDate
-            )
-        }
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedDate = selectedDate
+        )
     }
 
     fun onDaySelected(selectedDay: String) {
-        if (_timeScreenUiState.value.selectedDay != selectedDay) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedDay = selectedDay
-            )
-        }
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedDay = selectedDay
+        )
     }
 
     fun onSheetStateChanged() {
-        _timeScreenUiState.value = _timeScreenUiState.value.copy(
-            isSheetOpen = !_timeScreenUiState.value.isSheetOpen
+        _timeScreenState.value = _timeScreenState.value.copy(
+            isSheetOpen = !_timeScreenState.value.isSheetOpen
         )
     }
 
     fun onCGVTabInModalSelected(selectedIndex: Int) {
-        if (_timeScreenUiState.value.selectedTabInModalIndex != selectedIndex) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedTabInModalIndex = selectedIndex
-            )
-        }
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedTabInModalIndex = selectedIndex
+        )
     }
 
     fun onRegionInModalSelected(selectedRegion: String) {
-        if (_timeScreenUiState.value.selectedRegionInModal != selectedRegion) {
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedRegionInModal = selectedRegion
-            )
-        }
+        _timeScreenState.value = _timeScreenState.value.copy(
+            selectedRegionInModal = selectedRegion
+        )
     }
 
     fun onTheaterSelected(selectedTheater: String) {
-        if (_timeScreenUiState.value.selectedTheaters.contains(selectedTheater))
-            _timeScreenUiState.value = _timeScreenUiState.value.copy(
-                selectedTheaters = _timeScreenUiState.value.selectedTheaters.minus(selectedTheater)
+        if (_timeScreenState.value.selectedTheaters.contains(selectedTheater))
+            _timeScreenState.value = _timeScreenState.value.copy(
+                selectedTheaters = _timeScreenState.value.selectedTheaters.minus(selectedTheater)
             )
-        else _timeScreenUiState.value = _timeScreenUiState.value.copy(
-            selectedTheaters = _timeScreenUiState.value.selectedTheaters.plus(selectedTheater)
+        else _timeScreenState.value = _timeScreenState.value.copy(
+            selectedTheaters = _timeScreenState.value.selectedTheaters.plus(selectedTheater)
         )
     }
 }

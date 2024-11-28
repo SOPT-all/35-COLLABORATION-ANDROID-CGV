@@ -3,7 +3,7 @@ package org.sopt.cgv.feature.time
 import androidx.annotation.DrawableRes
 import org.sopt.cgv.R
 
-data class TimeScreenUiState(
+data class TimeScreenState(
     val selectedTabInModalIndex: Int = 0,
     val selectedRegionInModal: String = "추천 CGV",
     val selectedTheaters: Set<String> = setOf(),

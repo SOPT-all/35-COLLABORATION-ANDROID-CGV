@@ -34,24 +34,24 @@ fun TimeRoute(
     navigateToSeat: () -> Unit,
     timeScreenViewModel: TimeScreenViewModel
 ) {
-    val timeScreenUiState by timeScreenViewModel.uiState.collectAsStateWithLifecycle()
+    val timeScreenState by timeScreenViewModel.timeScreenState.collectAsStateWithLifecycle()
 
     TimeScreen(
-        selectedTabInModalIndex = timeScreenUiState.selectedTabInModalIndex,
+        selectedTabInModalIndex = timeScreenState.selectedTabInModalIndex,
         onCGVTabInModalSelected = timeScreenViewModel::onCGVTabInModalSelected,
-        selectedRegionInModal = timeScreenUiState.selectedRegionInModal,
+        selectedRegionInModal = timeScreenState.selectedRegionInModal,
         onRegionInModalSelected = timeScreenViewModel::onRegionInModalSelected,
-        selectedTheaters = timeScreenUiState.selectedTheaters,
+        selectedTheaters = timeScreenState.selectedTheaters,
         onTheaterSelected = timeScreenViewModel::onTheaterSelected,
-        selectedTimeScreenTobBarTabIndex = timeScreenUiState.selectedTimeScreenTobBarTabIndex,
+        selectedTimeScreenTobBarTabIndex = timeScreenState.selectedTimeScreenTobBarTabIndex,
         onTimeScreenTobBarTabSelected = timeScreenViewModel::onTimeScreenTobBarTabSelected,
-        selectedPoster = timeScreenUiState.selectedPoster,
+        selectedPoster = timeScreenState.selectedPoster,
         onPosterSelected = timeScreenViewModel::onPosterSelected,
-        selectedDate = timeScreenUiState.selectedDate,
+        selectedDate = timeScreenState.selectedDate,
         onDateSelected = timeScreenViewModel::onDateSelected,
-        selectedDay = timeScreenUiState.selectedDay,
+        selectedDay = timeScreenState.selectedDay,
         onDaySelected = timeScreenViewModel::onDaySelected,
-        isSheetOpen = timeScreenUiState.isSheetOpen,
+        isSheetOpen = timeScreenState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
         navigateToSeat = navigateToSeat
     )
@@ -154,24 +154,24 @@ fun TimeScreen(
 @Composable
 fun TimeScreenPreview() {
     val timeScreenViewModel = viewModel<TimeScreenViewModel>()
-    val timeScreenUiState by timeScreenViewModel.uiState.collectAsStateWithLifecycle()
+    val timeScreenState by timeScreenViewModel.timeScreenState.collectAsStateWithLifecycle()
 
     TimeScreen(
-        selectedTabInModalIndex = timeScreenUiState.selectedTabInModalIndex,
+        selectedTabInModalIndex = timeScreenState.selectedTabInModalIndex,
         onCGVTabInModalSelected = timeScreenViewModel::onCGVTabInModalSelected,
-        selectedRegionInModal = timeScreenUiState.selectedRegionInModal,
+        selectedRegionInModal = timeScreenState.selectedRegionInModal,
         onRegionInModalSelected = timeScreenViewModel::onRegionInModalSelected,
-        selectedTheaters = timeScreenUiState.selectedTheaters,
+        selectedTheaters = timeScreenState.selectedTheaters,
         onTheaterSelected = timeScreenViewModel::onTheaterSelected,
-        selectedTimeScreenTobBarTabIndex = timeScreenUiState.selectedTimeScreenTobBarTabIndex,
+        selectedTimeScreenTobBarTabIndex = timeScreenState.selectedTimeScreenTobBarTabIndex,
         onTimeScreenTobBarTabSelected = timeScreenViewModel::onTimeScreenTobBarTabSelected,
-        selectedPoster = timeScreenUiState.selectedPoster,
+        selectedPoster = timeScreenState.selectedPoster,
         onPosterSelected = timeScreenViewModel::onPosterSelected,
-        selectedDate = timeScreenUiState.selectedDate,
+        selectedDate = timeScreenState.selectedDate,
         onDateSelected = timeScreenViewModel::onDateSelected,
-        selectedDay = timeScreenUiState.selectedDay,
+        selectedDay = timeScreenState.selectedDay,
         onDaySelected = timeScreenViewModel::onDaySelected,
-        isSheetOpen = timeScreenUiState.isSheetOpen,
+        isSheetOpen = timeScreenState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
         navigateToSeat = {}
     )
