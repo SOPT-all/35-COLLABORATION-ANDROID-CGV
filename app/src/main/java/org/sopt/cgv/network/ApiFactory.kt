@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.cgv.BuildConfig
+import org.sopt.cgv.core.data.service.CgvService
 import retrofit2.Retrofit
 
 object ApiFactory {
@@ -31,5 +32,6 @@ object ApiFactory {
 }
 
 object ServicePool {
+    val cgvService = ApiFactory.create<CgvService>()
     fun timeService() = ApiFactory.create<TimeService>()
 }

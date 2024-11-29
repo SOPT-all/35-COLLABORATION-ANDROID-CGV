@@ -18,26 +18,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.theme.Gray900
 import org.sopt.cgv.feature.seats.component.SeatConfirmationModal
 import org.sopt.cgv.feature.seats.component.SeatSelectionModal1
 import org.sopt.cgv.feature.seats.component.SeatsScreenTopBar
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import org.sopt.cgv.R
+import org.sopt.cgv.core.data.repository.CgvRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SeatSelectScreen(
     modifier: Modifier = Modifier,
-    viewModel: SeatSelectViewModel = viewModel(),
-    movieTitle: String,
+    movieId: Long,
+    repository: CgvRepository,
     onNavigateBack: () -> Unit = {},
-){
+) {
+    val viewModel: SeatSelectViewModel = viewModel(
+        factory = SeatSelectViewModelFactory(repository)
+    )
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchMovieDetails(movieId)
+    }
+
+    val movieTitle = viewModel.movieTitle
+    val chipContents = viewModel.chipContents
 
     val scrollState = rememberScrollState()
 
@@ -51,21 +63,19 @@ fun SeatSelectScreen(
 
     val stepperValues = viewModel.stepperValues
 
-    val clickedTimeCardIndex = viewModel.clickedTimeCardIndex
-    val sampleTimeCardData = viewModel.sampleTimeCardData
+    val sampleTimeCardData = viewModel.timeCardData
 
-    val chipContents = viewModel.chipContents
 
     Scaffold(
         modifier = modifier,
-    ){  innerPadding ->
+    ) { innerPadding ->
 
-        if (showBottomSheet){
+        if (showBottomSheet) {
             LaunchedEffect(showBottomSheet) { selectionBottomSheetState.expand() }
             SeatSelectionModal1(
                 modifier = Modifier,
                 stepperValues = stepperValues,
-                onStepperIncrease = { index -> viewModel.increaseStepperValue(index) } ,
+                onStepperIncrease = { index -> viewModel.increaseStepperValue(index) },
                 onStepperDecrease = { index -> viewModel.decreaseStepperValue(index) },
                 movieTitle = movieTitle,
                 chipContents = chipContents,
@@ -103,42 +113,49 @@ fun SeatSelectScreen(
                 .verticalScroll(scrollState)
                 .background(Gray900)
                 .padding(innerPadding)
-        ){
+        ) {
             SeatsScreenTopBar(
                 modifier = Modifier,
-                clickedTimeCardIndex = clickedTimeCardIndex,
-                onTimeCardClick = { index -> viewModel.setClickedTimeCardIndex(index) },
+                clickedTimeCardIndex = viewModel.clickedTimeCardIndex.value,
+                onTimeCardClick = { index ->
+                    viewModel.updateClickedTimeCardIndex(index)
+                    viewModel.updateSelectedSeatUrl(index)
+                    viewModel.toggleBottomSheet()
+                },
                 timeCardContent = sampleTimeCardData,
                 onBackClick = onNavigateBack
             )
 
-            Image(
-                painter = painterResource(
-                    id = if (isSeatSelected){
-                        R.drawable.img_seats1_selected
-                    } else {
-                        R.drawable.img_seats1_unselected
-                    }
-                ),
-                contentDescription = "좌석표",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        viewModel.toggleSeat()
-                        viewModel.toggleSeatConfirmBottomSheet()
-                    },
-                contentScale = ContentScale.Crop
-            )
+
+
+            if (isSeatSelected) {
+                Image(
+                    painter = painterResource(id = R.drawable.img_seats1_selected),
+                    contentDescription = "좌석표",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            viewModel.toggleSeat()
+                            viewModel.toggleSeatConfirmBottomSheet()
+                        },
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(viewModel.selectedSeatUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = "좌석표",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            viewModel.toggleSeat()
+                            viewModel.toggleSeatConfirmBottomSheet()
+                        },
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
     }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true)
-@Composable
-fun SeatSelectScreenPreview(){
-    SeatSelectScreen(
-        modifier = Modifier,
-        movieTitle = "글래디에이터 2",
-    )
 }
