@@ -8,10 +8,17 @@
 | [공세영](https://github.com/0se0) | [김재민](https://github.com/kamja0510) | [양지원](https://github.com/tunaunnie) |
 | :--------: | :--------: | :--------: | 
 | <img src="https://github.com/user-attachments/assets/d2d12d33-23f7-4842-b59b-c8b52c0ca0ec" width="200px"  height="300dp">  | <img src="https://github.com/user-attachments/assets/8df98ab4-2190-425a-bd7b-072b51318186" width="180px"  height="200dp"> | <img src="https://github.com/user-attachments/assets/d4bb7635-5b0a-42a0-98ae-cab038f2c685" width="300px"  height="200dp">
-| 담당기능 | 담당기능 | 담당기능 | 
+| home | time | seats | 
 
 ## 📷 *****ScreenShot*****
+| Home| time | seats |
+|---------|---------| ---------|
+| ![Image 2](https://github.com/user-attachments/assets/2bfb105c-2ac7-4204-9df4-94547f7584bf) | ![Image 3](https://github.com/user-attachments/assets/0a1293a6-50ab-4d4d-b91c-123a53ccf5af)| ![Image 3](https://github.com/user-attachments/assets/625f4d34-66f8-440f-8357-60c16c84aea5) |
 
+
+| Home| time | seats |
+|---------|---------| ---------|
+| ![Image 2](https://github.com/user-attachments/assets/877645c6-6712-4f50-ae78-711953a2822d) | ![Image 3](https://github.com/user-attachments/assets/0defa5b7-4f83-4927-ab5a-1f952bb7abb3) | ![Image 3](https://github.com/user-attachments/assets/08539635-a0ef-44d4-8caf-b52fa4d6626a) |
 
 ## 👩🏻‍💻 ***𝙏𝙚𝙘𝙝 𝙎𝙩𝙖𝙘𝙠***
 
