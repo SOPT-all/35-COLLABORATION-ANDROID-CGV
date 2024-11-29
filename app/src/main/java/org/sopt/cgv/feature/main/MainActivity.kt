@@ -19,7 +19,7 @@ import org.sopt.cgv.feature.home.HomeRoute
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import org.sopt.cgv.core.data.datasourceImpl.CgvDataSourceImpl
-import org.sopt.cgv.core.data.repository.CgvRepositoryImpl
+import org.sopt.cgv.core.domain.repository.CgvRepositoryImpl
 import org.sopt.cgv.feature.seats.SeatSelectScreen
 import org.sopt.cgv.network.ServicePool.cgvService
 
