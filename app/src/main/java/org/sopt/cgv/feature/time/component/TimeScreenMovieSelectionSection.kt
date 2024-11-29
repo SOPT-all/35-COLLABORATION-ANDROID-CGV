@@ -3,7 +3,6 @@ package org.sopt.cgv.feature.time.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,7 +57,7 @@ fun TimeScreenMovieSelectionSection(
     )
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     ) {
         Box(
@@ -95,6 +94,7 @@ fun SelectableMoviePosters(
     modifier: Modifier = Modifier
 ) {
     LazyRow(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(
@@ -127,7 +127,7 @@ fun SelectedMovieInformation(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

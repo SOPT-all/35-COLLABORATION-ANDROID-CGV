@@ -2,7 +2,6 @@ package org.sopt.cgv.core.designsystem.component.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.cgv.R
+import org.sopt.cgv.core.common.extension.noRippleClickable
 import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray200
@@ -56,7 +56,7 @@ fun CompTimeCard(
             .clip(RoundedCornerShape(8.dp))
             .background(if (isActivated) White else Gray700)
             .border(width = 1.dp, color = Gray200, shape = RoundedCornerShape(8.dp))
-            .clickable {
+            .noRippleClickable {
                 onClick()
             }
     ) {

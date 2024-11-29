@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.seats.component
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
@@ -14,9 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,18 +33,18 @@ import org.sopt.cgv.core.designsystem.theme.White
 @Composable
 fun SeatsScreenTopBar(
     modifier: Modifier = Modifier,
-    clickedTimeCardIndex: MutableState<Int>,
+    clickedTimeCardIndex: Int,
     onTimeCardClick: (Int) -> Unit,
     timeCardContent: PersistentList<TimeCardContent>,
     onBackClick: () -> Unit,
-){
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(Gray850)
             .height(180.dp),
         verticalArrangement = Arrangement.Top
-    ){
+    ) {
 
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -55,8 +53,8 @@ fun SeatsScreenTopBar(
                 .fillMaxWidth()
                 .height(60.dp)
                 .background(Gray850),
-            
-        ){
+
+            ) {
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
                 contentDescription = "Go Back",
@@ -64,9 +62,7 @@ fun SeatsScreenTopBar(
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .align(Alignment.CenterStart)
-                    .clickable() {
-
-                    }
+                    .clickable {}
             )
 
             Text(
@@ -85,7 +81,7 @@ fun SeatsScreenTopBar(
             modifier = modifier
                 .height(70.dp)
                 .padding(vertical = 1.dp)
-        ){
+        ) {
             SeatSelectionTimeCardRow(
                 selectedIndex = clickedTimeCardIndex,
                 onCardClick = onTimeCardClick,
@@ -99,11 +95,12 @@ fun SeatsScreenTopBar(
 }
 
 
+@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-fun SeatsScreenTopBarPreview(){
-
+fun SeatsScreenTopBarPreview() {
+    val selectedIndex = 0
     val sampleTimeCardData = persistentListOf(
         TimeCardContent(
             startTime = "07:50",
@@ -112,6 +109,7 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -120,6 +118,7 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -128,6 +127,7 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = true,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -136,6 +136,7 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -144,6 +145,7 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         ),
         TimeCardContent(
             startTime = "07:50",
@@ -152,15 +154,14 @@ fun SeatsScreenTopBarPreview(){
             totalSeats = 178,
             isMorning = false,
             isActivated = false,
+            seatAnd = "https://example.com/seatAnd1"
         )
     )
-
-    val selectedIndex = remember { mutableStateOf(1) }
 
     SeatsScreenTopBar(
         modifier = Modifier,
         clickedTimeCardIndex = selectedIndex,
-        onTimeCardClick = {   },
+        onTimeCardClick = { },
         timeCardContent = sampleTimeCardData,
         onBackClick = { }
     )

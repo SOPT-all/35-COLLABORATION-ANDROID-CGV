@@ -8,6 +8,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.cgv.BuildConfig
+import org.sopt.cgv.core.data.service.CgvService
 import org.sopt.cgv.BuildConfig.BASE_URL
 import org.sopt.cgv.network.CgvService.SeatService
 import org.sopt.cgv.network.request.LocalDateTimeSerializer
@@ -44,5 +45,6 @@ object ApiFactory {
 }
 
 object ServicePool {
+    val cgvService = ApiFactory.create<CgvService>()
     val SeatService = ApiFactory.create<SeatService>()
 }

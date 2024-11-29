@@ -34,12 +34,7 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
-
-
-data class MovieTheatersByDetailRegion(
-    val detailRegionName: String,
-    val theaterNames: PersistentList<String>
-)
+import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
 
 @Composable
 fun SelectableTheatersInModal(
@@ -84,7 +79,7 @@ fun DetailRegionTheaters(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Text(
             text = detailRegionName,
@@ -114,7 +109,7 @@ fun TheaterListItem(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(44.dp)
             .noRippleClickable {
