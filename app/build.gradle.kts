@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId = "org.sopt.cgv"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -76,6 +76,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+
 
     //Network
     implementation(platform(libs.okhttp.bom))

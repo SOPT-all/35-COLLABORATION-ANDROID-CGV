@@ -1,5 +1,9 @@
 package org.sopt.cgv.feature.seats
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.persistentListOf
@@ -11,10 +15,19 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 import org.sopt.cgv.core.data.repository.CgvRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.serialization.encodeToString
 import org.sopt.cgv.feature.seats.component.TimeCardContent
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import org.sopt.cgv.core.domain.entity.SeatsDetailResponseEntity
+import org.sopt.cgv.network.ServicePool
+import org.sopt.cgv.network.ServicePool.seatService
+import org.sopt.cgv.network.request.RequestMovieBookingDTO
+import org.sopt.cgv.network.response.ResponseMovieBookingDTO
+import org.sopt.cgv.network.response.ResponseMovieBookingFailedDTO
+import java.time.LocalDateTime
 
 class SeatSelectViewModel(
     private val repository: CgvRepository
@@ -27,6 +40,7 @@ class SeatSelectViewModel(
 
     private val _chipContents = mutableStateOf<PersistentList<String>>(persistentListOf())
     val chipContents: PersistentList<String> get() = _chipContents.value
+
 
     var selectedSeatUrl by mutableStateOf("")
 
@@ -110,6 +124,11 @@ class SeatSelectViewModel(
         }
     }
 
+    private val seatService by lazy { ServicePool.seatService }
+
+    private val _bookingResult = MutableStateFlow<Result<ResponseMovieBookingDTO>?>(null)
+    val bookingResult: StateFlow<Result<ResponseMovieBookingDTO>?> = _bookingResult
+
     var showBottomSheet by mutableStateOf(true)
     fun toggleBottomSheet() {
         showBottomSheet = !showBottomSheet
@@ -143,3 +162,34 @@ class SeatSelectViewModel(
     }
 
 }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun bookMovie(movieId: Long) {
+        val requestDto = RequestMovieBookingDTO(
+            movieName = "글래디에이터 2",
+            theaterName = "구리",
+            startTime = LocalDateTime.of(2024, 11, 9, 10, 40),
+            endTime = LocalDateTime.of(2024, 11, 9, 12, 39),
+            ticketCount = 1
+        )
+
+        runCatching {
+            seatService.bookMovie(movieId, requestDto)
+        }.onSuccess { response ->
+            val responseBody = response.body()
+            val errorBody = response.errorBody()?.string()
+
+            if (response.isSuccessful) {
+                val successResponse = responseBody ?: throw Exception("응답 바디가 비어있습니다.")
+            } else {
+                Log.d("SeatSelectViewModel", "Error JSON Response: $errorBody")
+                val errorResponse = errorBody?.let {
+                    kotlinx.serialization.json.Json.decodeFromString<ResponseMovieBookingFailedDTO>(it)
+                } ?: throw Exception("실패 응답 파싱 실패")
+            }
+        }.onFailure { exception ->
+            Log.e("SeatSelectViewModel", "Request failed with exception: ${exception.message}", exception)
+        }
+    }
+
+
