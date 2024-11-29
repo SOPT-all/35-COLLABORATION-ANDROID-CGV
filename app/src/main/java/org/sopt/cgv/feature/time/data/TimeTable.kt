@@ -1,5 +1,6 @@
 package org.sopt.cgv.feature.time.data
 
+import kotlinx.collections.immutable.PersistentList
 import kotlinx.serialization.Serializable
 
 @Serializable

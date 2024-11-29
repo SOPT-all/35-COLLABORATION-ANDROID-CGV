@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.R
 import org.sopt.cgv.core.common.extension.noRippleClickable
@@ -39,7 +40,7 @@ import org.sopt.cgv.feature.time.data.Theater
 fun SelectableTheatersInModal(
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
-    theaterList: List<Theater>,
+    theaterList: PersistentList<Theater>,
     getTheaters: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -67,10 +68,10 @@ fun SelectableTheatersInModal(
         item {
             DetailRegionTheaters(
                 detailRegionName = "최근 이용한 CGV",
-                theaterNames = if (theaterList.isNotEmpty()) listOf(
+                theaterNames = if (theaterList.isNotEmpty()) persistentListOf(
                     theaterList[0].theaterName,
                     theaterList[1].theaterName
-                ) else listOf(),
+                ) else persistentListOf(),
                 selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )
@@ -79,7 +80,7 @@ fun SelectableTheatersInModal(
         item {
             DetailRegionTheaters(
                 detailRegionName = "현재 주변에 있는 CGV",
-                theaterNames = if (theaterList.isNotEmpty()) listOf(theaterList[2].theaterName) else listOf(),
+                theaterNames = if (theaterList.isNotEmpty()) persistentListOf(theaterList[2].theaterName) else persistentListOf(),
                 selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )
@@ -90,7 +91,7 @@ fun SelectableTheatersInModal(
 @Composable
 fun DetailRegionTheaters(
     detailRegionName: String,
-    theaterNames: List<String>,
+    theaterNames: PersistentList<String>,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -181,7 +182,7 @@ private fun SelectableTheatersInModalPreview() {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
         },
-        theaterList = listOf(
+        theaterList = persistentListOf(
             Theater(id = 1, theaterName = "구리"),
             Theater(id = 2, theaterName = "압구정"),
             Theater(id = 3, theaterName = "용산아이파크몰"),

@@ -1,9 +1,10 @@
 package org.sopt.cgv.feature.time
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -76,12 +77,9 @@ class TimeScreenViewModel : ViewModel() {
             runCatching {
                 timeService.getTheaters()
             }.onSuccess { theaterResponse ->
-                Log.d("service", theaterResponse.toString())
                 _timeModalState.value =
-                    _timeModalState.value.copy(theaterList = theaterResponse.data)
-            }.onFailure { error ->
-                Log.e("service", error.toString())
-            }
+                    _timeModalState.value.copy(theaterList = theaterResponse.data.toPersistentList())
+            }.onFailure { error -> }
         }
     }
 
@@ -98,16 +96,14 @@ class TimeScreenViewModel : ViewModel() {
                     auditoriumType = auditoriumType
                 )
             }.onSuccess { timeTableResponse ->
-                Log.d("ㅋㅋ", timeTableResponse.toString())
+
                 _timeScreenState.value =
-                    _timeScreenState.value.copy(timeTableList = _timeScreenState.value.timeTableList + timeTableResponse.data.movieList)
-            }.onFailure { error ->
-                Log.e("ㅋㅋ", error.toString())
-            }
+                    _timeScreenState.value.copy(timeTableList = (_timeScreenState.value.timeTableList + timeTableResponse.data.movieList).toPersistentList())
+            }.onFailure { error -> }
         }
     }
 
     fun initTimeTableList() {
-        _timeScreenState.value = _timeScreenState.value.copy(timeTableList = listOf())
+        _timeScreenState.value = _timeScreenState.value.copy(timeTableList = persistentListOf())
     }
 }

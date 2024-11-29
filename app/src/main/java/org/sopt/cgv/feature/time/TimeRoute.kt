@@ -21,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.component.TheaterSelectionModalBottomSheet
 import org.sopt.cgv.feature.time.component.TimeScreenAuditorioumAndTimeSelection
@@ -85,10 +87,10 @@ fun TimeScreen(
     isSheetOpen: Boolean,
     onSheetStateChanged: () -> Unit,
     navigateToSeat: () -> Unit,
-    theaterList: List<Theater>,
+    theaterList: PersistentList<Theater>,
     getTheaters: () -> Unit,
-    timeTableList: List<TimeTable>,
-    getTimeTables: (Int,String,String) -> Unit,
+    timeTableList: PersistentList<TimeTable>,
+    getTimeTables: (Int, String, String) -> Unit,
     initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -193,10 +195,10 @@ fun TimeScreenPreview() {
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeModalState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
-        theaterList = listOf(),
+        theaterList = persistentListOf(),
         getTheaters = {},
-        timeTableList = listOf(),
-        getTimeTables = {_,_,_ ->},
+        timeTableList = persistentListOf(),
+        getTimeTables = { _, _, _ -> },
         initTimeTableList = {},
         navigateToSeat = {}
     )

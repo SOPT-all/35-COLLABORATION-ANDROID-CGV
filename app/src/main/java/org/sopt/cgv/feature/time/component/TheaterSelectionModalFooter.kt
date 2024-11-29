@@ -53,7 +53,7 @@ fun TheaterSelectionModalFooter(
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
     getTimeTables: (Int, String, String) -> Unit,
-    theaterList: List<Theater>,
+    theaterList: PersistentList<Theater>,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -147,8 +147,8 @@ private fun TheaterSelectionModalFooterPreview() {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
         },
-        getTimeTables = {a,b,c ->},
-        theaterList = listOf()
+        getTimeTables = { a, b, c -> },
+        theaterList = persistentListOf()
     )
 }
 
@@ -160,7 +160,7 @@ private fun ShowSelectedChipsBoxPreview() {
         modifier = Modifier,
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
-            if(selectedTheaters.value.contains(it)) selectedTheaters.value -= it
+            if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value += it
         }
     )

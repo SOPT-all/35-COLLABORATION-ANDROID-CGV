@@ -1,6 +1,5 @@
 package org.sopt.cgv.feature.time.component
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +23,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import org.sopt.cgv.R
 import org.sopt.cgv.core.designsystem.component.card.CompTimeCard
 import org.sopt.cgv.core.designsystem.theme.Black
@@ -36,12 +38,11 @@ import org.sopt.cgv.feature.time.data.TimeTable
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>,
-    theaterList: List<Theater>,
+    theaterList: PersistentList<Theater>,
     navigateToSeat: () -> Unit,
-    timeTableList: List<TimeTable>,
+    timeTableList: PersistentList<TimeTable>,
     modifier: Modifier = Modifier
 ) {
-    Log.d("ㅋㅋ", timeTableList.size.toString() + timeTableList.toString())
     Column(
         modifier = modifier
     ) {
@@ -53,7 +54,7 @@ fun TimeScreenAuditorioumAndTimeSelection(
                 navigateToSeat = navigateToSeat,
                 timeTableList = timeTableList.filter { timeTable ->
                     timeTable.id in (theaterId - 1) * 6 + 1..(theaterId - 1) * 6 + 6
-                }
+                }.toPersistentList()
             )
         }
     }
@@ -64,7 +65,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
     theaterName: String,
     theaterId: Int,
     navigateToSeat: () -> Unit,
-    timeTableList: List<TimeTable>,
+    timeTableList: PersistentList<TimeTable>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -105,7 +106,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
                                 combination.id == theaterId
                             }[0].auditorium
                             )
-                },
+                }.toPersistentList(),
                 navigateToSeat = navigateToSeat
             )
             TimeScreenTimeInAuditorium(
@@ -115,7 +116,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
                                 combination.id == theaterId
                             }[1].auditorium
                             )
-                },
+                }.toPersistentList(),
                 navigateToSeat = navigateToSeat
             )
         }
@@ -134,7 +135,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
 
 @Composable
 fun TimeScreenTimeInAuditorium(
-    timeTableList: List<TimeTable>,
+    timeTableList: PersistentList<TimeTable>,
     navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -191,8 +192,8 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 
     TimeScreenAuditorioumAndTimeSelection(
         selectedTheaters = selectedTheaters.value,
-        theaterList = listOf(),
-        timeTableList = listOf(),
+        theaterList = persistentListOf(),
+        timeTableList = persistentListOf(),
         navigateToSeat = {}
     )
 }
@@ -203,7 +204,7 @@ private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     TimeScreenAuditoriumAndTimeInTheater(
         theaterName = "용산아이파크몰",
         theaterId = 3,
-        timeTableList = listOf(),
+        timeTableList = persistentListOf(),
         navigateToSeat = {}
     )
 }
@@ -212,7 +213,7 @@ private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
 @Composable
 private fun TimeScreenTimeInAuditoriumPreview() {
     TimeScreenTimeInAuditorium(
-        timeTableList = listOf(
+        timeTableList = persistentListOf(
             TimeTable(
                 auditorium = "7관",
                 auditoriumType = "2D",
@@ -221,7 +222,7 @@ private fun TimeScreenTimeInAuditoriumPreview() {
                 endTime = "09:41",
                 morning = true,
                 movieName = "글래디에이터",
-                ticket = listOf(),
+                ticket = persistentListOf(),
                 seatAnd = "",
                 seatiOS = ""
             )

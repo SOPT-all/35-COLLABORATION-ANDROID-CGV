@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.data.Theater
@@ -34,7 +35,7 @@ fun TheaterSelectionModalBottomSheet(
     onRegionInModalSelected: (String) -> Unit,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
-    theaterList: List<Theater>,
+    theaterList: PersistentList<Theater>,
     getTheaters: () -> Unit,
     getTimeTables: (Int, String, String) -> Unit,
     modifier: Modifier = Modifier
@@ -132,7 +133,7 @@ private fun TheaterSelectionModalBottomSheetPreview() {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
         },
-        theaterList = listOf(),
+        theaterList = persistentListOf(),
         getTheaters = {},
         getTimeTables = { a, b, c -> }
     )
