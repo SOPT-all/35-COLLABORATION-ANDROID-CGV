@@ -46,5 +46,5 @@ object ApiFactory {
 
 object ServicePool {
     val cgvService = ApiFactory.create<CgvService>()
-    val SeatService = ApiFactory.create<SeatService>()
+    val seatService = ApiFactory.create<SeatService>()
 }

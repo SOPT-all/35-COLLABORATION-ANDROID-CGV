@@ -23,7 +23,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import org.sopt.cgv.core.domain.entity.SeatsDetailResponseEntity
 import org.sopt.cgv.network.ServicePool
-import org.sopt.cgv.network.ServicePool.SeatService
+import org.sopt.cgv.network.ServicePool.seatService
 import org.sopt.cgv.network.request.RequestMovieBookingDTO
 import org.sopt.cgv.network.response.ResponseMovieBookingDTO
 import org.sopt.cgv.network.response.ResponseMovieBookingFailedDTO
@@ -124,7 +124,7 @@ class SeatSelectViewModel(
         }
     }
 
-    private val SeatService by lazy { ServicePool.SeatService }
+    private val seatService by lazy { ServicePool.seatService }
 
     private val _bookingResult = MutableStateFlow<Result<ResponseMovieBookingDTO>?>(null)
     val bookingResult: StateFlow<Result<ResponseMovieBookingDTO>?> = _bookingResult
@@ -174,7 +174,7 @@ class SeatSelectViewModel(
         )
 
         runCatching {
-            SeatService.bookMovie(movieId, requestDto)
+            seatService.bookMovie(movieId, requestDto)
         }.onSuccess { response ->
             val responseBody = response.body()
             val errorBody = response.errorBody()?.string()
