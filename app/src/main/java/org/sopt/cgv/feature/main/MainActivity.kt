@@ -19,12 +19,11 @@ import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.feature.home.HomeRoute
 import org.sopt.cgv.feature.time.TimeRoute
 import org.sopt.cgv.feature.time.TimeScreenViewModel
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.NavHost
 import org.sopt.cgv.core.data.datasourceImpl.CgvDataSourceImpl
 import org.sopt.cgv.core.domain.repository.CgvRepositoryImpl
 import org.sopt.cgv.feature.seats.SeatSelectScreen
 import org.sopt.cgv.network.ServicePool.cgvService
+import org.sopt.cgv.core.data.repository.CgvRepository
 
 
 class MainActivity : ComponentActivity() {
@@ -38,13 +37,13 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            MainScreen()
+            MainScreen(repository)
         }
     }
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(repository: CgvRepositoryImpl) {
     val navController = rememberNavController()
     val timeScreenViewModel = viewModel<TimeScreenViewModel>()
 
@@ -66,6 +65,14 @@ fun MainScreen() {
             TimeRoute(
                 navigateToSeat = { navController.navigate("seats") },
                 timeScreenViewModel = timeScreenViewModel
+            )
+        }
+        composable("seats") {
+            SeatSelectScreen(
+                movieId = 2L,
+                repository = repository,
+                modifier = Modifier,
+                onNavigateBack = { }
             )
         }
     }

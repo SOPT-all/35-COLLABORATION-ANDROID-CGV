@@ -174,13 +174,8 @@ class SeatSelectViewModel(
         )
 
         runCatching {
-            Log.d("SeatSelectViewModel", "Sending request to server: movieId=$movieId, requestDto=$requestDto")
             SeatService.bookMovie(movieId, requestDto)
         }.onSuccess { response ->
-            // HTTP 상태 코드 및 메시지
-            Log.d("SeatSelectViewModel", "Response received: code=${response.code()}, message=${response.message()}")
-
-            // JSON 응답 출력
             val responseBody = response.body()
             val errorBody = response.errorBody()?.string()
 
