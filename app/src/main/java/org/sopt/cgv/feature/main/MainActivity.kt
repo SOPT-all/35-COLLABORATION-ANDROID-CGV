@@ -35,11 +35,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            SeatSelectScreen(
-                modifier = Modifier,
-                movieId = 2L,
-                repository = repository
-            )
+            MainScreen()
         }
     }
 }
