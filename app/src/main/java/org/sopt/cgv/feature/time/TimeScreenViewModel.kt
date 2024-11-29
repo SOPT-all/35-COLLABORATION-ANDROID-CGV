@@ -2,11 +2,18 @@ package org.sopt.cgv.feature.time
 
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import org.sopt.cgv.network.ServicePool
 
 class TimeScreenViewModel : ViewModel() {
+    private val timeService by lazy { ServicePool.timeService() }
+
     private val _timeScreenState = MutableStateFlow(TimeScreenState())
     val timeScreenState: StateFlow<TimeScreenState> = _timeScreenState.asStateFlow()
 
@@ -20,11 +27,9 @@ class TimeScreenViewModel : ViewModel() {
     }
 
     fun onPosterSelected(@DrawableRes selectedPoster: Int) {
-
         _timeScreenState.value = _timeScreenState.value.copy(
             poster = selectedPoster
         )
-
     }
 
     fun onDateSelected(selectedDate: String) {
@@ -65,5 +70,40 @@ class TimeScreenViewModel : ViewModel() {
         else _timeModalState.value = _timeModalState.value.copy(
             theaters = _timeModalState.value.theaters.plus(selectedTheater)
         )
+    }
+
+    fun getTheaters() {
+        viewModelScope.launch {
+            runCatching {
+                timeService.getTheaters()
+            }.onSuccess { theaterResponse ->
+                _timeModalState.value =
+                    _timeModalState.value.copy(theaterList = theaterResponse.data.toPersistentList())
+            }.onFailure { error -> }
+        }
+    }
+
+    fun getTimeTables(
+        theaterId: Int,
+        auditorium: String,
+        auditoriumType: String
+    ) {
+        viewModelScope.launch {
+            runCatching {
+                timeService.getTimeTables(
+                    theaterId = theaterId,
+                    auditorium = auditorium,
+                    auditoriumType = auditoriumType
+                )
+            }.onSuccess { timeTableResponse ->
+
+                _timeScreenState.value =
+                    _timeScreenState.value.copy(timeTableList = (_timeScreenState.value.timeTableList + timeTableResponse.data.movieList).toPersistentList())
+            }.onFailure { error -> }
+        }
+    }
+
+    fun initTimeTableList() {
+        _timeScreenState.value = _timeScreenState.value.copy(timeTableList = persistentListOf())
     }
 }

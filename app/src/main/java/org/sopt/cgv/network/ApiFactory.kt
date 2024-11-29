@@ -33,4 +33,5 @@ object ApiFactory {
 
 object ServicePool {
     val cgvService = ApiFactory.create<CgvService>()
+    fun timeService() = ApiFactory.create<TimeService>()
 }
