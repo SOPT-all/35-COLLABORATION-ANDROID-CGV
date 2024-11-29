@@ -30,6 +30,7 @@ import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
+import org.sopt.cgv.feature.time.data.Date
 
 @Composable
 fun TimeScreenDateSelectionTab(
@@ -53,7 +54,7 @@ fun TimeScreenDateSelectionTab(
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(White)
             .padding(horizontal = 18.dp)
@@ -174,8 +175,3 @@ private fun TimeScreenDateSelectionTabPreview() {
     )
 
 }
-
-data class Date(
-    val date: String,
-    val day: String
-)

@@ -35,7 +35,7 @@ fun TimeScreenTobBar(
     val reservationMethods = persistentListOf("영화별예매", "극장별예매", "비교예매")
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(84.dp)
             .background(Gradient)

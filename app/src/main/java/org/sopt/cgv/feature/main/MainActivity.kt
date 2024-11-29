@@ -7,15 +7,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.feature.home.HomeRoute
+import org.sopt.cgv.feature.time.TimeRoute
+import org.sopt.cgv.feature.time.TimeScreenViewModel
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import org.sopt.cgv.core.data.datasourceImpl.CgvDataSourceImpl
@@ -43,26 +46,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
+    val timeScreenViewModel = viewModel<TimeScreenViewModel>()
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-    ) { padding ->
-        NavHost(
-            navController = navController,
-            startDestination = "home",
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-
-        ) {
-            composable("home") {
-                HomeRoute(
-                    onTicketClick = { /* 네비게이션 로직 */ },
-                    onSearchClick = { /* 네비게이션 로직 */ },
-                    onMenuClick = { /* 네비게이션 로직 */ },
-                    onReservationClick = { navController.navigate("seats") }
-                )
-            }
+    NavHost(
+        navController = navController,
+        startDestination = "home",
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        composable("home") {
+            HomeRoute(
+                onTicketClick = { /* 네비게이션 로직 */ },
+                onSearchClick = { /* 네비게이션 로직 */ },
+                onMenuClick = { /* 네비게이션 로직 */ },
+                onReservationClick = { navController.navigate("time") }
+            )
+        }
+        composable("time") {
+            TimeRoute(
+                navigateToSeat = { navController.navigate("seats") },
+                timeScreenViewModel = timeScreenViewModel
+            )
         }
     }
 }

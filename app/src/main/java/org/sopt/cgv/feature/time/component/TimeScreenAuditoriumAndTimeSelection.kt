@@ -28,26 +28,22 @@ import org.sopt.cgv.core.designsystem.theme.Black
 import org.sopt.cgv.core.designsystem.theme.CGVTheme
 import org.sopt.cgv.core.designsystem.theme.Gray100
 import org.sopt.cgv.core.designsystem.theme.Gray600
-
-data class CGVTimeTable(
-    val auditorium: String,
-    val auditoriumType: String,
-    val movieId: Int,
-    val startTime: String,
-    val endTime: String,
-    val isMorning: Boolean,
-    val movieName: String,
-    val theaterId: Int
-)
+import org.sopt.cgv.feature.time.data.CGVTimeTable
 
 @Composable
 fun TimeScreenAuditorioumAndTimeSelection(
     selectedTheaters: Set<String>,
+    navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column {
-        selectedTheaters.forEach{ theater ->
-            TimeScreenAuditoriumAndTimeInTheater(theaterName = theater)
+    Column(
+        modifier = modifier
+    ) {
+        selectedTheaters.forEach { theater ->
+            TimeScreenAuditoriumAndTimeInTheater(
+                theaterName = theater,
+                navigateToSeat = navigateToSeat
+            )
         }
     }
 }
@@ -55,10 +51,11 @@ fun TimeScreenAuditorioumAndTimeSelection(
 @Composable
 fun TimeScreenAuditoriumAndTimeInTheater(
     theaterName: String,
+    navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Spacer(Modifier.height(26.dp))
 
@@ -90,7 +87,7 @@ fun TimeScreenAuditoriumAndTimeInTheater(
         ) {
             repeat(4) {
                 TimeScreenTimeInAuditorium(
-                    CGVTimeTable(
+                    cgvTimeTable = CGVTimeTable(
                         auditorium = "7관",
                         auditoriumType = "2D",
                         movieId = 1,
@@ -99,7 +96,8 @@ fun TimeScreenAuditoriumAndTimeInTheater(
                         isMorning = true,
                         movieName = "글래디에이터",
                         theaterId = 1
-                    )
+                    ),
+                    navigateToSeat = navigateToSeat
                 )
             }
         }
@@ -119,10 +117,11 @@ fun TimeScreenAuditoriumAndTimeInTheater(
 @Composable
 fun TimeScreenTimeInAuditorium(
     cgvTimeTable: CGVTimeTable,
+    navigateToSeat: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -158,7 +157,7 @@ fun TimeScreenTimeInAuditorium(
                         isMorning = cgvTimeTable.isMorning,
                         isActivated = true,
                         isInTime = true
-                    ) { }
+                    ) { navigateToSeat() }
                 }
             }
         }
@@ -171,7 +170,8 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
     val selectedTheaters = remember { mutableStateOf(setOf("용산아이파크몰", "구리")) }
 
     TimeScreenAuditorioumAndTimeSelection(
-        selectedTheaters = selectedTheaters.value
+        selectedTheaters = selectedTheaters.value,
+        navigateToSeat = {}
     )
 }
 
@@ -179,7 +179,8 @@ private fun TimeScreenTimeAuditorioumAndTimeSelectionPreview() {
 @Composable
 private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
     TimeScreenAuditoriumAndTimeInTheater(
-        theaterName = "용산 아이파크몰"
+        theaterName = "용산 아이파크몰",
+        navigateToSeat = {}
     )
 }
 
@@ -187,7 +188,7 @@ private fun TimeScreenAuditorioumAndTimeInTheaterPreview() {
 @Composable
 private fun TimeScreenTimeInAuditoriumPreview() {
     TimeScreenTimeInAuditorium(
-        CGVTimeTable(
+        cgvTimeTable = CGVTimeTable(
             auditorium = "7관",
             auditoriumType = "2D",
             movieId = 1,
@@ -196,6 +197,7 @@ private fun TimeScreenTimeInAuditoriumPreview() {
             isMorning = true,
             movieName = "글래디에이터",
             theaterId = 1
-        )
+        ),
+        navigateToSeat = {}
     )
 }
