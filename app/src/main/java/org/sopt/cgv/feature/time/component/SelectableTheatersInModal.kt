@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,15 +34,21 @@ import org.sopt.cgv.core.designsystem.theme.Gray700
 import org.sopt.cgv.core.designsystem.theme.Gray850
 import org.sopt.cgv.core.designsystem.theme.PrimaryRed400
 import org.sopt.cgv.core.designsystem.theme.White
-import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
+import org.sopt.cgv.feature.time.data.Theater
 
 @Composable
 fun SelectableTheatersInModal(
-    movieTheatersByDetailRegion: PersistentList<MovieTheatersByDetailRegion>,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
+    theaterList: PersistentList<Theater>,
+    getTheaters: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    LaunchedEffect(Unit) {
+        getTheaters()
+    }
+
     LazyColumn(
         modifier = modifier
             .padding(end = 18.dp)
@@ -59,10 +65,22 @@ fun SelectableTheatersInModal(
 
         item { Spacer(modifier = Modifier.height(25.dp)) }
 
-        items(movieTheatersByDetailRegion) { movieTheatersByDetailRegion ->
+        item {
             DetailRegionTheaters(
-                detailRegionName = movieTheatersByDetailRegion.detailRegionName,
-                theaterNames = movieTheatersByDetailRegion.theaterNames,
+                detailRegionName = "최근 이용한 CGV",
+                theaterNames = if (theaterList.isNotEmpty()) persistentListOf(
+                    theaterList[0].theaterName,
+                    theaterList[1].theaterName
+                ) else persistentListOf(),
+                selectedTheaters = selectedTheaters,
+                onTheaterSelected = onTheaterSelected
+            )
+        }
+
+        item {
+            DetailRegionTheaters(
+                detailRegionName = "현재 주변에 있는 CGV",
+                theaterNames = if (theaterList.isNotEmpty()) persistentListOf(theaterList[2].theaterName) else persistentListOf(),
                 selectedTheaters = selectedTheaters,
                 onTheaterSelected = onTheaterSelected
             )
@@ -159,21 +177,17 @@ private fun SelectableTheatersInModalPreview() {
     val selectedTheaters = remember { mutableStateOf(setOf<String>()) }
 
     SelectableTheatersInModal(
-        movieTheatersByDetailRegion = persistentListOf(
-            MovieTheatersByDetailRegion(
-                detailRegionName = "최근 이용한 CGV",
-                theaterNames = persistentListOf("구리", "압구정"),
-            ),
-            MovieTheatersByDetailRegion(
-                detailRegionName = "현재 주변에 있는 CGV",
-                theaterNames = persistentListOf("용산아이파크몰"),
-            )
-        ),
         selectedTheaters = selectedTheaters.value,
         onTheaterSelected = {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
-        }
+        },
+        theaterList = persistentListOf(
+            Theater(id = 1, theaterName = "구리"),
+            Theater(id = 2, theaterName = "압구정"),
+            Theater(id = 3, theaterName = "용산아이파크몰"),
+        ),
+        getTheaters = {}
     )
 }
 

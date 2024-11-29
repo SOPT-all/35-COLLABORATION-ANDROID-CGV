@@ -21,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
 import org.sopt.cgv.feature.time.component.TheaterSelectionModalBottomSheet
 import org.sopt.cgv.feature.time.component.TimeScreenAuditorioumAndTimeSelection
@@ -28,6 +30,8 @@ import org.sopt.cgv.feature.time.component.TimeScreenDateSelectionTab
 import org.sopt.cgv.feature.time.component.TimeScreenMovieSelectionSection
 import org.sopt.cgv.feature.time.component.TimeScreenTimeSelectionHeader
 import org.sopt.cgv.feature.time.component.TimeScreenTobBar
+import org.sopt.cgv.feature.time.data.Theater
+import org.sopt.cgv.feature.time.data.TimeTable
 
 @Composable
 fun TimeRoute(
@@ -54,7 +58,12 @@ fun TimeRoute(
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeModalState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
-        navigateToSeat = navigateToSeat
+        navigateToSeat = navigateToSeat,
+        theaterList = timeModalState.theaterList,
+        getTheaters = timeScreenViewModel::getTheaters,
+        timeTableList = timeScreenState.timeTableList,
+        getTimeTables = timeScreenViewModel::getTimeTables,
+        initTimeTableList = timeScreenViewModel::initTimeTableList
     )
 }
 
@@ -78,6 +87,11 @@ fun TimeScreen(
     isSheetOpen: Boolean,
     onSheetStateChanged: () -> Unit,
     navigateToSeat: () -> Unit,
+    theaterList: PersistentList<Theater>,
+    getTheaters: () -> Unit,
+    timeTableList: PersistentList<TimeTable>,
+    getTimeTables: (Int, String, String) -> Unit,
+    initTimeTableList: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -124,13 +138,16 @@ fun TimeScreen(
 
                     TimeScreenTimeSelectionHeader(
                         onSheetStateChanged = onSheetStateChanged,
-                        numberOfSelectedTheaters = selectedTheaters.size
+                        numberOfSelectedTheaters = selectedTheaters.size,
+                        initTimeTableList = initTimeTableList
                     )
                 }
 
                 item {
                     TimeScreenAuditorioumAndTimeSelection(
                         selectedTheaters = selectedTheaters,
+                        timeTableList = timeTableList,
+                        theaterList = theaterList,
                         navigateToSeat = navigateToSeat
                     )
                 }
@@ -147,7 +164,10 @@ fun TimeScreen(
         selectedRegionInModal = selectedRegionInModal,
         onRegionInModalSelected = onRegionInModalSelected,
         selectedTheaters = selectedTheaters,
-        onTheaterSelected = onTheaterSelected
+        onTheaterSelected = onTheaterSelected,
+        theaterList = theaterList,
+        getTimeTables = getTimeTables,
+        getTheaters = getTheaters
     )
 }
 
@@ -175,6 +195,11 @@ fun TimeScreenPreview() {
         onDaySelected = timeScreenViewModel::onDaySelected,
         isSheetOpen = timeModalState.isSheetOpen,
         onSheetStateChanged = timeScreenViewModel::onSheetStateChanged,
+        theaterList = persistentListOf(),
+        getTheaters = {},
+        timeTableList = persistentListOf(),
+        getTimeTables = { _, _, _ -> },
+        initTimeTableList = {},
         navigateToSeat = {}
     )
 }

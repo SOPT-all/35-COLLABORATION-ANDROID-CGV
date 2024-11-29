@@ -18,9 +18,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.sopt.cgv.core.designsystem.theme.White
-import org.sopt.cgv.feature.time.data.MovieTheatersByDetailRegion
+import org.sopt.cgv.feature.time.data.Theater
 
 @ExperimentalMaterial3Api
 @Composable
@@ -34,6 +35,9 @@ fun TheaterSelectionModalBottomSheet(
     onRegionInModalSelected: (String) -> Unit,
     selectedTheaters: Set<String>,
     onTheaterSelected: (String) -> Unit,
+    theaterList: PersistentList<Theater>,
+    getTheaters: () -> Unit,
+    getTimeTables: (Int, String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (isSheetOpen) {
@@ -44,7 +48,6 @@ fun TheaterSelectionModalBottomSheet(
                 .height(650.dp),
             dragHandle = null
         ) {
-
             val tabs = persistentListOf("지역별", "특별관")
             val regions = persistentListOf(
                 "추천 CGV",
@@ -57,16 +60,6 @@ fun TheaterSelectionModalBottomSheet(
                 "울산/부산",
                 "경상",
                 "광주/전라/제주"
-            )
-            val movieTheatersByDetailRegion = persistentListOf(
-                MovieTheatersByDetailRegion(
-                    detailRegionName = "최근 이용한 CGV",
-                    theaterNames = persistentListOf("구리", "압구정"),
-                ),
-                MovieTheatersByDetailRegion(
-                    detailRegionName = "현재 주변에 있는 CGV",
-                    theaterNames = persistentListOf("용산아이파크몰"),
-                )
             )
 
             Column(
@@ -96,10 +89,11 @@ fun TheaterSelectionModalBottomSheet(
                     Spacer(modifier = Modifier.width(33.dp))
 
                     SelectableTheatersInModal(
-                        movieTheatersByDetailRegion = movieTheatersByDetailRegion,
                         selectedTheaters = selectedTheaters,
                         onTheaterSelected = onTheaterSelected,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        theaterList = theaterList,
+                        getTheaters = getTheaters
                     )
                 }
 
@@ -107,14 +101,15 @@ fun TheaterSelectionModalBottomSheet(
                     sheetState = sheetState,
                     onDismissRequest = onDismissRequest,
                     selectedTheaters = selectedTheaters,
-                    onTheaterSelected = onTheaterSelected
+                    onTheaterSelected = onTheaterSelected,
+                    getTimeTables = getTimeTables,
+                    theaterList = theaterList
                 )
             }
         }
     }
 }
 
-// interaction mode로 해야만 preview 보임
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -137,7 +132,10 @@ private fun TheaterSelectionModalBottomSheetPreview() {
         onTheaterSelected = {
             if (selectedTheaters.value.contains(it)) selectedTheaters.value -= it
             else selectedTheaters.value -= it
-        }
+        },
+        theaterList = persistentListOf(),
+        getTheaters = {},
+        getTimeTables = { a, b, c -> }
     )
 }
 
